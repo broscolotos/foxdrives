@@ -48,7 +48,7 @@ public abstract class EntityCar extends EntityAnimal {
         //this can be called on server from the inventory car class, so, dont do client stuff there
         if(world.isRemote) {
             this.preventEntitySpawning = true;
-            this.setSize(1.4F, 1.6F);
+            this.setSize(getHitboxSize(), 1.6F);
             this.yOffset = 0;
             ignoreFrustumCheck = true;
             this.isImmuneToFire = true;
@@ -69,7 +69,7 @@ public abstract class EntityCar extends EntityAnimal {
         this.prevPosX = xPos;
         this.prevPosY = yPos;
         this.prevPosZ = zPos;
-        this.setSize(1.4F, 1.6F);
+        this.setSize(getHitboxSize(), 1.6F);
         ignoreFrustumCheck = true;
         this.isImmuneToFire = true;
         this.preventEntitySpawning = true;
@@ -116,6 +116,11 @@ public abstract class EntityCar extends EntityAnimal {
     public float turnStrength(boolean reversing){return reversing?1f:1.25f;}
 
     /**
+     * returns a multiplier for how much the entity will rotate during turning
+     */
+    public float turnRenderDegree(boolean reversing){return reversing?-35:35;}
+
+    /**
      * returns a multiplier for the render of wheel spin speed
      */
     public float wheelSpinMultiplier(){return 1;}
@@ -129,6 +134,11 @@ public abstract class EntityCar extends EntityAnimal {
      * allows entities to climb a single full block
      */
     public boolean canClimbFullBlocks(){return false;}
+
+    /**
+     * defines the hitbox size (width and depth) of the vehicle
+     */
+    public float getHitboxSize(){return 1.4f;}
 
 
     /************
@@ -285,7 +295,7 @@ public abstract class EntityCar extends EntityAnimal {
                 velocity *= 0.35F;
             }
             float yaw=0;
-            if (velocity != 0.0F && Math.abs(motionY)<0.1) {
+            if (velocity != 0.0F && Math.abs(motionY)<0.5) {
                 yaw = (rotationYaw-180)* -((float)Math.PI / 180.0F);
                 this.motionX+= (velocity * MathHelper.cos(yaw));
                 this.motionZ+= (velocity * MathHelper.sin(yaw));
@@ -328,8 +338,9 @@ public abstract class EntityCar extends EntityAnimal {
 
         //pretend gravity is a thing.
         if(!worldObj.isRemote) {
-            if (!worldObj.getBlock((int) (posX - 0.5), (int) (posY), (int) (posZ - 0.5)).getMaterial().isSolid()) {
-                if(worldObj.getBlock((int) (posX - 0.5), (int) (posY), (int) (posZ - 0.5)) instanceof BlockSlab){
+            Block b = worldObj.getBlock((int) (posX - 0.5), (int) (posY), (int) (posZ - 0.5));
+            if (!b.getMaterial().isSolid()) {
+                if(b instanceof BlockSlab || b instanceof BlockStairs){
                     if(posY>(int)posY+0.7) {
                         this.motionY -= 0.002;
                         motionY = Math.max(motionY, -0.4);
@@ -388,26 +399,27 @@ public abstract class EntityCar extends EntityAnimal {
 
     public boolean climb(){
         //if there's nothing to climb, continue as normal
-        Block b=worldObj.getBlock((int)(posX + motionX),(int)(posY+motionY+1),(int)(posZ + motionZ));
-        if(b.getMaterial()== Material.air
-                || b instanceof IGrowable || b instanceof BlockBasePressurePlate){
-            return true;
-        }
+        Block b;
+        boolean allPassing=true;
+        //looped to allow climbing any intersecting block
+        for(int x=0;x<getHitboxSize();x++){
+            for(int z=0;z<getHitboxSize();z++){
+                b = worldObj.getBlock((int) (posX + motionX + x), (int) (posY + motionY + 1), (int) (posZ + motionZ + z));
+                allPassing = b.getMaterial() == Material.air || b instanceof IGrowable || b instanceof BlockBasePressurePlate;
 
-        //if the block above the colliding block is air and we can climb at all
-        if((canClimbSlabs() || canClimbFullBlocks()) &&
-                worldObj.getBlock((int)(posX + motionX),(int)(posY+motionY+2),(int)(posZ + motionZ)).getMaterial()== Material.air){
-            //if the block is a slab, climb it.
-            if(b instanceof BlockSlab){
-                if(posY+0.55<(int)(posY+1.5)) {
-                    posY += 0.5;
+                if(!allPassing && (canClimbSlabs() || canClimbFullBlocks())
+                    && worldObj.getBlock((int) (posX + motionX + x), (int) (posY + motionY + 2), (int) (posZ + motionZ + z)) instanceof BlockAir){
+                    if(b instanceof BlockSlab || b instanceof BlockStairs){
+                        if(posY+0.55<(int)(posY+1.5)) {
+                            posY += 0.5;
+                        }
+                        allPassing=true;
+                    }
                 }
-                return true;
+                if(!allPassing){return false;}
             }
-            //otherwise since we know it's a full block, return if we can climb it
-            return canClimbFullBlocks();
         }
-        return false;
+        return allPassing;
     }
 
     /**
