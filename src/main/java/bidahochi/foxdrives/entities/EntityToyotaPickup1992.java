@@ -38,7 +38,7 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
      */
     @Override
     public float getMoveSpeed() {
-        return 0.1f;
+        return 45f;
     }
 
     /**
@@ -54,7 +54,7 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
      * Returns the rider offset from the center of the entity, in blocks.
      */
     @Override
-    public float[] getRiderOffset(){return new float[]{-0.3f,-0.25f,0.25f};}
+    public float[] getRiderOffset(){return new float[]{0.3f,-0.25f,0.25f};}
 
     /**
      * Returns the amount to scale the player, MC default is 1, TC default is 0.65f

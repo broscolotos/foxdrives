@@ -40,7 +40,6 @@ public class RenderCar extends Render {
         //init model if necessary
         if(car.modelInstance==null){
             car.modelInstance=car.getModel();
-            boolean isAdded;
             for (ModelRendererTurbo render : car.modelInstance.getParts()) {
                 if (render.boxName == null) {
                     continue;
@@ -88,9 +87,9 @@ public class RenderCar extends Render {
                 }
                 wheel.rotateAngleZ -= rotation*car.wheelSpinMultiplier();
                 if (Minecraft.getMinecraft().thePlayer.moveStrafing > 0) {
-                    wheel.rotateAngleY = (car.turnRenderDegree(((((EntityLivingBase) car.riddenByEntity).moveForward>0))));
+                    wheel.rotateAngleY = (car.turnRenderDegree(true));
                 } else if (Minecraft.getMinecraft().thePlayer.moveStrafing < 0) {
-                    wheel.rotateAngleY = (car.turnRenderDegree(((((EntityLivingBase) car.riddenByEntity).moveForward>0))));
+                    wheel.rotateAngleY = (car.turnRenderDegree(false));
                 } else {
                     wheel.rotateAngleY = 0;
                 }
@@ -112,8 +111,8 @@ public class RenderCar extends Render {
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(FoxDrives.MODID,
                 car.getSkins()[car.getDataWatcher().getWatchableObjectInt(20)]+".png"));
         //reposition and rotation
-        GL11.glTranslated(x,y+0.8f,z);
-        GL11.glRotatef(car.rotationYaw,0,1,0);
+        GL11.glTranslated(x,y+0.625f,z);
+        GL11.glRotatef(-car.rotationYaw+90,0,1,0);
         GL11.glRotatef(180,1,0,0);
         GL11.glRotatef(car.getRollingDirection(),0,0,1);
         //render
