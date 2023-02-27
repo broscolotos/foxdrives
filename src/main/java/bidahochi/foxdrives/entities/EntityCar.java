@@ -8,13 +8,11 @@ import fexcraft.tmt.slim.ModelBase;
 import fexcraft.tmt.slim.ModelRendererTurbo;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
@@ -39,6 +37,7 @@ public abstract class EntityCar extends EntityAnimal {
     public double transportX=0,transportY=0,transportZ=0;
     public int tickOffset=0;
     public byte running=0;
+    public float velocity=0;
 
     /**
      * client side entity spawn
@@ -86,6 +85,7 @@ public abstract class EntityCar extends EntityAnimal {
         this.dataWatcher.addObject(18, roll);//tracks the entity roll from being hit
         this.dataWatcher.addObject(19, health);//tracks entity health
         this.dataWatcher.addObject(20, 0);//used to track currently selected skin
+        this.dataWatcher.addObject(21, 0f);//used to track rotation yaw
     }
 
     /**
@@ -256,11 +256,15 @@ public abstract class EntityCar extends EntityAnimal {
     /** save/load stuff */
     @Override
     public void readEntityFromNBT(NBTTagCompound p_70037_1_) {
-        running= p_70037_1_.getByte("running");
+        running= p_70037_1_.getByte("run");
+        velocity=p_70037_1_.getFloat("vel");
+        rotationYaw=p_70037_1_.getFloat("yaw");
     }
     @Override
     public void writeEntityToNBT(NBTTagCompound p_70014_1_) {
-        p_70014_1_.setByte("running", running);
+        p_70014_1_.setByte("run", running);
+        p_70014_1_.setFloat("vel", velocity);
+        p_70014_1_.setFloat("yaw", rotationYaw);
     }
 
     /**
@@ -280,84 +284,38 @@ public abstract class EntityCar extends EntityAnimal {
      * Moves the entity based on the rider heading and rider.moveForward
      */
     public void moveEntityWithHeading() {
-        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityLivingBase) {
-            this.prevRotationYaw = this.rotationYaw;// = 90-this.riddenByEntity.rotationYaw;
-            EntityLivingBase rider = ((EntityLivingBase)this.riddenByEntity);
-            float velocity = rider.moveForward * this.getMoveSpeed();
-            if(running!=dataWatcher.getWatchableObjectByte(17)){
-                running=dataWatcher.getWatchableObjectByte(17);
+        if(!worldObj.isRemote) {
+            velocity*=0.92f;
+            EntityLivingBase rider = ((EntityLivingBase) this.riddenByEntity);
+            if (rider != null) {
+                velocity += rider.moveForward * this.getAccelSpeed();
             }
-            if(running ==0){
-                velocity=0;
+            if (running != dataWatcher.getWatchableObjectByte(17)) {
+                running = dataWatcher.getWatchableObjectByte(17);
             }
-
-            if (velocity <= 0.0F) {
+            if (running == 0) {
+                velocity = 0;
+            } else if (velocity <= 0.0F) {
                 velocity *= 0.35F;
             }
-            float yaw=0;
-            if (velocity != 0.0F && Math.abs(motionY)<0.5) {
-                yaw = (rotationYaw-180)* -((float)Math.PI / 180.0F);
-                this.motionX+= (velocity * MathHelper.cos(yaw));
-                this.motionZ+= (velocity * MathHelper.sin(yaw));
+            //clamp top speed
+            if (velocity > getMoveSpeed()*0.0625f) {
+                velocity = getMoveSpeed()*0.0625f;
+            } else if (velocity < -getMoveSpeed()*0.0625f) {
+                velocity = -getMoveSpeed()*0.0625f;
             }
 
-
-            //this.setRotation((float) (Math.atan2(posZ-(posZ+motionZ),posX-((posX+motionX)))
-            //        * -(180f/(float)Math.PI)), 0);
-
-            double slide = 0.91;
-
-            if (Math.abs(motionY)<0.1 &&
-                    !(this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)) instanceof BlockAir)) {
-                slide = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
-            }
-            slide*=0.9;
-
-            if(climb()) {
-                this.setPosition(posX + motionX, posY + motionY, posZ + motionZ);
-                if(yaw !=0){
-                    if (velocity <= 0.0F) {
-                        rotationYaw -= (rider.moveStrafing * turnStrength(false));
-                    } else {
-                        rotationYaw += (rider.moveStrafing * turnStrength(true));
-                    }
-                    if (rotationYaw < -180) {
-                        rotationYaw += 360;
-                    }
-                }
-            }
-
-            this.motionY *= 0.9800000190734863D;
-            this.motionX *= slide;
-            this.motionZ *= slide;
-
-            this.stepHeight = 1.0F;
-        } else {
-            this.stepHeight = 0.5F;
-        }
-
-        //pretend gravity is a thing.
-        if(!worldObj.isRemote) {
-            Block b = worldObj.getBlock((int) (posX - 0.5), (int) (posY), (int) (posZ - 0.5));
-            if (!b.getMaterial().isSolid()) {
-                if(b instanceof BlockSlab || b instanceof BlockStairs){
-                    if(posY>(int)posY+0.7) {
-                        this.motionY -= 0.002;
-                        motionY = Math.max(motionY, -0.4);
-                    }
+            if (rider != null && rider.moveStrafing!=0) {
+                if (velocity <= 0.0F) {
+                    rotationYaw += (rider.moveStrafing * turnStrength(true));
                 } else {
-                    this.motionY -= 0.008;
-                    motionY = Math.max(motionY, -0.4);
+                    rotationYaw -= (rider.moveStrafing * turnStrength(false));
                 }
-            } else if (posY > (Math.floor(posY) + 0.8)){
-                this.motionY = -0.02;
-            } else {
-                this.motionY = 0d;
-            }
-            if (motionY != 0d) {
-                this.setPosition(posX, posY + motionY, posZ);
+                dataWatcher.updateObject(21, rotationYaw);
             }
 
+            this.stepHeight = canClimbFullBlocks()?1.0f:canClimbSlabs()?0.5f:0.0f;
+            moveEntityWithHeading(0, velocity);
 
             double d0 = 0.25D;
             List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getBoundingBox().expand(d0, d0, d0));
@@ -368,12 +326,7 @@ public abstract class EntityCar extends EntityAnimal {
                     ((Entity) o).attackEntityFrom(new EntityDamageSource("player", this), 5);
                 }
             }
-        }
-
-        //this is called on client, since it ticks FAR more often than server.
-        // without this it seemingly teleports around.
-        //tickOffset is managed by setPositionAndRotation2
-        if(worldObj.isRemote && tickOffset >0) {
+        } else if(tickOffset >0) {
             prevPosX=posX;prevPosZ=posZ;
             setPosition(
                     this.posX + (this.transportX - this.posX) / (double) this.tickOffset,
@@ -381,8 +334,11 @@ public abstract class EntityCar extends EntityAnimal {
                     this.posZ + (this.transportZ - this.posZ) / (double) this.tickOffset
             );
             tickOffset--;
+            rotationYaw=dataWatcher.getWatchableObjectFloat(21);
         }
     }
+
+
     @SideOnly(Side.CLIENT)
     public void setPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
         transportX=p_70056_1_;
@@ -395,31 +351,6 @@ public abstract class EntityCar extends EntityAnimal {
 
         //force an extra rider position update. probably unnecessary, but better safe than laggy.
         updateRiderPosition();
-    }
-
-    public boolean climb(){
-        //if there's nothing to climb, continue as normal
-        Block b;
-        boolean allPassing=true;
-        //looped to allow climbing any intersecting block
-        for(int x=0;x<getHitboxSize();x++){
-            for(int z=0;z<getHitboxSize();z++){
-                b = worldObj.getBlock((int) (posX + motionX + x), (int) (posY + motionY + 1), (int) (posZ + motionZ + z));
-                allPassing = b.getMaterial() == Material.air || b instanceof IGrowable || b instanceof BlockBasePressurePlate;
-
-                if(!allPassing && (canClimbSlabs() || canClimbFullBlocks())
-                    && worldObj.getBlock((int) (posX + motionX + x), (int) (posY + motionY + 2), (int) (posZ + motionZ + z)) instanceof BlockAir){
-                    if(b instanceof BlockSlab || b instanceof BlockStairs){
-                        if(posY+0.55<(int)(posY+1.5)) {
-                            posY += 0.5;
-                        }
-                        allPassing=true;
-                    }
-                }
-                if(!allPassing){return false;}
-            }
-        }
-        return allPassing;
     }
 
     /**
@@ -440,8 +371,8 @@ public abstract class EntityCar extends EntityAnimal {
             float[] xyz = getRiderOffset();
             //rotate yaw
             if (rotationYaw != 0.0F) {
-                float cos = MathHelper.cos((-rotationYaw)*((float) Math.PI / 180.0f));
-                float sin = MathHelper.sin((-rotationYaw)*((float) Math.PI / 180.0f));
+                float cos = MathHelper.cos((rotationYaw)*((float) Math.PI / 180.0f));
+                float sin = MathHelper.sin((rotationYaw)*((float) Math.PI / 180.0f));
 
                 xyz[0] = (getRiderOffset()[0] * cos) - (getRiderOffset()[2] * sin);
                 xyz[2] = (getRiderOffset()[0] * sin) + (getRiderOffset()[2] * cos);
@@ -464,23 +395,6 @@ public abstract class EntityCar extends EntityAnimal {
         }
     }*/
 
-    /** updates the position of this entity and it's hitbox */
-    @Override
-    public void setPosition(double p_70107_1_, double p_70107_3_, double p_70107_5_) {
-        this.posX = p_70107_1_;
-        this.posY = p_70107_3_;
-        this.posZ = p_70107_5_;
-        float f = this.width / 2.0F;
-        if(boundingBox.maxZ!=0) {
-            this.boundingBox.setBounds(
-                    p_70107_1_ - f,
-                    p_70107_3_ - this.yOffset + this.ySize,
-                    p_70107_5_ - f,
-                    p_70107_1_ + f,
-                    p_70107_3_ - this.yOffset + this.ySize + this.height,
-                    p_70107_5_ + f);
-        }
-    }
 
     //todo: plays driving sounds using vanilla step sound heresy
     @Override
