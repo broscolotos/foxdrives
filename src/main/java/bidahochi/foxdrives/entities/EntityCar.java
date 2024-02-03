@@ -1,5 +1,6 @@
 package bidahochi.foxdrives.entities;
 
+import bidahochi.foxdrives.EnumCars;
 import bidahochi.foxdrives.FoxDrives;
 import cpw.mods.fml.common.gameevent.InputEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -9,14 +10,14 @@ import fexcraft.tmt.slim.ModelRendererTurbo;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.*;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -62,7 +63,6 @@ public abstract class EntityCar extends EntityAnimal {
      */
     public EntityCar(World world, double xPos, double yPos, double zPos) {
         super(world);
-
         this.setPosition(xPos, yPos, zPos);
         this.motionX = 0.0D;
         this.motionY = 0.0D;
@@ -191,33 +191,29 @@ public abstract class EntityCar extends EntityAnimal {
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_) {
-        if (!this.worldObj.isRemote && !this.isDead) {
-            if (this.isEntityInvulnerable()) {
-                return false;
-            } else {
-                setRollingDirection(-this.getRollingDirection());
-                setRollingDirection(10);
-                setDamage(this.getDamage() + p_70097_2_ * 10.0F);
+    public boolean attackEntityFrom(DamageSource source, float p_70097_2_) {
+        if(worldObj.isRemote || isDead) return false;
+        setRollingDirection(-this.getRollingDirection());
+        setRollingDirection(10);
+        setDamage(this.getDamage() + p_70097_2_ * 10.0F);
 
-                if ((p_70097_1_.getEntity() instanceof EntityPlayer
-                        && ((EntityPlayer)p_70097_1_.getEntity()).capabilities.isCreativeMode)
-                        || this.getDamage() > 40.0F) {
-                    //dismount rider
-                    if (this.riddenByEntity != null) {
-                        this.riddenByEntity.mountEntity(this);
-                    }
-
-                    if (this.getDamage()<40) {
-                        this.setDead();
+        EntityPlayer player = source.getEntity() instanceof EntityPlayer ? player = (EntityPlayer)source.getEntity() : null;
+        if((player != null && player.capabilities.isCreativeMode) || getDamage() > 40){
+            if(riddenByEntity != null) riddenByEntity.mountEntity(null);
+            if(getDamage() > 40){
+                setDead();
+                if(player != null && !player.capabilities.isCreativeMode){
+                    Item item = EnumCars.get(this.getClass());
+                    if(item != null){
+                        EntityItem ent = new EntityItem(worldObj);
+                        ent.setEntityItemStack(new ItemStack(item, 1));
+                        ent.setPosition(posX, posY + 0.5, posZ);
+                        worldObj.spawnEntityInWorld(ent);
                     }
                 }
-
-                return true;
             }
-        } else {
-            return true;
         }
+        return true;
     }
 
     public float getDamage(){
@@ -261,6 +257,8 @@ public abstract class EntityCar extends EntityAnimal {
         running= p_70037_1_.getByte("run");
         velocity=p_70037_1_.getFloat("vel");
         rotationYaw=p_70037_1_.getFloat("yaw");
+        dataWatcher.updateObject(17, running);
+        dataWatcher.updateObject(21, rotationYaw);
     }
     @Override
     public void writeEntityToNBT(NBTTagCompound p_70014_1_) {
@@ -286,14 +284,14 @@ public abstract class EntityCar extends EntityAnimal {
      * Moves the entity based on the rider heading and rider.moveForward
      */
     public void moveEntityWithHeading() {
+        if(running != dataWatcher.getWatchableObjectByte(17)){
+            running = dataWatcher.getWatchableObjectByte(17);
+        }
         if(!worldObj.isRemote) {
             velocity*=0.92f;
             EntityLivingBase rider = ((EntityLivingBase) this.riddenByEntity);
             if (rider != null) {
                 velocity += rider.moveForward * this.getAccelSpeed();
-            }
-            if (running != dataWatcher.getWatchableObjectByte(17)) {
-                running = dataWatcher.getWatchableObjectByte(17);
             }
             if (running == 0) {
                 velocity = 0;
@@ -307,11 +305,22 @@ public abstract class EntityCar extends EntityAnimal {
                 velocity = -getMoveSpeed()*0.0625f;
             }
 
-            if (rider != null && rider.moveStrafing!=0) {
-                if (velocity <= 0.0F) {
-                    rotationYaw += (rider.moveStrafing * turnStrength(true));
-                } else {
-                    rotationYaw -= (rider.moveStrafing * turnStrength(false));
+            if(running != 0 && rider != null && rider.moveStrafing!=0){
+                if(velocity <= 0.0F){
+                    if(rearSteer()){
+                        rotationYaw -= (rider.moveStrafing * turnStrength(true));
+                    }
+                    else{
+                        rotationYaw += (rider.moveStrafing * turnStrength(true));
+                    }
+                }
+                else{
+                    if(rearSteer()){
+                        rotationYaw += (rider.moveStrafing * turnStrength(false));
+                    }
+                    else{
+                        rotationYaw -= (rider.moveStrafing * turnStrength(false));
+                    }
                 }
                 dataWatcher.updateObject(21, rotationYaw);
             }
@@ -401,4 +410,9 @@ public abstract class EntityCar extends EntityAnimal {
     //todo: plays driving sounds using vanilla step sound heresy
     @Override
     public void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_){}
+
+    public boolean rearSteer(){
+        return false;
+    }
+
 }
