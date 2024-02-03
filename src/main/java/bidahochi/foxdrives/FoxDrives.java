@@ -78,7 +78,7 @@ public class FoxDrives {
             //register core entity
             cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(
                     registry.getEntityClass(),
-                    registry.getClass().getName().replace(" ", "") + ".entity",
+                    registry.getEntityClass().getName().replace(" ", "") + ".entity",
                     registryPosition, FoxDrives.instance, 1600, 3, true);
             //register item
             RegisterItem(registry.getEntityItem(), registry.getEntityItem().getUnlocalizedName(), tab);
