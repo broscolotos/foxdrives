@@ -70,7 +70,7 @@ public class RenderCar extends Render {
             }
         }
 
-        if(car.riddenByEntity!=null) {
+        if(car.riddenByEntity!=null && car.running > 0) {
             // define the rotation angle, scale based on framerate.
             double rotation = ((((EntityLivingBase) car.riddenByEntity).moveForward*car.getMoveSpeed()*0.000001) * (System.currentTimeMillis() - car.lastFrame) * 60);
             //rotate back wheels
@@ -106,9 +106,9 @@ public class RenderCar extends Render {
                 wheel.rotateAngleZ -= rotation*car.wheelSpinMultiplier();
 
                 if (Minecraft.getMinecraft().thePlayer.moveStrafing < 0) {
-                    wheel.rotateAngleY = (car.turnRenderDegree(true));
+                    wheel.rotateAngleY = (car.turnRenderDegree(car.rearSteer() ? false : true));
                 } else if (Minecraft.getMinecraft().thePlayer.moveStrafing > 0) {
-                    wheel.rotateAngleY = (car.turnRenderDegree(false));
+                    wheel.rotateAngleY = (car.turnRenderDegree(car.rearSteer() ? true : false));
                 } else {
                     wheel.rotateAngleY = 0;
                 }
