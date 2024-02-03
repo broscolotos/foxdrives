@@ -29,6 +29,8 @@ public abstract class EntityCar extends EntityAnimal {
     @SideOnly(Side.CLIENT)
     public List<ModelRendererTurbo> frontWheels = new ArrayList<>();
     @SideOnly(Side.CLIENT)
+    public List<ModelRendererTurbo> frontWheels2 = new ArrayList<>();
+    @SideOnly(Side.CLIENT)
     public List<ModelRendererTurbo> backWheels = new ArrayList<>();
     @SideOnly(Side.CLIENT)
     public long lastFrame = System.currentTimeMillis();

@@ -1,16 +1,17 @@
 package bidahochi.foxdrives.entities;
 
+import bidahochi.foxdrives.models.ModelRedmund1972;
 import bidahochi.foxdrives.models.ToyotaPickup1992;
 import fexcraft.tmt.slim.ModelBase;
 import net.minecraft.world.World;
 
 
-public class EntityToyotaPickup1992 extends EntityCarChest {
+public class EntityRedmund1972 extends EntityCarChest {
 
-    public EntityToyotaPickup1992(World world, double xPos, double yPos, double zPos) {
+    public EntityRedmund1972(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
     }
-    public EntityToyotaPickup1992(World p_i1685_1_) {
+    public EntityRedmund1972(World p_i1685_1_) {
         super(p_i1685_1_);
     }
 
@@ -20,7 +21,7 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
      */
     @Override
     public ModelBase getModel() {
-        return new ToyotaPickup1992();
+        return new ModelRedmund1972();
     }
 
     /**
@@ -30,7 +31,7 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/toyota/JC1992BoiodaPickup"};
+        return new String[]{"textures/redmund_1972_blank", "textures/redmund_1972_brown","textures/redmund_1972_red"};
     }
 
     /**
@@ -47,7 +48,7 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
      */
     @Override
     public float getAccelSpeed() {
-        return 1;
+        return 0.75f;
     }
 
     /**

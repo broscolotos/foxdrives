@@ -24,10 +24,10 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod(modid = FoxDrives.MODID, version = FoxDrives.MOD_VERSION, name = "Fox Drives")
+@Mod(modid = FoxDrives.MODID, version = FoxDrives.MOD_VERSION, name = "FoxDrives")
 public class FoxDrives {
     public static final String MODID = "foxdrives";
-    public static final String MOD_VERSION = "1";
+    public static final String MOD_VERSION = "0.1";
 
     //used for TMT render caching. false improves performance dramatically, true can fix rare bugs.
     public static boolean disableCache=false;
@@ -46,7 +46,7 @@ public class FoxDrives {
     public static CommonProxy proxy;
 
 
-    //the 'paintbuvket' item
+    //the 'paintbucket' item
     public static Item wrap;
     //the creative tab
     public static CreativeTabs tab;
@@ -73,7 +73,7 @@ public class FoxDrives {
         wrap= RegisterItem(new Item(),"wrap", tab);
 
 
-        //register everyv ehicle in EnumCars
+        //register every vehicle in EnumCars
         for (EnumCars registry : EnumCars.values()) {
             //register core entity
             cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(

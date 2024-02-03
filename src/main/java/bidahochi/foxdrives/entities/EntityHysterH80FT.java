@@ -1,16 +1,17 @@
 package bidahochi.foxdrives.entities;
 
+import bidahochi.foxdrives.models.ModelHysterH80FT;
 import bidahochi.foxdrives.models.ToyotaPickup1992;
 import fexcraft.tmt.slim.ModelBase;
 import net.minecraft.world.World;
 
 
-public class EntityToyotaPickup1992 extends EntityCarChest {
+public class EntityHysterH80FT extends EntityCarChest {
 
-    public EntityToyotaPickup1992(World world, double xPos, double yPos, double zPos) {
+    public EntityHysterH80FT(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
     }
-    public EntityToyotaPickup1992(World p_i1685_1_) {
+    public EntityHysterH80FT(World p_i1685_1_) {
         super(p_i1685_1_);
     }
 
@@ -20,7 +21,7 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
      */
     @Override
     public ModelBase getModel() {
-        return new ToyotaPickup1992();
+        return new ModelHysterH80FT();
     }
 
     /**
@@ -30,7 +31,7 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/toyota/JC1992BoiodaPickup"};
+        return new String[]{"textures/hyster_h80ft", "textures/hyster_h80ft2"};
     }
 
     /**
@@ -38,8 +39,8 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
      */
     @Override
     public float getMoveSpeed() {
-        return 45f;
-    }//45
+        return 15f;
+    }
 
     /**
      * Returns the acceleration speed in meters per second.
@@ -54,7 +55,7 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
      * Returns the rider offset from the center of the entity, in blocks.
      */
     @Override
-    public float[] getRiderOffset(){return new float[]{0.3f,-0.25f,0.25f};}
+    public float[] getRiderOffset(){return new float[]{0.0f,0.25f,0.0f};}
 
     /**
      * Returns the amount to scale the player, MC default is 1, TC default is 0.65f

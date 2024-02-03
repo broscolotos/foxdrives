@@ -45,11 +45,11 @@ public class RenderCar extends Render {
                     continue;
                 }
                 //handle culling
-                if (render.boxName.toLowerCase().contains("cull")) {
+                /*if (render.boxName.toLowerCase().contains("cull")) {
                     render.boxName=render.boxName.replace("cull","").replace("Cull", "");
                     render.showModel = false;
-                } else if (render.boxName.toLowerCase().contains("nocull")) {
-                    render.boxName=render.boxName.replace("nocull","").replace("Nocull", "").replace("NoCull", "");
+                } else*/ if (render.boxName.toLowerCase().contains("cull")) {
+                    //render.boxName=render.boxName.replace("nocull","").replace("Nocull", "").replace("NoCull", "").replace("cull", "");
                     render.noCull = true;
                 }
                 //handle glow
@@ -61,6 +61,8 @@ public class RenderCar extends Render {
                 if(render.boxName.toLowerCase().contains("wheel")){
                     if(render.boxName.toLowerCase().contains("front")){
                         car.frontWheels.add(render);
+                    } else if (render.boxName.toLowerCase().contains("front2")){
+                        car.frontWheels2.add(render);
                     } else {
                         car.backWheels.add(render);
                     }
@@ -89,6 +91,23 @@ public class RenderCar extends Render {
                 if (Minecraft.getMinecraft().thePlayer.moveStrafing > 0) {
                     wheel.rotateAngleY = (car.turnRenderDegree(true));
                 } else if (Minecraft.getMinecraft().thePlayer.moveStrafing < 0) {
+                    wheel.rotateAngleY = (car.turnRenderDegree(false));
+                } else {
+                    wheel.rotateAngleY = 0;
+                }
+            }
+
+            //rotate front wheels, if they are actually on the back (forklift nonsense)
+            //todo: turn front wheels
+            for (ModelRendererTurbo wheel : car.frontWheels2) {
+                if (wheel.rotateAngleZ > Math.PI * 10000 || wheel.rotateAngleZ < Math.PI * -10000) {
+                    wheel.rotateAngleZ -= Math.copySign(Math.PI * 10000, wheel.rotateAngleZ);
+                }
+                wheel.rotateAngleZ -= rotation*car.wheelSpinMultiplier();
+
+                if (Minecraft.getMinecraft().thePlayer.moveStrafing < 0) {
+                    wheel.rotateAngleY = (car.turnRenderDegree(true));
+                } else if (Minecraft.getMinecraft().thePlayer.moveStrafing > 0) {
                     wheel.rotateAngleY = (car.turnRenderDegree(false));
                 } else {
                     wheel.rotateAngleY = 0;

@@ -1,2 +1,10 @@
 <!-- ## This is a comment, do no remove or modify these! ## -->http://jabelarminecraft.blogspot.com/p/minecraft-modding-localization.html
 <!-- ## Only replace the words on the right side of "=" ## -->
+
+item.wrap.name=Vehicle Wrap
+item.textures/creativetab.name=FoxDrives
+
+item.item.bidahochi.foxdrives.entities.EntityToyotaPickup1992.name=1992 Boiota Pickup
+item.item.bidahochi.foxdrives.entities.EntityRedmund1972.name=1972 Pine Redmund
+item.item.bidahochi.foxdrives.entities.EntityGilligPhantom.name=Gillig Phantom (40ft)
+item.item.bidahochi.foxdrives.entities.Entity.HysterH80FT.name=Hyster H80FT Forklift

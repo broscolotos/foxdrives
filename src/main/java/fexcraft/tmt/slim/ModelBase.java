@@ -64,6 +64,9 @@ public class ModelBase extends ArrayList<ModelRendererTurbo> {
 				if (part.ignoresLighting){
 					Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				}
+				if (part.noCull){
+					GL11.glDisable(GL11.GL_CULL_FACE);
+				}
 				GL11.glTranslatef(part.rotationPointX * 0.0625F, part.rotationPointY * 0.0625F, part.rotationPointZ * 0.0625F);
 				GL11.glRotatef(part.rotateAngleY, 0.0F, 1.0F, 0.0F);
 				GL11.glRotatef(part.rotateAngleZ, 0.0F, 0.0F, 1.0F);
@@ -74,6 +77,9 @@ public class ModelBase extends ArrayList<ModelRendererTurbo> {
 				GL11.glTranslatef(-part.rotationPointX * 0.0625F, -part.rotationPointY * 0.0625F, -part.rotationPointZ * 0.0625F);
 				if (part.ignoresLighting){
 					Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
+				}
+				if (part.noCull){
+					GL11.glEnable(GL11.GL_CULL_FACE);
 				}
 				GL11.glPopMatrix();
 				if(disableCache){
