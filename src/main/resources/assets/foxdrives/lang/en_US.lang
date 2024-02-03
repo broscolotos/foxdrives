@@ -4,7 +4,7 @@
 item.wrap.name=Vehicle Wrap
 item.textures/creativetab.name=FoxDrives
 
-item.item.bidahochi.foxdrives.entities.EntityToyotaPickup1992.name=1992 Boiota Pickup
-item.item.bidahochi.foxdrives.entities.EntityRedmund1972.name=1972 Pine Redmund
-item.item.bidahochi.foxdrives.entities.EntityGilligPhantom.name=Gillig Phantom (40ft)
-item.item.bidahochi.foxdrives.entities.Entity.HysterH80FT.name=Hyster H80FT Forklift
+item.foxdrives.toyota_pickup_1992.name=1992 Boiota Pickup
+item.foxdrives.redmund_1972.name=1972 Pine Redmund
+item.foxdrives.gillig_phantom.name=Gillig Phantom (40ft)
+item.foxdrives.hyster_H80FT.name=Hyster H80FT Forklift

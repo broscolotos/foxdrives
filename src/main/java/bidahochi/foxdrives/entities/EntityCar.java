@@ -1,23 +1,27 @@
 package bidahochi.foxdrives.entities;
 
-import bidahochi.foxdrives.EnumCars;
+import bidahochi.foxdrives.CarType;
 import bidahochi.foxdrives.FoxDrives;
 import cpw.mods.fml.common.gameevent.InputEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fexcraft.tmt.slim.ModelBase;
 import fexcraft.tmt.slim.ModelRendererTurbo;
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.*;
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -203,7 +207,7 @@ public abstract class EntityCar extends EntityAnimal {
             if(getDamage() > 40){
                 setDead();
                 if(player != null && !player.capabilities.isCreativeMode){
-                    Item item = EnumCars.get(this.getClass());
+                    Item item = CarType.getItemByClass(this.getClass());
                     if(item != null){
                         EntityItem ent = new EntityItem(worldObj);
                         ent.setEntityItemStack(new ItemStack(item, 1));
