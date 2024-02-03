@@ -3,6 +3,7 @@ package bidahochi.foxdrives.util;
 import bidahochi.foxdrives.entities.EntityCarChest;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.world.World;
 
 public class CommonProxy implements IGuiHandler {
@@ -19,12 +20,18 @@ public class CommonProxy implements IGuiHandler {
      */
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        System.out.println("Open client");
+        //System.out.println("Open client");
         if(player.worldObj.getEntityByID(ID) instanceof EntityCarChest){
             System.out.println("OpenServer");
             return new ContainerCarInventory(player.inventory, (EntityCarChest) player.worldObj.getEntityByID(ID));
         }
-        return null;
+        else return new Container(){
+            @Override
+            public boolean canInteractWith(EntityPlayer player){
+                return !player.isDead;
+            }
+        };
+        //return null;
     }
 
     /**

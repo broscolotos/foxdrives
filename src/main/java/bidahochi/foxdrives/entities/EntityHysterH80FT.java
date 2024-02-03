@@ -6,7 +6,7 @@ import fexcraft.tmt.slim.ModelBase;
 import net.minecraft.world.World;
 
 
-public class EntityHysterH80FT extends EntityCarChest {
+public class EntityHysterH80FT extends EntityCar {
 
     public EntityHysterH80FT(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
@@ -63,6 +63,11 @@ public class EntityHysterH80FT extends EntityCarChest {
     @Override
     public float getRiderScale() {
         return 0.65f;
+    }
+
+    @Override
+    public boolean rearSteer(){
+        return true;
     }
 
 }
