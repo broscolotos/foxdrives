@@ -53,6 +53,13 @@ public enum  EnumCars {
     private Item item;
     private ItemStack[] recipe;
 
+    public static Item get(Class<? extends EntityCar> clazz){
+        for(EnumCars en : values()){
+            if(en.entityClass.equals(clazz)) return en.item;
+        }
+        return null;
+    }
+
     public Class<? extends EntityCar> getEntityClass(){return entityClass;}
     public Item getEntityItem(){return item;}
     public ItemStack[] getEntityRecipe(){return recipe;}
