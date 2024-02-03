@@ -6,38 +6,43 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 
 import java.util.ArrayList;
 
-public class GuiCar extends GuiScreen {
+public class GuiCar extends GuiContainer {
 
     public static int guiTop;
     public static int guiLeft;
     public EntityCar entity;
+    private GuiButton button;
 
-    public GuiCar(EntityCar t){
-        entity=t;
-
+    public GuiCar(EntityCar car){
+        super(new Container() {
+            @Override
+            public boolean canInteractWith(EntityPlayer player){
+                return !player.isDead;
+            }
+        });
+        entity = car;
     }
 
     @Override
     public void initGui() {
-
+        buttonList = new ArrayList();
+        buttonList.add(button = new GuiButton(1, 0, 0, 20, 20, "loading..."));
     }
 
-
     @Override
-    public void drawScreen(int parWidth, int parHeight, float p_73863_3_) {
-        super.drawScreen(parWidth, parHeight, p_73863_3_);
+    protected void drawGuiContainerBackgroundLayer(float t, int x, int y){
         guiLeft = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight).getScaledWidth();
         guiTop = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight).getScaledHeight();
-
-
-        buttonList =new ArrayList();
-        buttonList.add(
-                new GuiButton( 1,percentLeft(15)-10,percentTop(56), 20,20,
-                        entity.getDataWatcher().getWatchableObjectByte(17)==(byte)1?"Turn Off":"Turn On"));
-
+        button.xPosition = percentLeft(15) - 10;
+        button.yPosition = percentTop(56);
+        button.displayString = entity.getDataWatcher().getWatchableObjectByte(17) == (byte)1 ? "Turn Off" : "Turn On";
+        System.out.println(button.id + " " + button.displayString + " " + entity.getDataWatcher().getWatchableObjectByte(17));
     }
 
     @Override
