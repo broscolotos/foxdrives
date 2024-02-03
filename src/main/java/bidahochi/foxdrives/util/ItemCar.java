@@ -27,8 +27,10 @@ public class ItemCar extends Item {
             return true;
         }
         try {
-            worldObj.spawnEntityInWorld(transport.getConstructor(World.class, double.class, double.class, double.class)
-                    .newInstance(worldObj, posX + 0.5D, posY+1, posZ + 0.5D));
+            EntityCar ent = transport.getConstructor(World.class, double.class, double.class, double.class)
+                    .newInstance(worldObj, posX + 0.5D, posY+1, posZ + 0.5D);
+            ent.rotationYaw = playerEntity.rotationYaw;
+            worldObj.spawnEntityInWorld(ent);
             if (!playerEntity.capabilities.isCreativeMode) {
                 itemStack.stackSize--;
                 if (itemStack.stackSize <= 0) {
