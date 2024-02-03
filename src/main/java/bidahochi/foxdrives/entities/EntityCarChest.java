@@ -28,19 +28,7 @@ public abstract class EntityCarChest extends EntityCar implements IInventory, II
     }
 
     public EntityCarChest(World world, double xPos, double yPos, double zPos) {
-        super(world);
-
-        this.setPosition(xPos, yPos, zPos);
-        this.motionX = 0.0D;
-        this.motionY = 0.0D;
-        this.motionZ = 0.0D;
-        this.prevPosX = xPos;
-        this.prevPosY = yPos;
-        this.prevPosZ = zPos;
-        this.setSize(1.4F, 1.6F);
-        ignoreFrustumCheck = true;
-        this.isImmuneToFire = true;
-        this.preventEntitySpawning = true;
+        super(world, xPos, yPos, zPos);
         this.func_110226_cD();
     }
 
@@ -142,12 +130,11 @@ public abstract class EntityCarChest extends EntityCar implements IInventory, II
     @Override
     public boolean networkInteract(int player, int key) {
         if (!worldObj.isRemote) {
-            if(key==1){//toggle running
-                this.dataWatcher.updateObject(17, running==(byte)1?(byte)0:(byte)1);
-            } else if(key==2){//open inventory
+            if(key==2){//open inventory
                 System.out.println("Open inv");
                 ((EntityPlayer)worldObj.getEntityByID(player)).openGui(FoxDrives.instance, getEntityId(), worldObj, 0, 0, 0);
             }
+            else return super.networkInteract(player, key);
         }
         return false;
     }
