@@ -257,18 +257,20 @@ public abstract class EntityCar extends EntityAnimal {
 
     /** save/load stuff */
     @Override
-    public void readEntityFromNBT(NBTTagCompound p_70037_1_) {
-        running= p_70037_1_.getByte("run");
-        velocity=p_70037_1_.getFloat("vel");
-        rotationYaw=p_70037_1_.getFloat("yaw");
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        running= compound.getByte("run");
+        velocity=compound.getFloat("vel");
+        rotationYaw=compound.getFloat("yaw");
         dataWatcher.updateObject(17, running);
         dataWatcher.updateObject(21, rotationYaw);
+        dataWatcher.updateObject(20, compound.getInteger("skin"));
     }
     @Override
-    public void writeEntityToNBT(NBTTagCompound p_70014_1_) {
-        p_70014_1_.setByte("run", running);
-        p_70014_1_.setFloat("vel", velocity);
-        p_70014_1_.setFloat("yaw", rotationYaw);
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        compound.setByte("run", running);
+        compound.setFloat("vel", velocity);
+        compound.setFloat("yaw", rotationYaw);
+        compound.setInteger("skin", dataWatcher.getWatchableObjectInt(20));
     }
 
     /**
