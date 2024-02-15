@@ -30,6 +30,7 @@ public class ItemCar extends Item {
             EntityCar ent = transport.clazz.getConstructor(World.class, double.class, double.class, double.class)
                     .newInstance(worldObj, posX + 0.5D, posY+1, posZ + 0.5D);
             ent.rotationYaw = playerEntity.rotationYaw;
+            ent.getDataWatcher().updateObject(21, ent.rotationYaw);
             worldObj.spawnEntityInWorld(ent);
             if (!playerEntity.capabilities.isCreativeMode) {
                 itemStack.stackSize--;
