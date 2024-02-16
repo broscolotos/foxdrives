@@ -1,6 +1,6 @@
 package bidahochi.foxdrives;
 
-import bidahochi.foxdrives.entities.EntityCar;
+import bidahochi.foxdrives.entities.*;
 import bidahochi.foxdrives.util.*;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -16,6 +16,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -23,6 +24,8 @@ import net.minecraftforge.common.MinecraftForge;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static cpw.mods.fml.common.registry.EntityRegistry.registerModEntity;
 
 @Mod(modid = FoxDrives.MODID, version = FoxDrives.MOD_VERSION, name = "FoxDrives")
 public class FoxDrives {
@@ -72,32 +75,47 @@ public class FoxDrives {
         tab= new FoxTab("Fox Drives", "textures/creativetab");
         wrap= RegisterItem(new Item(),"wrap", tab);
 
+        CarType.register("toyota_pickup_1992", EntityToyotaPickup1992.class)
+            .recipe(
+                new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane), new ItemStack(Blocks.stone),
+                new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs), new ItemStack(Blocks.iron_door),
+                new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane), new ItemStack(Blocks.stone)
+            );
+        CarType.register("redmund_1972", EntityRedmund1972.class)
+            .recipe(
+                new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+            );
+        CarType.register("gillig_phantom", EntityGilligPhantom.class)
+            .recipe(
+                new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+            );
+        CarType.register("hyster_H80FT", EntityHysterH80FT.class)
+            .recipe(
+                new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+            );
 
-        //register every vehicle in EnumCars
-        for (EnumCars registry : EnumCars.values()) {
-            //register core entity
-            cpw.mods.fml.common.registry.EntityRegistry.registerModEntity(
-                    registry.getEntityClass(),
-                    registry.getEntityClass().getName().replace(" ", "") + ".entity",
-                    registryPosition, FoxDrives.instance, 1600, 3, true);
-            //register item
-            RegisterItem(registry.getEntityItem(), registry.getEntityItem().getUnlocalizedName(), tab);
-            //register recipe to vanilla table.
-            if (registry.getEntityRecipe() != null) {
-
-                //make the initial recipe slot ID's
+        for(CarType type : CarType.REGISTRY.values()){
+            registerModEntity(type.clazz, MODID + "." + type.regname + ".entity", registryPosition, FoxDrives.instance, 1600, 3, true);
+            RegisterItem(type.getItem(), type.regname, tab);
+            if(type.getRecipe() != null){
                 String firstRow="";
-                firstRow+=registry.getEntityRecipe()[0]!=null?"A":" ";
-                firstRow+=registry.getEntityRecipe()[1]!=null?"B":" ";
-                firstRow+=registry.getEntityRecipe()[2]!=null?"C":" ";
+                firstRow+=type.getRecipe()[0]!=null?"A":" ";
+                firstRow+=type.getRecipe()[1]!=null?"B":" ";
+                firstRow+=type.getRecipe()[2]!=null?"C":" ";
                 String secondRow="";
-                secondRow+=registry.getEntityRecipe()[3]!=null?"D":" ";
-                secondRow+=registry.getEntityRecipe()[4]!=null?"E":" ";
-                secondRow+=registry.getEntityRecipe()[5]!=null?"F":" ";
+                secondRow+=type.getRecipe()[3]!=null?"D":" ";
+                secondRow+=type.getRecipe()[4]!=null?"E":" ";
+                secondRow+=type.getRecipe()[5]!=null?"F":" ";
                 String thirdRow="";
-                thirdRow+=registry.getEntityRecipe()[6]!=null?"G":" ";
-                thirdRow+=registry.getEntityRecipe()[7]!=null?"H":" ";
-                thirdRow+=registry.getEntityRecipe()[8]!=null?"I":" ";
+                thirdRow+=type.getRecipe()[6]!=null?"G":" ";
+                thirdRow+=type.getRecipe()[7]!=null?"H":" ";
+                thirdRow+=type.getRecipe()[8]!=null?"I":" ";
 
                 List<Object> recipe = new ArrayList<>();
                 recipe.add(firstRow);
@@ -107,27 +125,23 @@ public class FoxDrives {
                 //loop for all the items in the array, then make an entry for the ones that exist
                 //use a char array for a simple shorthand to figure out which char to use the the matching ID.
                 char[] c = {'A','B','C','D','E','F','G','H','I'};
-                for(int i=0; i<registry.getEntityRecipe().length;i++){
-                    if(registry.getEntityRecipe()[i]!=null){
+                for(int i=0; i<type.getRecipe().length;i++){
+                    if(type.getRecipe()[i]!=null){
                         recipe.add(c[i]);
-                        recipe.add(registry.getEntityRecipe()[i]);
+                        recipe.add(type.getRecipe()[i]);
                     }
                 }
-
-
-                GameRegistry.addRecipe(new ItemStack(registry.getEntityItem()), recipe.toArray());
+                GameRegistry.addRecipe(new ItemStack(type.getItem()), recipe.toArray());
             }
-
             //register entity render
             if (FoxDrives.proxy.isClient()) {
-                cpw.mods.fml.client.registry.RenderingRegistry.registerEntityRenderingHandler(registry.getEntityClass(), ClientProxy.transportRenderer);
+                cpw.mods.fml.client.registry.RenderingRegistry.registerEntityRenderingHandler(type.clazz, ClientProxy.transportRenderer);
 
                 //player scaler
                 cpw.mods.fml.client.registry.RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, playerRender);
             }
             registryPosition++;
         }
-
 
         //register the event handler, mainly for tracking inputs
         if(event.getSide().isClient()) {
@@ -139,7 +153,7 @@ public class FoxDrives {
 
     //shorthand for registering an item, taken from TiM.
     public static Item RegisterItem(Item itm, String unlocalizedName, @Nullable CreativeTabs tab) {
-        itm.setUnlocalizedName(unlocalizedName);
+        itm.setUnlocalizedName(MODID + "." + unlocalizedName);
         if (tab != null) {
             itm.setCreativeTab(tab);
         }
@@ -149,8 +163,6 @@ public class FoxDrives {
         GameRegistry.registerItem(itm, unlocalizedName);
         return itm;
     }
-
-
 
     //each packet needs it's own entry in this, duplicates are not allowed, for whatever reason
     private static final IMessageHandler[] HANDLERS = new IMessageHandler[]{

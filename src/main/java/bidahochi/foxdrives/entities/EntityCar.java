@@ -1,23 +1,27 @@
 package bidahochi.foxdrives.entities;
 
-import bidahochi.foxdrives.EnumCars;
+import bidahochi.foxdrives.CarType;
 import bidahochi.foxdrives.FoxDrives;
 import cpw.mods.fml.common.gameevent.InputEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fexcraft.tmt.slim.ModelBase;
 import fexcraft.tmt.slim.ModelRendererTurbo;
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.*;
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -203,7 +207,7 @@ public abstract class EntityCar extends EntityAnimal {
             if(getDamage() > 40){
                 setDead();
                 if(player != null && !player.capabilities.isCreativeMode){
-                    Item item = EnumCars.get(this.getClass());
+                    Item item = CarType.getItemByClass(this.getClass());
                     if(item != null){
                         EntityItem ent = new EntityItem(worldObj);
                         ent.setEntityItemStack(new ItemStack(item, 1));
@@ -253,18 +257,20 @@ public abstract class EntityCar extends EntityAnimal {
 
     /** save/load stuff */
     @Override
-    public void readEntityFromNBT(NBTTagCompound p_70037_1_) {
-        running= p_70037_1_.getByte("run");
-        velocity=p_70037_1_.getFloat("vel");
-        rotationYaw=p_70037_1_.getFloat("yaw");
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        running= compound.getByte("run");
+        velocity=compound.getFloat("vel");
+        rotationYaw=compound.getFloat("yaw");
         dataWatcher.updateObject(17, running);
         dataWatcher.updateObject(21, rotationYaw);
+        dataWatcher.updateObject(20, compound.getInteger("skin"));
     }
     @Override
-    public void writeEntityToNBT(NBTTagCompound p_70014_1_) {
-        p_70014_1_.setByte("run", running);
-        p_70014_1_.setFloat("vel", velocity);
-        p_70014_1_.setFloat("yaw", rotationYaw);
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        compound.setByte("run", running);
+        compound.setFloat("vel", velocity);
+        compound.setFloat("yaw", rotationYaw);
+        compound.setInteger("skin", dataWatcher.getWatchableObjectInt(20));
     }
 
     /**
