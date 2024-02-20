@@ -13,7 +13,6 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -133,18 +132,15 @@ public class FoxDrives {
                 }
                 GameRegistry.addRecipe(new ItemStack(type.getItem()), recipe.toArray());
             }
-            //register entity render
-            if (FoxDrives.proxy.isClient()) {
-                cpw.mods.fml.client.registry.RenderingRegistry.registerEntityRenderingHandler(type.clazz, ClientProxy.transportRenderer);
-
-                //player scaler
-                cpw.mods.fml.client.registry.RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, playerRender);
-            }
+            proxy.registerCarRenderer(type.clazz);
             registryPosition++;
         }
 
+        //register player scaler
+        proxy.registerPlayerScaler();
+
         //register the event handler, mainly for tracking inputs
-        if(event.getSide().isClient()) {
+        if(event.getSide().isClient()){
             MinecraftForge.EVENT_BUS.register(EventManager.instance);
             FMLCommonHandler.instance().bus().register(EventManager.instance);
         }
@@ -171,22 +167,4 @@ public class FoxDrives {
             }
     };
 
-
-    @SideOnly(Side.CLIENT)
-    private static final net.minecraft.client.renderer.entity.RenderPlayer playerRender= new net.minecraft.client.renderer.entity.RenderPlayer(){
-        EntityCar t;
-        @Override
-        public void doRender(net.minecraft.client.entity.AbstractClientPlayer p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_){
-            if (p_76986_1_.ridingEntity instanceof EntityCar) {
-                t=(EntityCar) p_76986_1_.ridingEntity;
-                org.lwjgl.opengl.GL11.glPushMatrix();
-                org.lwjgl.opengl.GL11.glScalef(t.getRiderScale(), t.getRiderScale(), t.getRiderScale());
-                super.doRender(p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
-                org.lwjgl.opengl.GL11.glPopMatrix();
-
-            } else {
-                super.doRender(p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
-            }
-        }
-    };
 }
