@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fexcraft.tmt.slim.ModelBase;
 import fexcraft.tmt.slim.ModelRendererTurbo;
+import fexcraft.tmt.slim.Vec3f;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -371,9 +372,9 @@ public abstract class EntityCar extends EntityAnimal {
     }
 
     /**
-     * Returns the rider offset from the center of the entity, in blocks.
+     * Returns the rider/passengers offset from the center of the entity, in blocks.
      */
-    public abstract float[] getRiderOffset();
+    public abstract List<float[]> getPassengerOffsets();
 
     /**
      * Returns the amount to scale the player, MC default is 1, TC default is 0.65
@@ -385,19 +386,21 @@ public abstract class EntityCar extends EntityAnimal {
     public void updateRiderPosition(){
         if (this.riddenByEntity != null) {
 
-            float[] xyz = getRiderOffset();
+            float[] pos = getPassengerOffsets().get(0);
             //rotate yaw
-            if (rotationYaw != 0.0F) {
+            if(rotationYaw != 0.0F){
                 float cos = MathHelper.cos((rotationYaw)*((float) Math.PI / 180.0f));
                 float sin = MathHelper.sin((rotationYaw)*((float) Math.PI / 180.0f));
 
-                xyz[0] = (getRiderOffset()[0] * cos) - (getRiderOffset()[2] * sin);
-                xyz[2] = (getRiderOffset()[0] * sin) + (getRiderOffset()[2] * cos);
+                riddenByEntity.setPosition(
+                    posX + (pos[0] * cos - pos[2] * sin),
+                    posY + riddenByEntity.getYOffset() + pos[1],
+                    posZ + (pos[0] * sin + pos[2] * cos)
+                );
             }
-
-            this.riddenByEntity.setPosition(this.posX + xyz[0],
-                    this.posY + this.riddenByEntity.getYOffset()+xyz[1],
-                    this.posZ+xyz[2]);
+            else{
+                riddenByEntity.setPosition(posX + pos[0], posY + riddenByEntity.getYOffset() + pos[1], posZ + pos[2]);
+            }
         }
     }
 
