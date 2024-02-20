@@ -47,7 +47,9 @@ public abstract class EntityCar extends EntityAnimal {
     public byte running=0;
     public float velocity=0;
 
-    /**
+    public ArrayList<EntitySeat> passengers = new ArrayList<>();
+
+     /**
      * client side entity spawn
      */
     public EntityCar(World world) {
@@ -172,12 +174,19 @@ public abstract class EntityCar extends EntityAnimal {
         return true;
     }
 
+	@Override
+	public void applyEntityCollision(Entity entity){
+		if(entity instanceof EntitySeat) return;
+        if(entity instanceof EntityPlayer && entity.ridingEntity instanceof EntitySeat) return;
+        super.applyEntityCollision(entity);
+	}
+
     /**add entity mount functionality, and remove item interactions*/
     @Override
-    public boolean interact(EntityPlayer p_70085_1_){
+    public boolean interact(EntityPlayer player){
         //if it's the skinning item, iterate to the next skin
-        if(!this.worldObj.isRemote && p_70085_1_.getHeldItem()!=null &&
-                p_70085_1_.getHeldItem().getItem()== FoxDrives.wrap) {
+        if(!this.worldObj.isRemote && player.getHeldItem()!=null &&
+                player.getHeldItem().getItem()== FoxDrives.wrap) {
 
                 //gets current skin value and loops around to 0 if it's past the entity's skin count.
                 int skin =dataWatcher.getWatchableObjectInt(20)+1;
@@ -186,8 +195,20 @@ public abstract class EntityCar extends EntityAnimal {
                 }
                 dataWatcher.updateObject(20,skin);
         //otherwise, try to mount the entity
-        } else if (!this.worldObj.isRemote && this.riddenByEntity == null) {
-            p_70085_1_.mountEntity(this);
+        } else if (!this.worldObj.isRemote) {
+            if(riddenByEntity == null){
+                player.mountEntity(this);
+            }
+            else if(player.ridingEntity == null){
+                if(passengers.size() + 1 < getPassengerOffsets().size()){
+                    EntitySeat seat = new EntitySeat(this);
+                    seat.setPosition(posX, posY, posZ);
+                    seat.getDataWatcher().updateObject(17, getEntityId());
+                    worldObj.spawnEntityInWorld(seat);
+                    passengers.add(seat);
+                    player.mountEntity(seat);
+                }
+            }
             return true;
         }
         return false;
