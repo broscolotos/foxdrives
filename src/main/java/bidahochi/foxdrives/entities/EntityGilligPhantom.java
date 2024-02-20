@@ -11,7 +11,7 @@ import java.util.List;
 
 public class EntityGilligPhantom extends EntityCar {
 
-    public static List<float[]> passpos = Arrays.asList(new float[]{ -1.5f, -0.0f, 0.3f });
+    public static List<float[]> passpos = Arrays.asList(new float[]{ 0.3f, 0, 1.5f });
 
     public EntityGilligPhantom(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
