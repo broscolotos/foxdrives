@@ -139,6 +139,9 @@ public class FoxDrives {
         //register player scaler
         proxy.registerPlayerScaler();
 
+        //register seat entity
+        registerModEntity(EntitySeat.class, MODID + ".seat.entity", registryPosition, FoxDrives.instance, 1600, 1, true);
+
         //register the event handler, mainly for tracking inputs
         if(event.getSide().isClient()){
             MinecraftForge.EVENT_BUS.register(EventManager.instance);
