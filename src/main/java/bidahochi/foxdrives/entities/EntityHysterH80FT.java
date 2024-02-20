@@ -5,8 +5,13 @@ import bidahochi.foxdrives.models.ToyotaPickup1992;
 import fexcraft.tmt.slim.ModelBase;
 import net.minecraft.world.World;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 public class EntityHysterH80FT extends EntityCar {
+
+    public static List<float[]> passpos = Arrays.asList(new float[]{ 0.0f, 0.25f, 0.0f });
 
     public EntityHysterH80FT(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
@@ -52,10 +57,11 @@ public class EntityHysterH80FT extends EntityCar {
     }
 
     /**
-     * Returns the rider offset from the center of the entity, in blocks.
+     * Returns the rider/passengers offset from the center of the entity, in blocks.
      */
-    @Override
-    public float[] getRiderOffset(){return new float[]{0.0f,0.25f,0.0f};}
+    public List<float[]> getPassengerOffsets(){
+        return passpos;
+    }
 
     /**
      * Returns the amount to scale the player, MC default is 1, TC default is 0.65f
