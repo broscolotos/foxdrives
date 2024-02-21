@@ -445,4 +445,13 @@ public abstract class EntityCar extends EntityAnimal {
         return false;
     }
 
+    @Override
+    public void setDead(){
+        super.setDead();
+        for(EntitySeat seat : passengers){
+            seat.car = null;
+            seat.setDead();
+        }
+    }
+
 }
