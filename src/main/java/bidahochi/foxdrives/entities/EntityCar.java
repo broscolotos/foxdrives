@@ -358,11 +358,10 @@ public abstract class EntityCar extends EntityAnimal {
 
             double d0 = 0.25D;
             List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getBoundingBox().expand(d0, d0, d0));
-
-            for (Object o : list) {
-                if (o instanceof EntityLiving && ((Entity) o).getBoundingBox()!=null
-                        && ((Entity) o).getBoundingBox().intersectsWith(getBoundingBox())) {
-                    ((Entity) o).attackEntityFrom(new EntityDamageSource("player", this), 5);
+            for(Object o : list){
+                if(o instanceof EntityPlayer && ((Entity)o).ridingEntity instanceof EntitySeat) continue;
+                if(o instanceof EntityLiving && ((Entity)o).getBoundingBox() != null && ((Entity)o).getBoundingBox().intersectsWith(getBoundingBox())){
+                    ((Entity)o).attackEntityFrom(new EntityDamageSource("player", this), 5);
                 }
             }
         } else if(tickOffset >0) {
