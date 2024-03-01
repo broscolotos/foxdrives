@@ -11,8 +11,8 @@ import java.util.List;
 public class EntityToyotaPickup1992 extends EntityCarChest {
 
     public static List<float[]> passpos = Arrays.asList(
-        new float[]{ 0.3f, -0.25f, 0.25f },
-        new float[]{ -0.3f, -0.25f, 0.25f }
+        new float[]{ 0.3f, 0.125f, 0.25f },
+        new float[]{ -0.3f, 0.125f, 0.25f }
     );
 
     public EntityToyotaPickup1992(World world, double xPos, double yPos, double zPos) {
