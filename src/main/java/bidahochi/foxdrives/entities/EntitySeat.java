@@ -90,9 +90,9 @@ public class EntitySeat extends Entity implements IEntityAdditionalSpawnData {
 	@Override
 	public void updateRiderPosition(){
         if(riddenByEntity == null || car == null) return;
-        riddenByEntity.setPosition(posX, posY + riddenByEntity.getYOffset(), posZ);
+        riddenByEntity.setPosition(posX, posY + riddenByEntity.getYOffset() * car.getRiderScale(), posZ);
 		riddenByEntity.lastTickPosX = riddenByEntity.prevPosX = prevPosX;
-		riddenByEntity.lastTickPosY = riddenByEntity.prevPosY = prevPosY + riddenByEntity.getYOffset();
+		riddenByEntity.lastTickPosY = riddenByEntity.prevPosY = prevPosY + riddenByEntity.getYOffset() * car.getRiderScale();
 		riddenByEntity.lastTickPosZ = riddenByEntity.prevPosZ = prevPosZ;
     }
 
