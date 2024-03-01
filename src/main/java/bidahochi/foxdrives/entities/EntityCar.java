@@ -414,12 +414,12 @@ public abstract class EntityCar extends EntityAnimal {
 
                 riddenByEntity.setPosition(
                     posX + (pos[0] * cos - pos[2] * sin),
-                    posY + riddenByEntity.getYOffset() + pos[1],
+                    posY + riddenByEntity.getYOffset() * getRiderScale() + pos[1],
                     posZ + (pos[0] * sin + pos[2] * cos)
                 );
             }
             else{
-                riddenByEntity.setPosition(posX + pos[0], posY + riddenByEntity.getYOffset() + pos[1], posZ + pos[2]);
+                riddenByEntity.setPosition(posX + pos[0], posY + riddenByEntity.getYOffset() * getRiderScale() + pos[1], posZ + pos[2]);
             }
         }
     }
