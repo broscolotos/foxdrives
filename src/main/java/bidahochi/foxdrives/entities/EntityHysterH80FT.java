@@ -11,7 +11,7 @@ import java.util.List;
 
 public class EntityHysterH80FT extends EntityCar {
 
-    public static List<float[]> passpos = Arrays.asList(new float[]{ 0.0f, 0.25f, 0.0f });
+    public static List<float[]> passpos = Arrays.asList(new float[]{ 0.0f, 0.5f, 0.0f });
 
     public EntityHysterH80FT(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
