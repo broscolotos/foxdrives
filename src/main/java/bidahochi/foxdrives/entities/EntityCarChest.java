@@ -128,15 +128,14 @@ public abstract class EntityCarChest extends EntityCar implements IInventory, II
      * @see bidahochi.foxdrives.util.PacketInteract
      * @see bidahochi.foxdrives.util.EventManager#onClientKeyPress(InputEvent.MouseInputEvent) */
     @Override
-    public boolean networkInteract(int player, int key) {
+    public void networkInteract(int player, int key) {
         if (!worldObj.isRemote) {
             if(key==2){//open inventory
                 System.out.println("Open inv");
                 ((EntityPlayer)worldObj.getEntityByID(player)).openGui(FoxDrives.instance, getEntityId(), worldObj, 0, 0, 0);
             }
-            else return super.networkInteract(player, key);
+            else super.networkInteract(player, key);
         }
-        return false;
     }
 
 
