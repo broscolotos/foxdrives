@@ -41,11 +41,19 @@ public abstract class EntityCar extends EntityAnimal {
     @SideOnly(Side.CLIENT)
     public long lastFrame = System.currentTimeMillis();
 
+    public static int DW_RUNNING = 17;
+    public static int DW_ROLL = 18;
+    public static int DW_HEALTH = 19;
+    public static int DW_SKIN = 20;
+    public static int DW_YAW = 21;
+    public static int DW_THROTTLE = 22;
+
     public float health =20, roll=0;
     public double transportX=0,transportY=0,transportZ=0;
     public int tickOffset=0;
     public byte running=0;
     public float velocity=0;
+    public float throttle;
 
     public ArrayList<EntitySeat> passengers = new ArrayList<>();
 
@@ -90,11 +98,12 @@ public abstract class EntityCar extends EntityAnimal {
     @Override
     public void entityInit(){
         super.entityInit();
-        this.dataWatcher.addObject(17, running);//tracks if the entity is on or not
-        this.dataWatcher.addObject(18, roll);//tracks the entity roll from being hit
-        this.dataWatcher.addObject(19, health);//tracks entity health
-        this.dataWatcher.addObject(20, 0);//used to track currently selected skin
-        this.dataWatcher.addObject(21, 0f);//used to track rotation yaw
+        this.dataWatcher.addObject(DW_RUNNING, running);//tracks if the entity is on or not
+        this.dataWatcher.addObject(DW_ROLL, roll);//tracks the entity roll from being hit
+        this.dataWatcher.addObject(DW_HEALTH, health);//tracks entity health
+        this.dataWatcher.addObject(DW_SKIN, 0);//used to track currently selected skin
+        this.dataWatcher.addObject(DW_YAW, 0f);//used to track rotation yaw
+        this.dataWatcher.addObject(DW_THROTTLE, 0f);//throttle
     }
 
     /**
@@ -189,11 +198,11 @@ public abstract class EntityCar extends EntityAnimal {
                 player.getHeldItem().getItem()== FoxDrives.wrap) {
 
                 //gets current skin value and loops around to 0 if it's past the entity's skin count.
-                int skin =dataWatcher.getWatchableObjectInt(20)+1;
+                int skin =dataWatcher.getWatchableObjectInt(DW_SKIN)+1;
                 if(skin>=getSkins().length){
                     skin=0;
                 }
-                dataWatcher.updateObject(20,skin);
+                dataWatcher.updateObject(DW_SKIN,skin);
         //otherwise, try to mount the entity
         } else if (!this.worldObj.isRemote) {
             if(riddenByEntity == null){
@@ -243,16 +252,16 @@ public abstract class EntityCar extends EntityAnimal {
     }
 
     public float getDamage(){
-        return this.dataWatcher.getWatchableObjectFloat(19);
+        return this.dataWatcher.getWatchableObjectFloat(DW_HEALTH);
     }
     public void setDamage(float d){
-        this.dataWatcher.updateObject(19, d);
+        this.dataWatcher.updateObject(DW_HEALTH, d);
     }
     public float getRollingDirection(){
-        return this.dataWatcher.getWatchableObjectFloat(18);
+        return this.dataWatcher.getWatchableObjectFloat(DW_ROLL);
     }
     public void setRollingDirection(float r){
-        this.dataWatcher.updateObject(18, r);
+        this.dataWatcher.updateObject(DW_ROLL, r);
     }
 
     /** called every tick
@@ -283,16 +292,16 @@ public abstract class EntityCar extends EntityAnimal {
         running= compound.getByte("run");
         velocity=compound.getFloat("vel");
         rotationYaw=compound.getFloat("yaw");
-        dataWatcher.updateObject(17, running);
-        dataWatcher.updateObject(21, rotationYaw);
-        dataWatcher.updateObject(20, compound.getInteger("skin"));
+        dataWatcher.updateObject(DW_RUNNING, running);
+        dataWatcher.updateObject(DW_YAW, rotationYaw);
+        dataWatcher.updateObject(DW_SKIN, compound.getInteger("skin"));
     }
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         compound.setByte("run", running);
         compound.setFloat("vel", velocity);
         compound.setFloat("yaw", rotationYaw);
-        compound.setInteger("skin", dataWatcher.getWatchableObjectInt(20));
+        compound.setInteger("skin", dataWatcher.getWatchableObjectInt(DW_SKIN));
     }
 
     /**
@@ -302,7 +311,7 @@ public abstract class EntityCar extends EntityAnimal {
     public boolean networkInteract(int player, int key) {
         if (!worldObj.isRemote) {
             if(key==1){
-                this.dataWatcher.updateObject(17, running==(byte)1?(byte)0:(byte)1);
+                this.dataWatcher.updateObject(DW_RUNNING, running==(byte)1?(byte)0:(byte)1);
             }
         }
         return false;
@@ -312,8 +321,8 @@ public abstract class EntityCar extends EntityAnimal {
      * Moves the entity based on the rider heading and rider.moveForward
      */
     public void moveEntityWithHeading() {
-        if(running != dataWatcher.getWatchableObjectByte(17)){
-            running = dataWatcher.getWatchableObjectByte(17);
+        if(running != dataWatcher.getWatchableObjectByte(DW_RUNNING)){
+            running = dataWatcher.getWatchableObjectByte(DW_RUNNING);
         }
         if(!worldObj.isRemote) {
             velocity*=0.92f;
@@ -350,7 +359,7 @@ public abstract class EntityCar extends EntityAnimal {
                         rotationYaw -= (rider.moveStrafing * turnStrength(false));
                     }
                 }
-                dataWatcher.updateObject(21, rotationYaw);
+                dataWatcher.updateObject(DW_YAW, rotationYaw);
             }
 
             this.stepHeight = canClimbFullBlocks()?1.0f:canClimbSlabs()?0.5f:0.0f;
@@ -372,7 +381,7 @@ public abstract class EntityCar extends EntityAnimal {
                     this.posZ + (this.transportZ - this.posZ) / (double) this.tickOffset
             );
             tickOffset--;
-            rotationYaw=dataWatcher.getWatchableObjectFloat(21);
+            rotationYaw=dataWatcher.getWatchableObjectFloat(DW_YAW);
         }
     }
 
