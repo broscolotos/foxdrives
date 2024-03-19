@@ -19,6 +19,7 @@ public class ClientProxy extends CommonProxy {
     public static final RenderCar transportRenderer = new RenderCar();
     /**the keybind for opening the inventory*/
     public static KeyBinding KeyInventory = new KeyBinding("Open car GUI",  Keyboard.KEY_R, "Fox Drives");
+    public static KeyBinding KeyBrake = new KeyBinding("Brake",  Keyboard.KEY_B, "Fox Drives");
 
     @Override
     public Object getEntityRender(){return transportRenderer;}
