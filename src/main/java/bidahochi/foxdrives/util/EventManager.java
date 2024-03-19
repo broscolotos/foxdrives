@@ -7,6 +7,7 @@ import bidahochi.foxdrives.entities.EntitySeat;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -23,10 +24,10 @@ public class EventManager {
     //    which opens the GUI through the proxy.
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public void onClientKeyPress(InputEvent.MouseInputEvent event) {
-        if(Minecraft.getMinecraft().currentScreen !=null || !(Minecraft.getMinecraft().thePlayer.ridingEntity instanceof EntityCar)){
-            return;
-        }
+    public void onClientKeyPress(TickEvent.ClientTickEvent event){
+        if(event.phase == TickEvent.Phase.END) return;
+        if(Minecraft.getMinecraft().currentScreen != null) return;
+        if(!(Minecraft.getMinecraft().thePlayer.ridingEntity instanceof EntityCar)) return;
 
         if(bidahochi.foxdrives.util.ClientProxy.KeyInventory.isPressed()){
             if(Minecraft.getMinecraft().thePlayer.ridingEntity instanceof EntityCarChest){
@@ -34,6 +35,12 @@ public class EventManager {
                         2,Minecraft.getMinecraft().thePlayer.ridingEntity.getEntityId()));
             } else {
                 FMLCommonHandler.instance().showGuiScreen(new GuiCar((EntityCar) Minecraft.getMinecraft().thePlayer.ridingEntity));
+            }
+        }
+
+        if(bidahochi.foxdrives.util.ClientProxy.KeyBrake.isPressed()){
+            if(Minecraft.getMinecraft().thePlayer.ridingEntity instanceof EntityCar){
+                FoxDrives.interactChannel.sendToServer(new PacketInteract(3, Minecraft.getMinecraft().thePlayer.ridingEntity.getEntityId()));
             }
         }
     }
