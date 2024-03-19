@@ -54,6 +54,7 @@ public abstract class EntityCar extends EntityAnimal {
     public byte running=0;
     public float velocity=0;
     public float throttle;
+    public boolean braking;
 
     public ArrayList<EntitySeat> passengers = new ArrayList<>();
 
@@ -306,15 +307,17 @@ public abstract class EntityCar extends EntityAnimal {
 
     /**
      * handles interaction from client over network.
-     * @see bidahochi.foxdrives.util.PacketInteract
-     * @see bidahochi.foxdrives.util.EventManager#onClientKeyPress(InputEvent.MouseInputEvent) */
-    public boolean networkInteract(int player, int key) {
+     * @see bidahochi.foxdrives.util.PacketInteract  */
+    public void networkInteract(int player, int key) {
         if (!worldObj.isRemote) {
             if(key==1){
                 this.dataWatcher.updateObject(DW_RUNNING, running==(byte)1?(byte)0:(byte)1);
             }
+            if(key == 3){
+                braking = true;
+            }
+            System.out.println(key + " " + player);
         }
-        return false;
     }
 
     /**
@@ -331,18 +334,26 @@ public abstract class EntityCar extends EntityAnimal {
             throttle *= 0.98;
             if(throttle < 0.001 && throttle > -0.001) throttle = 0;
             EntityLivingBase rider = ((EntityLivingBase)this.riddenByEntity);
-            if(running > 0){
-                if(rider != null && rider.moveForward != 0f){
+            if(rider != null){
+                if(running > 0 && rider.moveForward != 0f){
                     throttle += 0.05f * (rider.moveForward > 0 ? 1 : -1);
                 }
             }
+            if(braking){
+                throttle *= 0.5f;
+                if(throttle < 0.1 && throttle > -0.1f) throttle = 0;
+                braking = false;
+            }
+            if(throttle > 1) throttle = 1;
+            if(throttle < -1) throttle = -1;
             dataWatcher.updateObject(DW_THROTTLE, throttle);
             velocity = throttle * getAccelSpeed();
             //clamp top speed
-            if (velocity > getMoveSpeed()*0.0625f) {
-                velocity = getMoveSpeed()*0.0625f;
-            } else if (velocity < -getMoveSpeed()*0.0625f) {
-                velocity = -getMoveSpeed()*0.0625f;
+            if(velocity > getMoveSpeed() * 0.0625f){
+                velocity = getMoveSpeed() * 0.0625f;
+            }
+            else if(velocity < -getMoveSpeed() * 0.0625f * 0.5f){
+                velocity = -getMoveSpeed() * 0.0625f * 0.5f;
             }
 
             if(running != 0 && rider != null && rider.moveStrafing!=0){
