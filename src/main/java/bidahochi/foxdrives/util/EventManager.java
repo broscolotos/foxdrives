@@ -48,8 +48,6 @@ public class EventManager {
         EntityCar car = player.ridingEntity instanceof EntityCar ? (EntityCar)player.ridingEntity : player.ridingEntity instanceof EntitySeat ? ((EntitySeat)player.ridingEntity).car : null;
         if(car == null) return;
         Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Throttle: " + car.throttle, 5, 5, 0xffff00);
-        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Vel: " + car.velocity, 5, 15, 0xffff00);
-        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Speed: " + car.getMoveSpeed(), 5, 25, 0xffff00);
     }
 
 }
