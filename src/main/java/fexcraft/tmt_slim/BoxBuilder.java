@@ -1,4 +1,4 @@
-package fexcraft.tmt.slim;
+package fexcraft.tmt_slim;
 
 import java.util.ArrayList;
 import java.util.List;

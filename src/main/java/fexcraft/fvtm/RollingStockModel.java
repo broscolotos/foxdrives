@@ -1,16 +1,15 @@
 package fexcraft.fvtm;
 
-import fexcraft.tmt.slim.ModelBase;
-import fexcraft.tmt.slim.ModelRendererTurbo;
-import fexcraft.tmt.slim.Tessellator;
-import fexcraft.tmt.slim.TexturedPolygon;
+import fexcraft.tmt_slim.ModelBase;
+import fexcraft.tmt_slim.ModelRendererTurbo;
+import fexcraft.tmt_slim.Tessellator;
+import fexcraft.tmt_slim.TexturedPolygon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static bidahochi.foxdrives.FoxDrives.disableCache;

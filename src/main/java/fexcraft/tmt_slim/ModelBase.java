@@ -1,8 +1,7 @@
-package fexcraft.tmt.slim;
+package fexcraft.tmt_slim;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GLAllocation;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 

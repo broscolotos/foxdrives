@@ -1,4 +1,4 @@
-package fexcraft.tmt.slim;
+package fexcraft.tmt_slim;
 
 import net.minecraft.util.Vec3;
 

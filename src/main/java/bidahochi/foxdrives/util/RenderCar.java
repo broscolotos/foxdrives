@@ -2,7 +2,7 @@ package bidahochi.foxdrives.util;
 
 import bidahochi.foxdrives.FoxDrives;
 import bidahochi.foxdrives.entities.EntityCar;
-import fexcraft.tmt.slim.ModelRendererTurbo;
+import fexcraft.tmt_slim.ModelRendererTurbo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;

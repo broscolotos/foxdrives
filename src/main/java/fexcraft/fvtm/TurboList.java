@@ -1,7 +1,7 @@
 package fexcraft.fvtm;
 
-import fexcraft.tmt.slim.ModelBase;
-import fexcraft.tmt.slim.ModelRendererTurbo;
+import fexcraft.tmt_slim.ModelBase;
+import fexcraft.tmt_slim.ModelRendererTurbo;
 /**
  * A compatibility class for "FVTM Scheme/Format" or "FMT" models.
  * @Author Eternal BlueFlame

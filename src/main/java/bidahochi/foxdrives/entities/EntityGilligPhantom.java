@@ -1,11 +1,9 @@
 package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.models.ModelGilligPhantom;
-import bidahochi.foxdrives.models.ToyotaPickup1992;
-import fexcraft.tmt.slim.ModelBase;
+import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
