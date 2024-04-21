@@ -29,7 +29,6 @@ public abstract class EntityCar extends EntityAnimal {
 
     @SideOnly(Side.CLIENT)
     public ModelBase modelInstance;
-    @SideOnly(Side.CLIENT)
     public long lastFrame = System.currentTimeMillis();
 
     public static int DW_RUNNING = 17;
