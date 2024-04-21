@@ -5,7 +5,6 @@ import bidahochi.foxdrives.FoxDrives;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fexcraft.tmt_slim.ModelBase;
-import fexcraft.tmt_slim.ModelRendererTurbo;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -30,12 +29,6 @@ public abstract class EntityCar extends EntityAnimal {
 
     @SideOnly(Side.CLIENT)
     public ModelBase modelInstance;
-    @SideOnly(Side.CLIENT)
-    public List<ModelRendererTurbo> frontWheels = new ArrayList<>();
-    @SideOnly(Side.CLIENT)
-    public List<ModelRendererTurbo> frontWheels2 = new ArrayList<>();
-    @SideOnly(Side.CLIENT)
-    public List<ModelRendererTurbo> backWheels = new ArrayList<>();
     @SideOnly(Side.CLIENT)
     public long lastFrame = System.currentTimeMillis();
 
