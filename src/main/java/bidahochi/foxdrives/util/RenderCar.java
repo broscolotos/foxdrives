@@ -60,11 +60,11 @@ public class RenderCar extends Render {
                 //handle wheels
                 if(render.boxName.toLowerCase().contains("wheel")){
                     if(render.boxName.toLowerCase().contains("front")){
-                        car.frontWheels.add(render);
+                        car.modelInstance.frontWheels.add(render);
                     } else if (render.boxName.toLowerCase().contains("front2")){
-                        car.frontWheels2.add(render);
+                        car.modelInstance.frontWheels2.add(render);
                     } else {
-                        car.backWheels.add(render);
+                        car.modelInstance.backWheels.add(render);
                     }
                 }
             }
@@ -74,7 +74,7 @@ public class RenderCar extends Render {
             // define the rotation angle, scale based on framerate.
             double rotation = ((((EntityLivingBase) car.riddenByEntity).moveForward*car.getMoveSpeed()*0.000001) * (System.currentTimeMillis() - car.lastFrame) * 60);
             //rotate back wheels
-            for (ModelRendererTurbo wheel : car.backWheels) {
+            for (ModelRendererTurbo wheel : car.modelInstance.backWheels) {
                 if (wheel.rotateAngleZ > Math.PI * 10000 || wheel.rotateAngleZ < Math.PI * -10000) {
                     wheel.rotateAngleZ -= Math.copySign(Math.PI * 10000, wheel.rotateAngleZ);
                 }
@@ -83,7 +83,7 @@ public class RenderCar extends Render {
 
             //rotate front wheels
             //todo: turn front wheels
-            for (ModelRendererTurbo wheel : car.frontWheels) {
+            for (ModelRendererTurbo wheel : car.modelInstance.frontWheels) {
                 if (wheel.rotateAngleZ > Math.PI * 10000 || wheel.rotateAngleZ < Math.PI * -10000) {
                     wheel.rotateAngleZ -= Math.copySign(Math.PI * 10000, wheel.rotateAngleZ);
                 }
@@ -99,7 +99,7 @@ public class RenderCar extends Render {
 
             //rotate front wheels, if they are actually on the back (forklift nonsense)
             //todo: turn front wheels
-            for (ModelRendererTurbo wheel : car.frontWheels2) {
+            for (ModelRendererTurbo wheel : car.modelInstance.frontWheels2) {
                 if (wheel.rotateAngleZ > Math.PI * 10000 || wheel.rotateAngleZ < Math.PI * -10000) {
                     wheel.rotateAngleZ -= Math.copySign(Math.PI * 10000, wheel.rotateAngleZ);
                 }
