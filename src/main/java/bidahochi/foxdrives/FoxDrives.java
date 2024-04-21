@@ -64,6 +64,7 @@ public class FoxDrives {
         // the import from being loaded on server and crashing.
         if(event.getSide().isClient()){
             cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(bidahochi.foxdrives.util.ClientProxy.KeyInventory);
+            cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(bidahochi.foxdrives.util.ClientProxy.KeyBrake);
 
         }
         //init networking stuff
@@ -138,6 +139,9 @@ public class FoxDrives {
 
         //register player scaler
         proxy.registerPlayerScaler();
+
+        //register seat entity
+        registerModEntity(EntitySeat.class, MODID + ".seat.entity", registryPosition, FoxDrives.instance, 1600, 1, true);
 
         //register the event handler, mainly for tracking inputs
         if(event.getSide().isClient()){

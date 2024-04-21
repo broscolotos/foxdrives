@@ -1,11 +1,9 @@
-package fexcraft.tmt.slim;
+package fexcraft.tmt_slim;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
 import java.util.ArrayList;
-
-import static fexcraft.tmt.slim.ModelRendererTurbo.*;
 
 public class CylinderBuilder {
     private ModelRendererTurbo root;
@@ -120,10 +118,10 @@ public class CylinderBuilder {
         }
         if(radius < 1){ texDiameterW = 2; texDiameterH = 2; } if(length < 1){ texHeight = 2; }
         //
-        boolean dirTop = (direction == MR_TOP || direction == MR_BOTTOM);
-        boolean dirSide = (direction == MR_RIGHT || direction == MR_LEFT);
-        boolean dirFront = (direction == MR_FRONT || direction == MR_BACK);
-        boolean dirMirror = (direction == MR_LEFT || direction == MR_BOTTOM || direction == MR_BACK);
+        boolean dirTop = (direction == ModelRendererTurbo.MR_TOP || direction == ModelRendererTurbo.MR_BOTTOM);
+        boolean dirSide = (direction == ModelRendererTurbo.MR_RIGHT || direction == ModelRendererTurbo.MR_LEFT);
+        boolean dirFront = (direction == ModelRendererTurbo.MR_FRONT || direction == ModelRendererTurbo.MR_BACK);
+        boolean dirMirror = (direction == ModelRendererTurbo.MR_LEFT || direction == ModelRendererTurbo.MR_BOTTOM || direction == ModelRendererTurbo.MR_BACK);
         if(base_scale == 0) base_scale = 1f; if(top_scale == 0) top_scale = 1f;
         if(segments < 3) segments = 3; if(seglimit <= 0) seglimit = segments; boolean segl = seglimit < segments;
         ArrayList<TexturedVertex> verts = new ArrayList<>(); ArrayList<TexturedPolygon> polis = new ArrayList<>();

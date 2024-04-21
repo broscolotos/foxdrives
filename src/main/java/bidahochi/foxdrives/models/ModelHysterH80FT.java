@@ -9,11 +9,8 @@
 
 package bidahochi.foxdrives.models; //Path where the model is located
 
-import fexcraft.tmt.slim.ModelConverter;
-import fexcraft.tmt.slim.ModelRendererTurbo;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import org.lwjgl.opengl.GL11;
+import fexcraft.tmt_slim.ModelConverter;
+import fexcraft.tmt_slim.ModelRendererTurbo;
 
 public class ModelHysterH80FT extends ModelConverter //Same as Filename
 {

@@ -1,4 +1,4 @@
-package fexcraft.tmt.slim;
+package fexcraft.tmt_slim;
 
 /**
 * Converter to use Flansmod-Type vehicle models.

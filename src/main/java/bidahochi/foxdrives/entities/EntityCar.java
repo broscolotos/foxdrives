@@ -2,11 +2,9 @@ package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.CarType;
 import bidahochi.foxdrives.FoxDrives;
-import cpw.mods.fml.common.gameevent.InputEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import fexcraft.tmt.slim.ModelBase;
-import fexcraft.tmt.slim.ModelRendererTurbo;
+import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -32,21 +30,26 @@ public abstract class EntityCar extends EntityAnimal {
     @SideOnly(Side.CLIENT)
     public ModelBase modelInstance;
     @SideOnly(Side.CLIENT)
-    public List<ModelRendererTurbo> frontWheels = new ArrayList<>();
-    @SideOnly(Side.CLIENT)
-    public List<ModelRendererTurbo> frontWheels2 = new ArrayList<>();
-    @SideOnly(Side.CLIENT)
-    public List<ModelRendererTurbo> backWheels = new ArrayList<>();
-    @SideOnly(Side.CLIENT)
     public long lastFrame = System.currentTimeMillis();
+
+    public static int DW_RUNNING = 17;
+    public static int DW_ROLL = 18;
+    public static int DW_HEALTH = 19;
+    public static int DW_SKIN = 20;
+    public static int DW_YAW = 21;
+    public static int DW_THROTTLE = 22;
 
     public float health =20, roll=0;
     public double transportX=0,transportY=0,transportZ=0;
     public int tickOffset=0;
     public byte running=0;
     public float velocity=0;
+    public float throttle;
+    public boolean braking;
 
-    /**
+    public ArrayList<EntitySeat> passengers = new ArrayList<>();
+
+     /**
      * client side entity spawn
      */
     public EntityCar(World world) {
@@ -87,11 +90,12 @@ public abstract class EntityCar extends EntityAnimal {
     @Override
     public void entityInit(){
         super.entityInit();
-        this.dataWatcher.addObject(17, running);//tracks if the entity is on or not
-        this.dataWatcher.addObject(18, roll);//tracks the entity roll from being hit
-        this.dataWatcher.addObject(19, health);//tracks entity health
-        this.dataWatcher.addObject(20, 0);//used to track currently selected skin
-        this.dataWatcher.addObject(21, 0f);//used to track rotation yaw
+        this.dataWatcher.addObject(DW_RUNNING, running);//tracks if the entity is on or not
+        this.dataWatcher.addObject(DW_ROLL, roll);//tracks the entity roll from being hit
+        this.dataWatcher.addObject(DW_HEALTH, health);//tracks entity health
+        this.dataWatcher.addObject(DW_SKIN, 0);//used to track currently selected skin
+        this.dataWatcher.addObject(DW_YAW, 0f);//used to track rotation yaw
+        this.dataWatcher.addObject(DW_THROTTLE, 0f);//throttle
     }
 
     /**
@@ -171,22 +175,41 @@ public abstract class EntityCar extends EntityAnimal {
         return true;
     }
 
+	@Override
+	public void applyEntityCollision(Entity entity){
+		if(entity instanceof EntitySeat) return;
+        if(entity instanceof EntityPlayer && entity.ridingEntity instanceof EntitySeat) return;
+        super.applyEntityCollision(entity);
+	}
+
     /**add entity mount functionality, and remove item interactions*/
     @Override
-    public boolean interact(EntityPlayer p_70085_1_){
+    public boolean interact(EntityPlayer player){
         //if it's the skinning item, iterate to the next skin
-        if(!this.worldObj.isRemote && p_70085_1_.getHeldItem()!=null &&
-                p_70085_1_.getHeldItem().getItem()== FoxDrives.wrap) {
+        if(!this.worldObj.isRemote && player.getHeldItem()!=null &&
+                player.getHeldItem().getItem()== FoxDrives.wrap) {
 
                 //gets current skin value and loops around to 0 if it's past the entity's skin count.
-                int skin =dataWatcher.getWatchableObjectInt(20)+1;
+                int skin =dataWatcher.getWatchableObjectInt(DW_SKIN)+1;
                 if(skin>=getSkins().length){
                     skin=0;
                 }
-                dataWatcher.updateObject(20,skin);
+                dataWatcher.updateObject(DW_SKIN,skin);
         //otherwise, try to mount the entity
-        } else if (!this.worldObj.isRemote && this.riddenByEntity == null) {
-            p_70085_1_.mountEntity(this);
+        } else if (!this.worldObj.isRemote) {
+            if(riddenByEntity == null){
+                player.mountEntity(this);
+            }
+            else if(player.ridingEntity == null){
+                if(passengers.size() + 1 < getPassengerOffsets().size()){
+                    EntitySeat seat = new EntitySeat(this);
+                    seat.setPosition(posX, posY, posZ);
+                    seat.getDataWatcher().updateObject(17, getEntityId());
+                    worldObj.spawnEntityInWorld(seat);
+                    passengers.add(seat);
+                    player.mountEntity(seat);
+                }
+            }
             return true;
         }
         return false;
@@ -221,16 +244,16 @@ public abstract class EntityCar extends EntityAnimal {
     }
 
     public float getDamage(){
-        return this.dataWatcher.getWatchableObjectFloat(19);
+        return this.dataWatcher.getWatchableObjectFloat(DW_HEALTH);
     }
     public void setDamage(float d){
-        this.dataWatcher.updateObject(19, d);
+        this.dataWatcher.updateObject(DW_HEALTH, d);
     }
     public float getRollingDirection(){
-        return this.dataWatcher.getWatchableObjectFloat(18);
+        return this.dataWatcher.getWatchableObjectFloat(DW_ROLL);
     }
     public void setRollingDirection(float r){
-        this.dataWatcher.updateObject(18, r);
+        this.dataWatcher.updateObject(DW_ROLL, r);
     }
 
     /** called every tick
@@ -261,54 +284,67 @@ public abstract class EntityCar extends EntityAnimal {
         running= compound.getByte("run");
         velocity=compound.getFloat("vel");
         rotationYaw=compound.getFloat("yaw");
-        dataWatcher.updateObject(17, running);
-        dataWatcher.updateObject(21, rotationYaw);
-        dataWatcher.updateObject(20, compound.getInteger("skin"));
+        dataWatcher.updateObject(DW_RUNNING, running);
+        dataWatcher.updateObject(DW_YAW, rotationYaw);
+        dataWatcher.updateObject(DW_SKIN, compound.getInteger("skin"));
     }
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         compound.setByte("run", running);
         compound.setFloat("vel", velocity);
         compound.setFloat("yaw", rotationYaw);
-        compound.setInteger("skin", dataWatcher.getWatchableObjectInt(20));
+        compound.setInteger("skin", dataWatcher.getWatchableObjectInt(DW_SKIN));
     }
 
     /**
      * handles interaction from client over network.
-     * @see bidahochi.foxdrives.util.PacketInteract
-     * @see bidahochi.foxdrives.util.EventManager#onClientKeyPress(InputEvent.MouseInputEvent) */
-    public boolean networkInteract(int player, int key) {
+     * @see bidahochi.foxdrives.util.PacketInteract  */
+    public void networkInteract(int player, int key) {
         if (!worldObj.isRemote) {
             if(key==1){
-                this.dataWatcher.updateObject(17, running==(byte)1?(byte)0:(byte)1);
+                this.dataWatcher.updateObject(DW_RUNNING, running==(byte)1?(byte)0:(byte)1);
             }
+            if(key == 3){
+                braking = true;
+            }
+            System.out.println(key + " " + player);
         }
-        return false;
     }
 
     /**
      * Moves the entity based on the rider heading and rider.moveForward
      */
     public void moveEntityWithHeading() {
-        if(running != dataWatcher.getWatchableObjectByte(17)){
-            running = dataWatcher.getWatchableObjectByte(17);
+        if(running != dataWatcher.getWatchableObjectByte(DW_RUNNING)){
+            running = dataWatcher.getWatchableObjectByte(DW_RUNNING);
         }
         if(!worldObj.isRemote) {
-            velocity*=0.92f;
-            EntityLivingBase rider = ((EntityLivingBase) this.riddenByEntity);
-            if (rider != null) {
-                velocity += rider.moveForward * this.getAccelSpeed();
+            motionX *= 0.9;
+            motionY *= 0.9 - (9.2 * 0.05);
+            motionZ *= 0.9;
+            throttle *= 0.98;
+            if(throttle < 0.001 && throttle > -0.001) throttle = 0;
+            EntityLivingBase rider = ((EntityLivingBase)this.riddenByEntity);
+            if(rider != null){
+                if(running > 0 && rider.moveForward != 0f){
+                    throttle += 0.05f * (rider.moveForward > 0 ? 1 : -1);
+                }
             }
-            if (running == 0) {
-                velocity = 0;
-            } else if (velocity <= 0.0F) {
-                velocity *= 0.35F;
+            if(braking){
+                throttle *= 0.5f;
+                if(throttle < 0.1 && throttle > -0.1f) throttle = 0;
+                braking = false;
             }
+            if(throttle > 1) throttle = 1;
+            if(throttle < -1) throttle = -1;
+            dataWatcher.updateObject(DW_THROTTLE, throttle);
+            velocity = throttle * getAccelSpeed();
             //clamp top speed
-            if (velocity > getMoveSpeed()*0.0625f) {
-                velocity = getMoveSpeed()*0.0625f;
-            } else if (velocity < -getMoveSpeed()*0.0625f) {
-                velocity = -getMoveSpeed()*0.0625f;
+            if(velocity > getMoveSpeed() * 0.0625f){
+                velocity = getMoveSpeed() * 0.0625f;
+            }
+            else if(velocity < -getMoveSpeed() * 0.0625f * 0.5f){
+                velocity = -getMoveSpeed() * 0.0625f * 0.5f;
             }
 
             if(running != 0 && rider != null && rider.moveStrafing!=0){
@@ -328,7 +364,7 @@ public abstract class EntityCar extends EntityAnimal {
                         rotationYaw -= (rider.moveStrafing * turnStrength(false));
                     }
                 }
-                dataWatcher.updateObject(21, rotationYaw);
+                dataWatcher.updateObject(DW_YAW, rotationYaw);
             }
 
             this.stepHeight = canClimbFullBlocks()?1.0f:canClimbSlabs()?0.5f:0.0f;
@@ -336,11 +372,10 @@ public abstract class EntityCar extends EntityAnimal {
 
             double d0 = 0.25D;
             List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getBoundingBox().expand(d0, d0, d0));
-
-            for (Object o : list) {
-                if (o instanceof EntityLiving && ((Entity) o).getBoundingBox()!=null
-                        && ((Entity) o).getBoundingBox().intersectsWith(getBoundingBox())) {
-                    ((Entity) o).attackEntityFrom(new EntityDamageSource("player", this), 5);
+            for(Object o : list){
+                if(o instanceof EntityPlayer && ((Entity)o).ridingEntity instanceof EntitySeat) continue;
+                if(o instanceof EntityLiving && ((Entity)o).getBoundingBox() != null && ((Entity)o).getBoundingBox().intersectsWith(getBoundingBox())){
+                    ((Entity)o).attackEntityFrom(new EntityDamageSource("player", this), 5);
                 }
             }
         } else if(tickOffset >0) {
@@ -351,7 +386,7 @@ public abstract class EntityCar extends EntityAnimal {
                     this.posZ + (this.transportZ - this.posZ) / (double) this.tickOffset
             );
             tickOffset--;
-            rotationYaw=dataWatcher.getWatchableObjectFloat(21);
+            rotationYaw=dataWatcher.getWatchableObjectFloat(DW_YAW);
         }
     }
 
@@ -371,9 +406,9 @@ public abstract class EntityCar extends EntityAnimal {
     }
 
     /**
-     * Returns the rider offset from the center of the entity, in blocks.
+     * Returns the rider/passengers offset from the center of the entity, in blocks.
      */
-    public abstract float[] getRiderOffset();
+    public abstract List<float[]> getPassengerOffsets();
 
     /**
      * Returns the amount to scale the player, MC default is 1, TC default is 0.65
@@ -385,19 +420,21 @@ public abstract class EntityCar extends EntityAnimal {
     public void updateRiderPosition(){
         if (this.riddenByEntity != null) {
 
-            float[] xyz = getRiderOffset();
+            float[] pos = getPassengerOffsets().get(0);
             //rotate yaw
-            if (rotationYaw != 0.0F) {
+            if(rotationYaw != 0.0F){
                 float cos = MathHelper.cos((rotationYaw)*((float) Math.PI / 180.0f));
                 float sin = MathHelper.sin((rotationYaw)*((float) Math.PI / 180.0f));
 
-                xyz[0] = (getRiderOffset()[0] * cos) - (getRiderOffset()[2] * sin);
-                xyz[2] = (getRiderOffset()[0] * sin) + (getRiderOffset()[2] * cos);
+                riddenByEntity.setPosition(
+                    posX + (pos[0] * cos - pos[2] * sin),
+                    posY + riddenByEntity.getYOffset() * getRiderScale() + pos[1],
+                    posZ + (pos[0] * sin + pos[2] * cos)
+                );
             }
-
-            this.riddenByEntity.setPosition(this.posX + xyz[0],
-                    this.posY + this.riddenByEntity.getYOffset()+xyz[1],
-                    this.posZ+xyz[2]);
+            else{
+                riddenByEntity.setPosition(posX + pos[0], posY + riddenByEntity.getYOffset() * getRiderScale() + pos[1], posZ + pos[2]);
+            }
         }
     }
 
@@ -419,6 +456,15 @@ public abstract class EntityCar extends EntityAnimal {
 
     public boolean rearSteer(){
         return false;
+    }
+
+    @Override
+    public void setDead(){
+        super.setDead();
+        for(EntitySeat seat : passengers){
+            seat.car = null;
+            seat.setDead();
+        }
     }
 
 }

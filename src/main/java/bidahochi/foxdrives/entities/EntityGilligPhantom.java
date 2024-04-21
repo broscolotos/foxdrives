@@ -1,11 +1,25 @@
 package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.models.ModelGilligPhantom;
-import bidahochi.foxdrives.models.ToyotaPickup1992;
-import fexcraft.tmt.slim.ModelBase;
+import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class EntityGilligPhantom extends EntityCar {
+
+    public static List<float[]> passpos = Arrays.asList(
+        new float[]{ 0.3f, 0.25f, 1.5f },
+        new float[]{ -.3f, 0.25f, 1f },
+        new float[]{ 0.3f, 0.25f, 1f },
+        new float[]{ -.3f, 0.25f, 0.5f },
+        new float[]{ 0.3f, 0.25f, 0.5f },
+        new float[]{ -.3f, 0.25f, 0f },
+        new float[]{ 0.3f, 0.25f, 0f },
+        new float[]{ -.3f, 0.25f, -.5f },
+        new float[]{ 0.3f, 0.25f, -.5f }
+    );
 
     public EntityGilligPhantom(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
@@ -13,7 +27,6 @@ public class EntityGilligPhantom extends EntityCar {
     public EntityGilligPhantom(World p_i1685_1_) {
         super(p_i1685_1_);
     }
-
 
     /**
      * Returns the model for the entity
@@ -51,10 +64,11 @@ public class EntityGilligPhantom extends EntityCar {
     }
 
     /**
-     * Returns the rider offset from the center of the entity, in blocks.
+     * Returns the rider/passengers offset from the center of the entity, in blocks.
      */
-    @Override
-    public float[] getRiderOffset(){return new float[]{-1.5f,-0.0f,0.3f};}
+    public List<float[]> getPassengerOffsets(){
+        return passpos;
+    }
 
     /**
      * Returns the amount to scale the player, MC default is 1, TC default is 0.65f

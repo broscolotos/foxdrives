@@ -1,7 +1,7 @@
 package bidahochi.foxdrives.models;
 
-import fexcraft.tmt.slim.ModelConverter;
-import fexcraft.tmt.slim.ModelRendererTurbo;
+import fexcraft.tmt_slim.ModelConverter;
+import fexcraft.tmt_slim.ModelRendererTurbo;
 
 public class ToyotaPickup1992 extends ModelConverter //Same as Filename
 {
