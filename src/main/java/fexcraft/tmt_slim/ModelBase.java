@@ -25,7 +25,21 @@ public class ModelBase extends ArrayList<ModelRendererTurbo> {
 	public List<ModelRendererTurbo> animatedList = new ArrayList<>();
 	public List<String> creators = new ArrayList<>();
 	public boolean init=true;
-	public ModelRendererTurbo base[],bodyModel[],open[],closed[],r1[],r2[],r3[],r4[],r5[],r6[],r7[],r8[],r9[],r0[];
+	public ModelRendererTurbo[] base;
+	public ModelRendererTurbo[] bodyModel;
+	public ModelRendererTurbo[] open;
+	public ModelRendererTurbo[] closed;
+	public ModelRendererTurbo[] r0;
+	public ModelRendererTurbo[] r1;
+	public ModelRendererTurbo[] r2;
+	public ModelRendererTurbo[] r3;
+	public ModelRendererTurbo[] r4;
+	public ModelRendererTurbo[] r5;
+	public ModelRendererTurbo[] r6;
+	public ModelRendererTurbo[] r7;
+	public List<ModelRendererTurbo> frontWheels = new ArrayList<>();
+	public List<ModelRendererTurbo> frontWheels2 = new ArrayList<>();
+	public List<ModelRendererTurbo> backWheels = new ArrayList<>();
 
 	public List<Integer> displayList=new ArrayList<>();
 
@@ -134,8 +148,9 @@ public class ModelBase extends ArrayList<ModelRendererTurbo> {
 		translate(r5, x, y, z);
 		translate(r6, x, y, z);
 		translate(r7, x, y, z);
-		translate(r8, x, y, z);
-		translate(r9, x, y, z);
+		translate(backWheels, x, y, z);
+		translate(frontWheels, x, y, z);
+		translate(frontWheels2, x, y, z);
 		translate(bodyModel,x,y,z);
 		translate(boxList,x,y,z);
 		translate(animatedList,x,y,z);
@@ -154,8 +169,9 @@ public class ModelBase extends ArrayList<ModelRendererTurbo> {
 		rotate(r5, x, y, z);
 		rotate(r6, x, y, z);
 		rotate(r7, x, y, z);
-		rotate(r8, x, y, z);
-		rotate(r9, x, y, z);
+		rotate(backWheels, x, y, z);
+		rotate(frontWheels, x, y, z);
+		rotate(frontWheels2, x, y, z);
 		rotate(bodyModel,x,y,z);
 		rotate(boxList,x,y,z);
 		rotate(animatedList,x,y,z);
@@ -172,8 +188,9 @@ public class ModelBase extends ArrayList<ModelRendererTurbo> {
         flip(r5);
         flip(r6);
         flip(r7);
-        flip(r8);
-        flip(r9);
+        flip(backWheels);
+        flip(frontWheels);
+        flip(frontWheels2);
 		flip(bodyModel);
 		flip(boxList);
 		flip(animatedList);
@@ -286,8 +303,9 @@ public class ModelBase extends ArrayList<ModelRendererTurbo> {
         r5=initList(r5);
         r6=initList(r6);
         r7=initList(r7);
-        r8=initList(r8);
-        r9=initList(r9);
+        //backWheels = initList(backWheels);
+        //frontWheels = initList(frontWheels);
+        //frontWheels2 = initList(frontWheels2);
         init=false;
     }
 
