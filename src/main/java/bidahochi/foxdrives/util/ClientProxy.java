@@ -41,18 +41,22 @@ public class ClientProxy extends CommonProxy {
         EntityCar car;
         @Override
         public void doRender(net.minecraft.client.entity.AbstractClientPlayer player, double x, double y, double z, float f0, float f1){
-            if(player.ridingEntity instanceof EntitySeat || player.ridingEntity instanceof EntityCar){
-                car = (EntityCar)(player.ridingEntity instanceof EntityCar ? player.ridingEntity : ((EntitySeat)player.ridingEntity).car);
-                if(car != null){
-                    GL11.glPushMatrix();
-                    GL11.glScalef(car.getRiderScale(), car.getRiderScale(), car.getRiderScale());
-                    super.doRender(player, x, y, z, f0, f1);
-                    GL11.glPopMatrix();
-                }
-                else super.doRender(player, x, y, z, f0, f1);
+			if(player.ridingEntity instanceof EntitySeat || player.ridingEntity instanceof EntityCar){
+				car = (EntityCar)(player.ridingEntity instanceof EntityCar ? player.ridingEntity : ((EntitySeat)player.ridingEntity).car);
+				if(car != null){
+					GL11.glPushMatrix();
+                    float scale = car.getRiderScale();
+					scale = player.height * scale / player.height;
+					GL11.glTranslated(x, y, z);
+					GL11.glScalef(scale, scale, scale);
+					GL11.glTranslated(-x, -y, -z);
+					super.doRender(player, x, y, z, f0, f1);
+					GL11.glPopMatrix();
+					return;
+				}
 
-            }
-            else super.doRender(player, x, y, z, f0, f1);
+			}
+			super.doRender(player, x, y, z, f0, f1);
         }
     };
 
