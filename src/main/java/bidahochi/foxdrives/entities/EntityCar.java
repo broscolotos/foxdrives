@@ -319,9 +319,10 @@ public abstract class EntityCar extends EntityAnimal {
         }
         if(!worldObj.isRemote) {
             motionX *= 0.9;
-            motionY *= 0.9 - (9.2 * 0.05);
+            //motionY *= 0.9 - (9.2 * 0.05);
+            motionY = -0.4905;
             motionZ *= 0.9;
-            throttle *= 0.98;
+            if(running == 0 || riddenByEntity == null) throttle *= 0.98;
             if(throttle < 0.001 && throttle > -0.001) throttle = 0;
             EntityLivingBase rider = ((EntityLivingBase)this.riddenByEntity);
             if(rider != null){
