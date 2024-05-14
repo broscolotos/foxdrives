@@ -37,23 +37,6 @@ public class EntityRedmund1972 extends EntityCarChest {
         return new String[]{"textures/redmund_1972_blank", "textures/redmund_1972_brown","textures/redmund_1972_red"};
     }
 
-    /**
-     * Returns the movement speed in blocks per tick. entity horse uses 0.1f
-     */
-    @Override
-    public float getMoveSpeed() {
-        return 45f;
-    }//45
-
-    /**
-     * Returns the acceleration speed in meters per second.
-     * NOTE: this method is a placeholder and is not yet implemented.
-     */
-    @Override
-    public float getAccelSpeed() {
-        return 0.75f;
-    }
-
     @Override
     public CarType type(){
         return CarType.REDMUND_1972;
