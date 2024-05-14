@@ -28,6 +28,12 @@ public class CarType {
 	/** default is 1, TC default is 0.65 */
 	public float rider_scale = 0.65f;
 	public List<float[]> passenger_pos = new ArrayList<>();
+	/** acceleration speed in meters per tick */
+	public float accel = 1;
+	/** max forwards movement speed in meters per tick */
+	public float max_forward_speed = 10;
+	/** max backwards movement speed in meters per tick */
+	public float max_backward_speed = 5;
  	//
 	public static CarType TOYOTA_PICKUP_1992;
 	public static CarType REDMUND_1972;
@@ -70,6 +76,17 @@ public class CarType {
 		for(float[] pos : positions){
 			passenger_pos.add(pos);
 		}
+		return this;
+	}
+
+	public CarType acceleration(float val){
+		accel = val;
+		return this;
+	}
+
+	public CarType maxspeed(float front, float back){
+		max_forward_speed = front;
+		max_backward_speed = back;
 		return this;
 	}
 
