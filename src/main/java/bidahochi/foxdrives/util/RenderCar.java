@@ -106,9 +106,9 @@ public class RenderCar extends Render {
                 wheel.rotateAngleZ -= rotation*car.wheelSpinMultiplier();
 
                 if (Minecraft.getMinecraft().thePlayer.moveStrafing < 0) {
-                    wheel.rotateAngleY = (car.turnRenderDegree(car.rearSteer() ? false : true));
+                    wheel.rotateAngleY = (car.turnRenderDegree(car.type().rear_steer ? false : true));
                 } else if (Minecraft.getMinecraft().thePlayer.moveStrafing > 0) {
-                    wheel.rotateAngleY = (car.turnRenderDegree(car.rearSteer() ? true : false));
+                    wheel.rotateAngleY = (car.turnRenderDegree(car.type().rear_steer ? true : false));
                 } else {
                     wheel.rotateAngleY = 0;
                 }
