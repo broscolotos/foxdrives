@@ -38,6 +38,7 @@ public abstract class EntityCar extends EntityAnimal {
     public static int DW_SKIN = 20;
     public static int DW_YAW = 21;
     public static int DW_THROTTLE = 22;
+    //public static int DW_BRAKING = 23;
 
     public float health =20, roll=0;
     public double transportX=0,transportY=0,transportZ=0;
@@ -96,6 +97,7 @@ public abstract class EntityCar extends EntityAnimal {
         this.dataWatcher.addObject(DW_SKIN, 0);//used to track currently selected skin
         this.dataWatcher.addObject(DW_YAW, 0f);//used to track rotation yaw
         this.dataWatcher.addObject(DW_THROTTLE, 0f);//throttle
+        //this.dataWatcher.addObject(DW_BRAKING, 0);//throttle
     }
 
     /**
@@ -109,16 +111,6 @@ public abstract class EntityCar extends EntityAnimal {
      * String[] getSkins(){return new String[]{"textures/skin1", "textures/skin2"};}
      */
     public abstract String[] getSkins();
-
-    /**
-     * Returns the max movement speed in meters per tick (50ms). entity horse uses 0.1f
-     */
-    public abstract float getMoveSpeed();
-
-    /**
-     * Returns the acceleration speed in meters per tick (50ms). (currently unused)
-     */
-    public abstract float getAccelSpeed();
 
     /**
      * returns a multiplier for how much the entity will rotate during turning
@@ -305,6 +297,7 @@ public abstract class EntityCar extends EntityAnimal {
                 this.dataWatcher.updateObject(DW_RUNNING, running==(byte)1?(byte)0:(byte)1);
             }
             if(key == 3){
+                //dataWatcher.updateObject(DW_BRAKING, 1);
                 braking = true;
             }
             System.out.println(key + " " + player);
@@ -320,10 +313,13 @@ public abstract class EntityCar extends EntityAnimal {
         }
         if(!worldObj.isRemote) {
             motionX *= 0.9;
-            //motionY *= 0.9 - (9.2 * 0.05);
             motionY = -0.4905;
             motionZ *= 0.9;
-            if(running == 0 || riddenByEntity == null) throttle *= 0.98;
+            velocity *= 0.98;
+            if(running == 0 || riddenByEntity == null){
+                throttle *= 0.98;
+                velocity *= 0.75;
+            }
             if(throttle < 0.001 && throttle > -0.001) throttle = 0;
             EntityLivingBase rider = ((EntityLivingBase)this.riddenByEntity);
             if(rider != null){
@@ -334,18 +330,21 @@ public abstract class EntityCar extends EntityAnimal {
             if(braking){
                 throttle *= 0.5f;
                 if(throttle < 0.1 && throttle > -0.1f) throttle = 0;
+                velocity *= 0.5;
+                if(velocity < 0.1 && velocity > -0.1) velocity = 0;
+                //dataWatcher.updateObject(DW_BRAKING, 0);
                 braking = false;
             }
             if(throttle > 1) throttle = 1;
             if(throttle < -1) throttle = -1;
             dataWatcher.updateObject(DW_THROTTLE, throttle);
-            velocity = throttle * getAccelSpeed();
+            velocity += throttle * type().accel * 0.05;
             //clamp top speed
-            if(velocity > getMoveSpeed()){
-                velocity = getMoveSpeed();
+            if(velocity > type().max_forward_speed){
+                velocity = type().max_forward_speed;
             }
-            else if(velocity < -getMoveSpeed() * 0.5f){
-                velocity = -getMoveSpeed() * 0.5f;
+            else if(velocity < -type().max_backward_speed){
+                velocity = -type().max_backward_speed;
             }
 
             if(running != 0 && rider != null && rider.moveStrafing!=0){
@@ -365,6 +364,8 @@ public abstract class EntityCar extends EntityAnimal {
                         rotationYaw -= (rider.moveStrafing * turnStrength(false));
                     }
                 }
+                while(rotationYaw > 180) rotationYaw -= 360;
+                while(rotationYaw < 180) rotationYaw += 360;
                 dataWatcher.updateObject(DW_YAW, rotationYaw);
             }
 
@@ -455,10 +456,6 @@ public abstract class EntityCar extends EntityAnimal {
             seat.car = null;
             seat.setDead();
         }
-    }
-
-    public double getHorSpeed(){
-        return Math.sqrt(motionX * motionX + motionZ * motionZ);
     }
 
     /** Gets this Entity's CarType */
