@@ -37,23 +37,6 @@ public class EntityHysterH80FT extends EntityCar {
         return new String[]{"textures/hyster_h80ft", "textures/hyster_h80ft2"};
     }
 
-    /**
-     * Returns the movement speed in blocks per tick. entity horse uses 0.1f
-     */
-    @Override
-    public float getMoveSpeed() {
-        return 15f;
-    }
-
-    /**
-     * Returns the acceleration speed in meters per second.
-     * NOTE: this method is a placeholder and is not yet implemented.
-     */
-    @Override
-    public float getAccelSpeed() {
-        return 1;
-    }
-
     @Override
     public CarType type(){
         return CarType.HYSTER_H80FT;
