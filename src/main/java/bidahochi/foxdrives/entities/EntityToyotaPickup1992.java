@@ -1,5 +1,6 @@
 package bidahochi.foxdrives.entities;
 
+import bidahochi.foxdrives.CarType;
 import bidahochi.foxdrives.models.ToyotaPickup1992;
 import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
@@ -7,13 +8,7 @@ import net.minecraft.world.World;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class EntityToyotaPickup1992 extends EntityCarChest {
-
-    public static List<float[]> passpos = Arrays.asList(
-        new float[]{ 0.3f, 0.25f, 0.25f },
-        new float[]{ -0.3f, 0.25f, 0.25f }
-    );
 
     public EntityToyotaPickup1992(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
@@ -58,19 +53,9 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
         return 1;
     }
 
-    /**
-     * Returns the rider/passengers offset from the center of the entity, in blocks.
-     */
-    public List<float[]> getPassengerOffsets(){
-        return passpos;
-    }
-
-    /**
-     * Returns the amount to scale the player, MC default is 1, TC default is 0.65f
-     */
     @Override
-    public float getRiderScale() {
-        return 0.65f;
+    public CarType type(){
+        return CarType.TOYOTA_PICKUP_1992;
     }
 
 }
