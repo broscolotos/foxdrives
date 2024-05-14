@@ -56,7 +56,7 @@ public class EntitySeat extends Entity implements IEntityAdditionalSpawnData {
 			return;
 		}
 		int off = car.passengers.indexOf(this) + 1;
-		float[] pos = car.getPassengerOffsets().get(off >= car.getPassengerOffsets().size() ? 0 : off);
+		float[] pos = car.type().passenger_pos.get(off >= car.type().passenger_pos.size() ? 0 : off);
 		float cos = MathHelper.cos((float)(car.rotationYaw * Math.PI / 180.0f));
 		float sin = MathHelper.sin((float)(car.rotationYaw * Math.PI / 180.0f));
 		setPosition(
@@ -90,9 +90,9 @@ public class EntitySeat extends Entity implements IEntityAdditionalSpawnData {
 	@Override
 	public void updateRiderPosition(){
         if(riddenByEntity == null || car == null) return;
-        riddenByEntity.setPosition(posX, posY + riddenByEntity.getYOffset() * car.getRiderScale(), posZ);
+        riddenByEntity.setPosition(posX, posY + riddenByEntity.getYOffset() * car.type().rider_scale, posZ);
 		riddenByEntity.lastTickPosX = riddenByEntity.prevPosX = prevPosX;
-		riddenByEntity.lastTickPosY = riddenByEntity.prevPosY = prevPosY + riddenByEntity.getYOffset() * car.getRiderScale();
+		riddenByEntity.lastTickPosY = riddenByEntity.prevPosY = prevPosY + riddenByEntity.getYOffset() * car.type().rider_scale;
 		riddenByEntity.lastTickPosZ = riddenByEntity.prevPosZ = prevPosZ;
     }
 
