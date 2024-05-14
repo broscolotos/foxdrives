@@ -1,5 +1,6 @@
 package bidahochi.foxdrives.entities;
 
+import bidahochi.foxdrives.CarType;
 import bidahochi.foxdrives.models.ModelHysterH80FT;
 import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
@@ -9,8 +10,6 @@ import java.util.List;
 
 
 public class EntityHysterH80FT extends EntityCar {
-
-    public static List<float[]> passpos = Arrays.asList(new float[]{ 0.0f, 0.5f, 0.0f });
 
     public EntityHysterH80FT(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
@@ -55,24 +54,9 @@ public class EntityHysterH80FT extends EntityCar {
         return 1;
     }
 
-    /**
-     * Returns the rider/passengers offset from the center of the entity, in blocks.
-     */
-    public List<float[]> getPassengerOffsets(){
-        return passpos;
-    }
-
-    /**
-     * Returns the amount to scale the player, MC default is 1, TC default is 0.65f
-     */
     @Override
-    public float getRiderScale() {
-        return 0.65f;
-    }
-
-    @Override
-    public boolean rearSteer(){
-        return true;
+    public CarType type(){
+        return CarType.HYSTER_H80FT;
     }
 
 }
