@@ -201,7 +201,7 @@ public abstract class EntityCar extends EntityAnimal {
                 player.mountEntity(this);
             }
             else if(player.ridingEntity == null){
-                if(passengers.size() + 1 < getPassengerOffsets().size()){
+                if(passengers.size() + 1 < type().passenger_pos.size()){
                     EntitySeat seat = new EntitySeat(this);
                     seat.setPosition(posX, posY, posZ);
                     seat.getDataWatcher().updateObject(17, getEntityId());
@@ -341,16 +341,16 @@ public abstract class EntityCar extends EntityAnimal {
             dataWatcher.updateObject(DW_THROTTLE, throttle);
             velocity = throttle * getAccelSpeed();
             //clamp top speed
-            if(velocity > getMoveSpeed() * 0.0625f){
-                velocity = getMoveSpeed() * 0.0625f;
+            if(velocity > getMoveSpeed()){
+                velocity = getMoveSpeed();
             }
-            else if(velocity < -getMoveSpeed() * 0.0625f * 0.5f){
-                velocity = -getMoveSpeed() * 0.0625f * 0.5f;
+            else if(velocity < -getMoveSpeed() * 0.5f){
+                velocity = -getMoveSpeed() * 0.5f;
             }
 
             if(running != 0 && rider != null && rider.moveStrafing!=0){
                 if(velocity <= 0.0F){
-                    if(rearSteer()){
+                    if(type().rear_steer){
                         rotationYaw -= (rider.moveStrafing * turnStrength(true));
                     }
                     else{
@@ -358,7 +358,7 @@ public abstract class EntityCar extends EntityAnimal {
                     }
                 }
                 else{
-                    if(rearSteer()){
+                    if(type().rear_steer){
                         rotationYaw += (rider.moveStrafing * turnStrength(false));
                     }
                     else{
@@ -369,7 +369,10 @@ public abstract class EntityCar extends EntityAnimal {
             }
 
             this.stepHeight = canClimbFullBlocks()?1.0f:canClimbSlabs()?0.5f:0.0f;
-            moveEntityWithHeading(0, velocity);
+            motionX -= Math.sin(Math.toRadians(rotationYaw)) * velocity * 0.05;
+            motionZ += Math.cos(Math.toRadians(rotationYaw)) * velocity * 0.05;
+            //moveEntityWithHeading(0, velocity);
+            moveEntity(motionX, motionY, motionZ);
 
             double d0 = 0.25D;
             List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getBoundingBox().expand(d0, d0, d0));
@@ -406,22 +409,12 @@ public abstract class EntityCar extends EntityAnimal {
         updateRiderPosition();
     }
 
-    /**
-     * Returns the rider/passengers offset from the center of the entity, in blocks.
-     */
-    public abstract List<float[]> getPassengerOffsets();
-
-    /**
-     * Returns the amount to scale the player, MC default is 1, TC default is 0.65
-     */
-    public abstract float getRiderScale();
-
     /**sets the position of the entity riding*/
     @Override
     public void updateRiderPosition(){
         if (this.riddenByEntity != null) {
 
-            float[] pos = getPassengerOffsets().get(0);
+            float[] pos = type().passenger_pos.get(0);
             //rotate yaw
             if(rotationYaw != 0.0F){
                 float cos = MathHelper.cos((rotationYaw)*((float) Math.PI / 180.0f));
@@ -429,12 +422,12 @@ public abstract class EntityCar extends EntityAnimal {
 
                 riddenByEntity.setPosition(
                     posX + (pos[0] * cos - pos[2] * sin),
-                    posY + riddenByEntity.getYOffset() * getRiderScale() + pos[1],
+                    posY + riddenByEntity.getYOffset() * type().rider_scale + pos[1],
                     posZ + (pos[0] * sin + pos[2] * cos)
                 );
             }
             else{
-                riddenByEntity.setPosition(posX + pos[0], posY + riddenByEntity.getYOffset() * getRiderScale() + pos[1], posZ + pos[2]);
+                riddenByEntity.setPosition(posX + pos[0], posY + riddenByEntity.getYOffset() * type().rider_scale + pos[1], posZ + pos[2]);
             }
         }
     }
@@ -455,10 +448,6 @@ public abstract class EntityCar extends EntityAnimal {
     @Override
     public void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_){}
 
-    public boolean rearSteer(){
-        return false;
-    }
-
     @Override
     public void setDead(){
         super.setDead();
@@ -467,5 +456,12 @@ public abstract class EntityCar extends EntityAnimal {
             seat.setDead();
         }
     }
+
+    public double getHorSpeed(){
+        return Math.sqrt(motionX * motionX + motionZ * motionZ);
+    }
+
+    /** Gets this Entity's CarType */
+    public abstract CarType type();
 
 }
