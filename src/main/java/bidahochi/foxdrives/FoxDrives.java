@@ -75,31 +75,54 @@ public class FoxDrives {
         tab= new FoxTab("Fox Drives", "textures/creativetab");
         wrap= RegisterItem(new Item(),"wrap", tab);
 
-        CarType.register("toyota_pickup_1992", EntityToyotaPickup1992.class)
+        //Fill CarType Registry
+        CarType.TOYOTA_PICKUP_1992 = CarType.register("toyota_pickup_1992", EntityToyotaPickup1992.class)
             .recipe(
                 new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane), new ItemStack(Blocks.stone),
                 new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs), new ItemStack(Blocks.iron_door),
                 new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane), new ItemStack(Blocks.stone)
+            )
+            .passpos(
+                new float[]{ 0.3f, 0.25f, 0.25f },
+                new float[]{ -0.3f, 0.25f, 0.25f }
             );
-        CarType.register("redmund_1972", EntityRedmund1972.class)
+        CarType.REDMUND_1972 = CarType.register("redmund_1972", EntityRedmund1972.class)
             .recipe(
                 new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
                 new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
                 new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
-            );
-        CarType.register("gillig_phantom", EntityGilligPhantom.class)
+            )
+            .passpos(new float[]{ 0.3f, 0.25f, 0.25f })
+            .acceleration(0.75f);
+        CarType.GILLIG_PHANTOM = CarType.register("gillig_phantom", EntityGilligPhantom.class)
             .recipe(
                 new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
                 new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
                 new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
-            );
-        CarType.register("hyster_H80FT", EntityHysterH80FT.class)
+            )
+            .passpos(
+                new float[]{ 0.3f, 0.25f, 1.5f },
+                new float[]{ -.3f, 0.25f, 1f },
+                new float[]{ 0.3f, 0.25f, 1f },
+                new float[]{ -.3f, 0.25f, 0.5f },
+                new float[]{ 0.3f, 0.25f, 0.5f },
+                new float[]{ -.3f, 0.25f, 0f },
+                new float[]{ 0.3f, 0.25f, 0f },
+                new float[]{ -.3f, 0.25f, -.5f },
+                new float[]{ 0.3f, 0.25f, -.5f }
+            )
+            .maxspeed(5, 3);
+        CarType.HYSTER_H80FT = CarType.register("hyster_H80FT", EntityHysterH80FT.class)
             .recipe(
                 new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
                 new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
                 new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
-            );
+            )
+            .passpos(new float[]{ 0.0f, 0.5f, 0.0f })
+            .rearsteer(true)
+            .maxspeed(3, 3);
 
+        //CarType Registry Entry registration
         for(CarType type : CarType.REGISTRY.values()){
             registerModEntity(type.clazz, MODID + "." + type.regname + ".entity", registryPosition, FoxDrives.instance, 1600, 3, true);
             RegisterItem(type.getItem(), type.regname, tab);

@@ -6,7 +6,9 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Non-Enum Car Registry
@@ -21,6 +23,22 @@ public class CarType {
 	public final String regname;
 	private ItemStack[] recipe;
 	private Item item;
+	//
+	public boolean rear_steer;
+	/** default is 1, TC default is 0.65 */
+	public float rider_scale = 0.65f;
+	public List<float[]> passenger_pos = new ArrayList<>();
+	/** acceleration speed in meters per tick */
+	public float accel = 1;
+	/** max forwards movement speed in meters per tick */
+	public float max_forward_speed = 10;
+	/** max backwards movement speed in meters per tick */
+	public float max_backward_speed = 5;
+ 	//
+	public static CarType TOYOTA_PICKUP_1992;
+	public static CarType REDMUND_1972;
+	public static CarType GILLIG_PHANTOM;
+	public static CarType HYSTER_H80FT;
 
 	public CarType(String id, Class<? extends EntityCar> carclass){
 		regname = id;
@@ -41,6 +59,34 @@ public class CarType {
 
 	public CarType recipe(ItemStack... stacks){
 		recipe = stacks;
+		return this;
+	}
+
+	public CarType rearsteer(boolean bool){
+		rear_steer = bool;
+		return this;
+	}
+
+	public CarType riderscale(float scale){
+		rider_scale = scale;
+		return this;
+	}
+
+	public CarType passpos(float[]... positions){
+		for(float[] pos : positions){
+			passenger_pos.add(pos);
+		}
+		return this;
+	}
+
+	public CarType acceleration(float val){
+		accel = val;
+		return this;
+	}
+
+	public CarType maxspeed(float front, float back){
+		max_forward_speed = front;
+		max_backward_speed = back;
 		return this;
 	}
 

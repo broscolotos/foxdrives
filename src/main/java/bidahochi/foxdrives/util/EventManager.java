@@ -6,14 +6,14 @@ import bidahochi.foxdrives.entities.EntityCarChest;
 import bidahochi.foxdrives.entities.EntitySeat;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.InputEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+
+import static bidahochi.foxdrives.entities.EntityCar.DW_THROTTLE;
 
 public class EventManager {
 
@@ -47,14 +47,17 @@ public class EventManager {
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public void onClientKeyPress(RenderGameOverlayEvent.Post event){
-        if(MinecraftServer.getServer() == null) return;
+    public void onRenderOverlay(RenderGameOverlayEvent.Post event){
+        if(Minecraft.getMinecraft().thePlayer == null) return;
         if(event.type != RenderGameOverlayEvent.ElementType.CROSSHAIRS) return;
-        EntityPlayer player = MinecraftServer.getServer().getEntityWorld().getPlayerEntityByName(Minecraft.getMinecraft().thePlayer.getDisplayName());
+        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
         if(player.ridingEntity == null) return;
         EntityCar car = player.ridingEntity instanceof EntityCar ? (EntityCar)player.ridingEntity : player.ridingEntity instanceof EntitySeat ? ((EntitySeat)player.ridingEntity).car : null;
         if(car == null) return;
-        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Throttle: " + car.throttle, 5, 5, 0xffff00);
+        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Throttle: " + (int)(car.getDataWatcher().getWatchableObjectFloat(DW_THROTTLE) * 100) / 100f, 5, 5, 0xffff00);
+        //Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Speed: " + ((int)(car.getHorSpeed() * 100) / 100f), 5, 15, 0xffff00);
+        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Yaw: " + car.rotationYaw, 5, 25, 0xffff00);
+        //if(car.getDataWatcher().getWatchableObjectInt(DW_BRAKING) > 0) Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Braking!", 5, 25, 0xff0000);
     }
 
 }
