@@ -29,7 +29,7 @@ import static cpw.mods.fml.common.registry.EntityRegistry.registerModEntity;
 @Mod(modid = FoxDrives.MODID, version = FoxDrives.MOD_VERSION, name = "FoxDrives")
 public class FoxDrives {
     public static final String MODID = "foxdrives";
-    public static final String MOD_VERSION = "0.1";
+    public static final String MOD_VERSION = "0.2.2";
 
     //used for TMT render caching. false improves performance dramatically, true can fix rare bugs.
     public static boolean disableCache=false;
@@ -72,7 +72,7 @@ public class FoxDrives {
         interactChannel.registerMessage(HANDLERS[0], PacketInteract.class, 1, Side.SERVER);
 
         //init item stuff
-        tab= new FoxTab("Fox Drives", "textures/creativetab");
+        tab= new FoxTab("FoxDrives", "creativetab");
         wrap= RegisterItem(new Item(),"wrap", tab);
 
         //Fill CarType Registry
@@ -85,7 +85,9 @@ public class FoxDrives {
             .passpos(
                 new float[]{ 0.3f, 0.25f, 0.25f },
                 new float[]{ -0.3f, 0.25f, 0.25f }
-            );
+            )
+            .maxspeed(8, 7);;
+
         CarType.REDMUND_1972 = CarType.register("redmund_1972", EntityRedmund1972.class)
             .recipe(
                 new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
@@ -93,7 +95,9 @@ public class FoxDrives {
                 new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
             )
             .passpos(new float[]{ 0.3f, 0.25f, 0.25f })
-            .acceleration(0.75f);
+            .acceleration(0.75f)
+            .maxspeed(8, 6);
+
         CarType.GILLIG_PHANTOM = CarType.register("gillig_phantom", EntityGilligPhantom.class)
             .recipe(
                 new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
@@ -111,7 +115,8 @@ public class FoxDrives {
                 new float[]{ -.3f, 0.25f, -.5f },
                 new float[]{ 0.3f, 0.25f, -.5f }
             )
-            .maxspeed(5, 3);
+            .maxspeed(6, 3);
+
         CarType.HYSTER_H80FT = CarType.register("hyster_H80FT", EntityHysterH80FT.class)
             .recipe(
                 new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
