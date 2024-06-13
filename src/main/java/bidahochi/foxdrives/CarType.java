@@ -39,6 +39,7 @@ public class CarType {
 	public static CarType REDMUND_1972;
 	public static CarType GILLIG_PHANTOM;
 	public static CarType HYSTER_H80FT;
+	public static CarType MKDS_Standard;
 
 	public CarType(String id, Class<? extends EntityCar> carclass){
 		regname = id;
