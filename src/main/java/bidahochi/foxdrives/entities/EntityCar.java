@@ -370,10 +370,10 @@ public abstract class EntityCar extends EntityAnimal {
             }
 
             this.stepHeight = canClimbFullBlocks()?1.0f:canClimbSlabs()?0.5f:0.0f;
-            motionX -= Math.sin(Math.toRadians(rotationYaw)) * velocity * 0.05;
-            motionZ += Math.cos(Math.toRadians(rotationYaw)) * velocity * 0.05;
-            //moveEntityWithHeading(0, velocity);
-            moveEntity(motionX, motionY, motionZ);
+            moveEntityWithHeading(0, velocity);
+            //motionX -= Math.sin(Math.toRadians(rotationYaw)) * velocity * 0.05;
+            //motionZ += Math.cos(Math.toRadians(rotationYaw)) * velocity * 0.05;
+            //moveEntity(motionX, motionY, motionZ);
 
             double d0 = 0.25D;
             List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getBoundingBox().expand(d0, d0, d0));
