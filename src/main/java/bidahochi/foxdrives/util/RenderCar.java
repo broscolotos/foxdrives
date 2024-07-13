@@ -72,7 +72,7 @@ public class RenderCar extends Render {
 
         if(car.riddenByEntity!=null && car.running > 0) {
             // define the rotation angle, scale based on framerate.
-            double rotation = (car.throttle * car.type().max_forward_speed * 0.000001) * (System.currentTimeMillis() - car.lastFrame) * 60;
+            double rotation = (car.velocity/*throttle*/ * car.type().max_forward_speed * 0.000001) * (System.currentTimeMillis() - car.lastFrame) * 60;
             //rotate back wheels
             for (ModelRendererTurbo wheel : car.modelInstance.backWheels) {
                 if (wheel.rotateAngleZ > Math.PI * 10000 || wheel.rotateAngleZ < Math.PI * -10000) {
