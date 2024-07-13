@@ -326,6 +326,7 @@ public abstract class EntityCar extends EntityAnimal {
                 /*if(running > 0 && rider.moveForward != 0f){
                     throttle += 0.05f * (rider.moveForward > 0 ? 1 : -1);
                 }*/
+                velocity += rider.moveForward * type().accel * 0.05;
             }
             if(braking){
                 //throttle *= 0.5f;
@@ -338,7 +339,6 @@ public abstract class EntityCar extends EntityAnimal {
             //if(throttle > 1) throttle = 1;
             //if(throttle < -1) throttle = -1;
             //dataWatcher.updateObject(DW_THROTTLE, throttle);
-            velocity += /*throttle **/ rider.moveForward * type().accel * 0.05;
             //clamp top speed
             if(velocity > type().max_forward_speed){
                 velocity = type().max_forward_speed;
