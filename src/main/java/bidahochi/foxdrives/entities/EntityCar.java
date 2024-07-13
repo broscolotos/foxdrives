@@ -37,7 +37,7 @@ public abstract class EntityCar extends EntityAnimal {
     public static int DW_HEALTH = 19;
     public static int DW_SKIN = 20;
     public static int DW_YAW = 21;
-    public static int DW_THROTTLE = 22;
+    //public static int DW_THROTTLE = 22;
     //public static int DW_BRAKING = 23;
 
     public float health =20, roll=0;
@@ -45,7 +45,7 @@ public abstract class EntityCar extends EntityAnimal {
     public int tickOffset=0;
     public byte running=0;
     public float velocity=0;
-    public float throttle;
+    //public float throttle;
     public boolean braking;
 
     public ArrayList<EntitySeat> passengers = new ArrayList<>();
@@ -96,7 +96,7 @@ public abstract class EntityCar extends EntityAnimal {
         this.dataWatcher.addObject(DW_HEALTH, health);//tracks entity health
         this.dataWatcher.addObject(DW_SKIN, 0);//used to track currently selected skin
         this.dataWatcher.addObject(DW_YAW, 0f);//used to track rotation yaw
-        this.dataWatcher.addObject(DW_THROTTLE, 0f);//throttle
+        //this.dataWatcher.addObject(DW_THROTTLE, 0f);//throttle
         //this.dataWatcher.addObject(DW_BRAKING, 0);//throttle
     }
 
@@ -317,28 +317,28 @@ public abstract class EntityCar extends EntityAnimal {
             motionZ *= 0.9;
             velocity *= 0.98;
             if(running == 0 || riddenByEntity == null){
-                throttle *= 0.98;
+                //throttle *= 0.98;
                 velocity *= 0.75;
             }
-            if(throttle < 0.001 && throttle > -0.001) throttle = 0;
+            //if(throttle < 0.001 && throttle > -0.001) throttle = 0;
             EntityLivingBase rider = ((EntityLivingBase)this.riddenByEntity);
             if(rider != null){
-                if(running > 0 && rider.moveForward != 0f){
+                /*if(running > 0 && rider.moveForward != 0f){
                     throttle += 0.05f * (rider.moveForward > 0 ? 1 : -1);
-                }
+                }*/
             }
             if(braking){
-                throttle *= 0.5f;
-                if(throttle < 0.1 && throttle > -0.1f) throttle = 0;
+                //throttle *= 0.5f;
+                //if(throttle < 0.1 && throttle > -0.1f) throttle = 0;
                 velocity *= 0.5;
                 if(velocity < 0.1 && velocity > -0.1) velocity = 0;
                 //dataWatcher.updateObject(DW_BRAKING, 0);
                 braking = false;
             }
-            if(throttle > 1) throttle = 1;
-            if(throttle < -1) throttle = -1;
-            dataWatcher.updateObject(DW_THROTTLE, throttle);
-            velocity += throttle * type().accel * 0.05;
+            //if(throttle > 1) throttle = 1;
+            //if(throttle < -1) throttle = -1;
+            //dataWatcher.updateObject(DW_THROTTLE, throttle);
+            velocity += /*throttle **/ rider.moveForward * type().accel * 0.05;
             //clamp top speed
             if(velocity > type().max_forward_speed){
                 velocity = type().max_forward_speed;
@@ -370,10 +370,10 @@ public abstract class EntityCar extends EntityAnimal {
             }
 
             this.stepHeight = canClimbFullBlocks()?1.0f:canClimbSlabs()?0.5f:0.0f;
-            motionX -= Math.sin(Math.toRadians(rotationYaw)) * velocity * 0.05;
-            motionZ += Math.cos(Math.toRadians(rotationYaw)) * velocity * 0.05;
-            //moveEntityWithHeading(0, velocity);
-            moveEntity(motionX, motionY, motionZ);
+            moveEntityWithHeading(0, velocity);
+            //motionX -= Math.sin(Math.toRadians(rotationYaw)) * velocity * 0.05;
+            //motionZ += Math.cos(Math.toRadians(rotationYaw)) * velocity * 0.05;
+            //moveEntity(motionX, motionY, motionZ);
 
             double d0 = 0.25D;
             List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getBoundingBox().expand(d0, d0, d0));
