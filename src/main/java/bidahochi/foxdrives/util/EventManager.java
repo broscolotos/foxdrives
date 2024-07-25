@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 public class EventManager {
@@ -50,12 +51,17 @@ public class EventManager {
         if(event.type != RenderGameOverlayEvent.ElementType.CROSSHAIRS) return;
         EntityPlayer player = Minecraft.getMinecraft().thePlayer;
         if(player.ridingEntity == null) return;
-        EntityCar car = player.ridingEntity instanceof EntityCar ? (EntityCar)player.ridingEntity : player.ridingEntity instanceof EntitySeat ? ((EntitySeat)player.ridingEntity).car : null;
+        EntityCar car = null;
+        if(MinecraftServer.getServer() != null){
+            car = (EntityCar)MinecraftServer.getServer().getEntityWorld().getEntityByID(player.ridingEntity.getEntityId());
+        }
+        else{
+            car =player.ridingEntity instanceof EntityCar ? (EntityCar)player.ridingEntity : player.ridingEntity instanceof EntitySeat ? ((EntitySeat)player.ridingEntity).car : null;
+        }
         if(car == null) return;
-        //Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Throttle: " + (int)(car.getDataWatcher().getWatchableObjectFloat(DW_THROTTLE) * 100) / 100f, 5, 5, 0xffff00);
-        //Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Speed: " + ((int)(car.getHorSpeed() * 100) / 100f), 5, 15, 0xffff00);
         Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Yaw: " + car.rotationYaw, 5, 5, 0xffff00);
-        //if(car.getDataWatcher().getWatchableObjectInt(DW_BRAKING) > 0) Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Braking!", 5, 25, 0xff0000);
+        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Vel: " + car.velocity, 5, 15, 0xffff00);
+        if(!car.worldObj.isRemote) Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Local Server", 5, 25, 0xffff00);
     }
 
 }
