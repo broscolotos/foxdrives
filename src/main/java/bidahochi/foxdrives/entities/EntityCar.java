@@ -315,30 +315,23 @@ public abstract class EntityCar extends EntityAnimal {
             motionX *= 0.9;
             motionY = -0.4905;
             motionZ *= 0.9;
-            velocity *= 0.98;
-            if(running == 0 || riddenByEntity == null){
-                //throttle *= 0.98;
-                velocity *= 0.75;
-            }
-            //if(throttle < 0.001 && throttle > -0.001) throttle = 0;
+            velocity *= 0.92;
             EntityLivingBase rider = ((EntityLivingBase)this.riddenByEntity);
             if(rider != null){
-                /*if(running > 0 && rider.moveForward != 0f){
-                    throttle += 0.05f * (rider.moveForward > 0 ? 1 : -1);
-                }*/
-                velocity += rider.moveForward * type().accel * 0.05;
+                velocity += rider.moveForward * type().accel ;
             }
             if(braking){
-                //throttle *= 0.5f;
-                //if(throttle < 0.1 && throttle > -0.1f) throttle = 0;
                 velocity *= 0.5;
                 if(velocity < 0.1 && velocity > -0.1) velocity = 0;
                 //dataWatcher.updateObject(DW_BRAKING, 0);
                 braking = false;
             }
-            //if(throttle > 1) throttle = 1;
-            //if(throttle < -1) throttle = -1;
-            //dataWatcher.updateObject(DW_THROTTLE, throttle);
+            if(running == 0 || riddenByEntity == null){
+                velocity = 0;
+            }
+            else if(velocity <= 0f){
+                velocity *= 0.35f;
+            }
             //clamp top speed
             if(velocity > type().max_forward_speed){
                 velocity = type().max_forward_speed;
