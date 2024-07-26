@@ -3,12 +3,12 @@ package bidahochi.foxdrives.models;
 import fexcraft.tmt_slim.ModelConverter;
 import fexcraft.tmt_slim.ModelRendererTurbo;
 
-public class ToyotaPickup1992 extends ModelConverter //Same as Filename
+public class ModelToyotaPickup1992 extends ModelConverter //Same as Filename
 {
     int textureX = 512;
     int textureY = 128;
 
-    public ToyotaPickup1992() //Same as Filename
+    public ModelToyotaPickup1992() //Same as Filename
     {
         bodyModel = new ModelRendererTurbo[216];
 

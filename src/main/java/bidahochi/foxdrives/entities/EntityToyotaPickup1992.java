@@ -1,12 +1,9 @@
 package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.CarType;
-import bidahochi.foxdrives.models.ToyotaPickup1992;
+import bidahochi.foxdrives.models.ModelToyotaPickup1992;
 import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class EntityToyotaPickup1992 extends EntityCarChest {
 
@@ -23,7 +20,7 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
      */
     @Override
     public ModelBase getModel() {
-        return new ToyotaPickup1992();
+        return new ModelToyotaPickup1992();
     }
 
     /**
