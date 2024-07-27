@@ -112,7 +112,7 @@ public class FoxDrives {
                         new float[]{ -0.3f, 0.25f, 0.25f }
                         )
                 .acceleration(0.75f)
-                .maxspeed(8, 6);
+                .maxspeed(20, 10);
 
 
         CarType.GILLIG_PHANTOM = CarType.register("gillig_phantom", EntityGilligPhantom.class)
