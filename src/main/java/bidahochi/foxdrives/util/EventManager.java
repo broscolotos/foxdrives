@@ -50,9 +50,8 @@ public class EventManager {
         if(Minecraft.getMinecraft().thePlayer == null) return;
         if(event.type != RenderGameOverlayEvent.ElementType.CROSSHAIRS) return;
         EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-        if(player.ridingEntity == null || !(player.ridingEntity instanceof EntityCar)) return;
+        if(player.ridingEntity instanceof EntityCar == false) return
         EntityCar car = null;
-
         if(MinecraftServer.getServer() != null){
             car = (EntityCar)MinecraftServer.getServer().getEntityWorld().getEntityByID(player.ridingEntity.getEntityId());
         }
