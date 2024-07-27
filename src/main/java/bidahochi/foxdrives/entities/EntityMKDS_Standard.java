@@ -32,7 +32,10 @@ public class EntityMKDS_Standard extends EntityCarChest {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/mkds_standard_mr", "textures/mkds_standard_lr"};
+        return new String[]{"textures/mkds/mkds_standard_mr", "textures/mkds/mkds_standard_lg", "textures/mkds/mkds_standard_pc", "textures/mkds/mkds_standard_ys",
+                "textures/mkds/mkds_standard_td", "textures/mkds/mkds_standard_dk", "textures/mkds/mkds_standard_wr", "textures/mkds/mkds_standard_bw",
+                "textures/mkds/mkds_standard_ds", "textures/mkds/mkds_standard_db", "textures/mkds/mkds_standard_wl", "textures/mkds/mkds_standard_rb",
+                "textures/mkds/mkds_standard_sg", "textures/mkds/mkds_standard_bd", "textures/mkds/mkds_standard_cb"};
     }
 
     @Override

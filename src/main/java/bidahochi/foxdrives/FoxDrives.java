@@ -94,9 +94,26 @@ public class FoxDrives {
                 new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
                 new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
             )
-            .passpos(new float[]{ 0.3f, 0.25f, 0.25f })
+            .passpos(
+                    new float[]{ 0.3f, 0.25f, 0.25f },
+                    new float[]{ -0.3f, 0.25f, 0.25f }
+                    )
             .acceleration(0.75f)
             .maxspeed(8, 6);
+
+        CarType.WORKDAY_1980 = CarType.register("workday_1980", EntityWorkday1980.class)
+                .recipe(
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                        new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+                )
+                .passpos(
+                        new float[]{ 0.3f, 0.25f, 0.25f },
+                        new float[]{ -0.3f, 0.25f, 0.25f }
+                        )
+                .acceleration(0.75f)
+                .maxspeed(8, 6);
+
 
         CarType.GILLIG_PHANTOM = CarType.register("gillig_phantom", EntityGilligPhantom.class)
             .recipe(

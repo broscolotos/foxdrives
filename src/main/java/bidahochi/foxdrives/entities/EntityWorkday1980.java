@@ -1,16 +1,17 @@
 package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.CarType;
-import bidahochi.foxdrives.models.ModelToyotaPickup1992;
+import bidahochi.foxdrives.models.ModelWorkday_1980;
 import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
-public class EntityToyotaPickup1992 extends EntityCarChest {
 
-    public EntityToyotaPickup1992(World world, double xPos, double yPos, double zPos) {
+public class EntityWorkday1980 extends EntityCarChest {
+
+    public EntityWorkday1980(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
     }
-    public EntityToyotaPickup1992(World p_i1685_1_) {
+    public EntityWorkday1980(World p_i1685_1_) {
         super(p_i1685_1_);
     }
 
@@ -20,7 +21,7 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
      */
     @Override
     public ModelBase getModel() {
-        return new ModelToyotaPickup1992();
+        return new ModelWorkday_1980();
     }
 
     /**
@@ -30,12 +31,12 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/toyota/JC1992BoiodaPickup"};
+        return new String[]{"textures/workday_1980_blank", "textures/workday_1980_greyblack", "textures/workday_1980_moss", "textures/workday_1980_bida"};
     }
 
     @Override
     public CarType type(){
-        return CarType.TOYOTA_PICKUP_1992;
+        return CarType.REDMUND_1972;
     }
 
 }
