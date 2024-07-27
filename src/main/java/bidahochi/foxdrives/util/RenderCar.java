@@ -30,13 +30,13 @@ public class RenderCar extends Render {
     @Override
     public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_) {
         if(p_76986_1_ instanceof EntityCar){
-            doRender((EntityCar) p_76986_1_, p_76986_2_,p_76986_4_,p_76986_6_);
+            doRender((EntityCar) p_76986_1_, p_76986_2_,p_76986_4_,p_76986_6_, p_76986_9_);
         }
 
     }
 
 
-    public void doRender(EntityCar car, double x, double y, double z){
+    public void doRender(EntityCar car, double x, double y, double z, float ticks){
         //init model if necessary
         if(car.modelInstance==null){
             car.modelInstance=car.getModel();
@@ -131,7 +131,7 @@ public class RenderCar extends Render {
                 car.getSkins()[car.getDataWatcher().getWatchableObjectInt(20)]+".png"));
         //reposition and rotation
         GL11.glTranslated(x,y+0.625f,z);
-        GL11.glRotatef(-car.rotationYaw+90,0,1,0);
+        GL11.glRotatef(-(car.rotationYaw + (car.rotationYaw - car.prevRotationYaw) * ticks) + 90, 0, 1, 0);
         GL11.glRotatef(180,1,0,0);
         GL11.glRotatef(car.getRollingDirection(),0,0,1);
         //render
