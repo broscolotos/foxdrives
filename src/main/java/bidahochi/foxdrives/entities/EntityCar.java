@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -42,6 +43,7 @@ public abstract class EntityCar extends EntityAnimal {
 
     public float health =20, roll=0;
     public double transportX=0,transportY=0,transportZ=0;
+    public float servyaw;
     public int tickOffset=0;
     public byte running=0;
     public float velocity=0;
@@ -115,7 +117,9 @@ public abstract class EntityCar extends EntityAnimal {
     /**
      * returns a multiplier for how much the entity will rotate during turning
      */
-    public float turnStrength(boolean reversing){return reversing?1f:1.25f;}
+    public float turnStrength(boolean reversing){
+        return reversing ? 0.75f : 1f;
+    }
 
     /**
      * returns a multiplier for how much the entity will rotate during turning
@@ -340,25 +344,9 @@ public abstract class EntityCar extends EntityAnimal {
                 velocity = -type().max_backward_speed;
             }
 
-            if(running != 0 && rider != null && rider.moveStrafing!=0){
-                if(velocity <= 0.0F){
-                    if(type().rear_steer){
-                        rotationYaw -= (rider.moveStrafing * turnStrength(true));
-                    }
-                    else{
-                        rotationYaw += (rider.moveStrafing * turnStrength(true));
-                    }
-                }
-                else{
-                    if(type().rear_steer){
-                        rotationYaw += (rider.moveStrafing * turnStrength(false));
-                    }
-                    else{
-                        rotationYaw -= (rider.moveStrafing * turnStrength(false));
-                    }
-                }
-                while(rotationYaw > 180) rotationYaw -= 360;
-                while(rotationYaw < 180) rotationYaw += 360;
+            float diff = rider == null ? 0f : rotationYaw - rider.rotationYaw;
+            if(running != 0){
+                rotationYaw -= (diff * turnStrength(velocity <= 0.0F));
                 dataWatcher.updateObject(DW_YAW, rotationYaw);
             }
 
@@ -384,7 +372,8 @@ public abstract class EntityCar extends EntityAnimal {
                     this.posZ + (this.transportZ - this.posZ) / (double) this.tickOffset
             );
             tickOffset--;
-            rotationYaw=dataWatcher.getWatchableObjectFloat(DW_YAW);
+            prevRotationYaw = rotationYaw;
+            rotationYaw = rotationYaw + (((servyaw - rotationYaw) + 180) % 360 - 180) / tickOffset;
         }
     }
 
@@ -398,6 +387,7 @@ public abstract class EntityCar extends EntityAnimal {
         //as noted in the cpw.mods.fml.common.registry.EntityRegistry.registerModEntity
         //     call of FoxDrives.java#init(FMLInitializationEvent)
         tickOffset = p_70056_9_ + 2;
+        servyaw = dataWatcher.getWatchableObjectFloat(DW_YAW);
 
         //force an extra rider position update. probably unnecessary, but better safe than laggy.
         updateRiderPosition();
