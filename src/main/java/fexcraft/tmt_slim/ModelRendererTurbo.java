@@ -1,6 +1,6 @@
 package fexcraft.tmt_slim;
 
-import fexcraft.fvtm.TurboList;
+import fexcraft.fvtm.FDTurboList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
@@ -75,13 +75,13 @@ public class ModelRendererTurbo {
     }
 
     public ModelRendererTurbo(ModelBase modelbase, String s){this(s);}
-    public ModelRendererTurbo(TurboList modelbase, String s){this(s);}
+    public ModelRendererTurbo(FDTurboList modelbase, String s){this(s);}
     public ModelRendererTurbo(ModelBase modelbase){this("");}
 
     public ModelRendererTurbo(ModelBase modelbase, int textureX, int textureY, int textureU, int textureV){
         this("",textureX,textureY,textureU,textureV);
     }
-    public ModelRendererTurbo(TurboList modelbase, int textureX, int textureY, int textureU, int textureV){
+    public ModelRendererTurbo(FDTurboList modelbase, int textureX, int textureY, int textureU, int textureV){
         this("",textureX,textureY,textureU,textureV);
     }
     public ModelRendererTurbo(ModelBase modelbase, int textureX, int textureY, int textureU, int textureV, String boxName) {

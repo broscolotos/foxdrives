@@ -8,10 +8,10 @@ import fexcraft.tmt_slim.ModelRendererTurbo;
  *
  * @OriginalAuthor Ferdinand Calo' (FEX___96)
  */
-public class TurboList extends ModelBase {
+public class FDTurboList extends ModelBase {
 
     public String boxname;
-    public TurboList(String name){
+    public FDTurboList(String name){
         boxname=name;
     }
 

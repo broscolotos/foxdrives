@@ -23,13 +23,13 @@ import static bidahochi.foxdrives.FoxDrives.disableCache;
 
 public class RollingStockModel extends ModelBase {
 	
-    public List<TurboList> groups = new ArrayList<>();
+    public List<FDTurboList> groups = new ArrayList<>();
     public int textureX, textureY;
     public RollingStockModel(){}
 
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5){
-        for(TurboList list :groups) {
+        for(FDTurboList list :groups) {
             if(list.init){
                 list.initAllParts();
             }
@@ -42,17 +42,17 @@ public class RollingStockModel extends ModelBase {
 
         GL11.glPushMatrix();
         if(disableCache){
-            for(TurboList list :groups) {
+            for(FDTurboList list :groups) {
                 list.render(list.boxList);
             }
         } else if(staticPartMap.get(this.getClass().getName())==null) {
             staticPartMap.put(this.getClass().getName(), GLAllocation.generateDisplayLists(1));
             GL11.glNewList(staticPartMap.get(this.getClass().getName()), GL11.GL_COMPILE);
-            for(TurboList list :groups) {
+            for(FDTurboList list :groups) {
                 list.render(list.boxList);
             }
             GL11.glEndList();
-            for(TurboList list :groups) {
+            for(FDTurboList list :groups) {
                 list.boxList=null;
             }
         } else {
@@ -61,7 +61,7 @@ public class RollingStockModel extends ModelBase {
         GL11.glPopMatrix();
 
         ModelRendererTurbo part;
-        for(TurboList list :groups) {
+        for(FDTurboList list :groups) {
             if (list.animatedList != null) {
                 for (int i = 0; i < list.animatedList.size(); i++) {
                     if(list.displayList.size()>i && list.displayList.get(i)!=null){
@@ -123,7 +123,7 @@ public class RollingStockModel extends ModelBase {
     @Override
     public List<ModelRendererTurbo> getParts(){
         List<ModelRendererTurbo> turboList = new ArrayList<ModelRendererTurbo>();
-        for(TurboList g: groups){
+        for(FDTurboList g: groups){
             turboList.addAll(g.boxList);
             turboList.addAll(g.animatedList);
         }
