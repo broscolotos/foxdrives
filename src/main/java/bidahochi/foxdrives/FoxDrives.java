@@ -154,6 +154,26 @@ public class FoxDrives {
                 .acceleration(0.9f)
                 .maxspeed(9, 4);
 
+        CarType.WagonKart = CarType.register("wagonkart", EntityWagonKart.class)
+                .recipe(
+                        new ItemStack(Blocks.wooden_button), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                        new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+                )
+                .passpos(new float[]{ 0.0f, 0.3f, 0.0f })//LR, UD, FB
+                .acceleration(0.9f)
+                .maxspeed(9, 4);
+
+        CarType.TurboToilet = CarType.register("turbotoilet", EntityTurboToilet.class)
+                .recipe(
+                        new ItemStack(Blocks.wooden_button), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                        new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+                )
+                .passpos(new float[]{ 0.0f, 0.3f, 0.25f })//LR, UD, FB
+                .acceleration(0.9f)
+                .maxspeed(9, 4);
+
         //CarType Registry Entry registration
         for(CarType type : CarType.REGISTRY.values()){
             registerModEntity(type.clazz, MODID + "." + type.regname + ".entity", registryPosition, FoxDrives.instance, 1600, 3, true);

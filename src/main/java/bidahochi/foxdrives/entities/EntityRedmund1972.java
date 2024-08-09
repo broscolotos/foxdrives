@@ -34,7 +34,7 @@ public class EntityRedmund1972 extends EntityCarChest {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/redmund_1972_blank", "textures/redmund_1972_brown","textures/redmund_1972_red"};
+        return new String[]{"textures/redmund/redmund_1972_blank", "textures/redmund/redmund_1972_brown","textures/redmund/redmund_1972_red"};
     }
 
     @Override

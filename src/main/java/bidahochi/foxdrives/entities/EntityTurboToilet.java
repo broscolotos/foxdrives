@@ -1,17 +1,17 @@
 package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.CarType;
-import bidahochi.foxdrives.models.ModelWorkday_1980;
+import bidahochi.foxdrives.models.ModelTurboToilet;
 import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
 
-public class EntityWorkday1980 extends EntityCarChest {
+public class EntityTurboToilet extends EntityCar {
 
-    public EntityWorkday1980(World world, double xPos, double yPos, double zPos) {
+    public EntityTurboToilet(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
     }
-    public EntityWorkday1980(World p_i1685_1_) {
+    public EntityTurboToilet(World p_i1685_1_) {
         super(p_i1685_1_);
     }
 
@@ -21,7 +21,7 @@ public class EntityWorkday1980 extends EntityCarChest {
      */
     @Override
     public ModelBase getModel() {
-        return new ModelWorkday_1980();
+        return new ModelTurboToilet();
     }
 
     /**
@@ -31,12 +31,13 @@ public class EntityWorkday1980 extends EntityCarChest {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/workday/workday_1980_blank", "textures/workday/workday_1980_greyblack", "textures/workday/workday_1980_moss", "textures/workday/workday_1980_bida"};
+        return new String[]{"textures/turboshitter"};
     }
 
     @Override
     public CarType type(){
-        return CarType.REDMUND_1972;
+        return CarType.TurboToilet;
     }
+
 
 }
