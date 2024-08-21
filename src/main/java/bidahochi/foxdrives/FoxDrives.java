@@ -114,6 +114,32 @@ public class FoxDrives {
                 .acceleration(0.75f)
                 .maxspeed(20, 10);
 
+        CarType.WORKDAY_1980_Utility = CarType.register("workday_1980_utility", EntityWorkday1980Utility.class)
+                .recipe(
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                        new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+                )
+                .passpos(
+                        new float[]{ 0.3f, 0.25f, 0.25f },
+                        new float[]{ -0.3f, 0.25f, 0.25f }
+                )
+                .acceleration(0.75f)
+                .maxspeed(20, 10);
+
+        CarType.WORKDAY_1980_Utility_Hirail = CarType.register("workday_1980_utility_hirail", EntityWorkday1980UtilityHirail.class)
+                .recipe(
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                        new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+                )
+                .passpos(
+                        new float[]{ 0.3f, 0.25f, 0.25f },
+                        new float[]{ -0.3f, 0.25f, 0.25f }
+                )
+                .acceleration(0.75f)
+                .maxspeed(20, 10);
+
 
         CarType.GILLIG_PHANTOM = CarType.register("gillig_phantom", EntityGilligPhantom.class)
             .recipe(

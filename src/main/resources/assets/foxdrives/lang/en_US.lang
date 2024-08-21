@@ -7,6 +7,8 @@ item.textures/creativetab.name=FoxDrives
 item.foxdrives.toyota_pickup_1992.name=1992 Boiota Pickup
 item.foxdrives.redmund_1972.name=1972 Pine Redmund
 item.foxdrives.workday_1980.name=1980 Pine Workday
+item.foxdrives.workday_1980_utility.name=1980 Pine Workday (Utility Bed)
+item.foxdrives.workday_1980_utility_hirail.name=1980 Pine Workday (Hi-Rail, Utility Bed)
 
 item.foxdrives.gillig_phantom.name=Gillig Phantom (40ft)
 item.foxdrives.hyster_H80FT.name=Hyster H80FT Forklift

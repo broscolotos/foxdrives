@@ -1,17 +1,18 @@
 package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.CarType;
-import bidahochi.foxdrives.models.ModelWorkday_1980;
+import bidahochi.foxdrives.models.ModelWorkday_1980_Utility;
+import bidahochi.foxdrives.models.ModelWorkday_1980_Utility_Hirail;
 import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
 
-public class EntityWorkday1980 extends EntityCarChest {
+public class EntityWorkday1980UtilityHirail extends EntityCarChest {
 
-    public EntityWorkday1980(World world, double xPos, double yPos, double zPos) {
+    public EntityWorkday1980UtilityHirail(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
     }
-    public EntityWorkday1980(World p_i1685_1_) {
+    public EntityWorkday1980UtilityHirail(World p_i1685_1_) {
         super(p_i1685_1_);
     }
 
@@ -21,7 +22,7 @@ public class EntityWorkday1980 extends EntityCarChest {
      */
     @Override
     public ModelBase getModel() {
-        return new ModelWorkday_1980();
+        return new ModelWorkday_1980_Utility_Hirail();
     }
 
     /**
@@ -31,12 +32,12 @@ public class EntityWorkday1980 extends EntityCarChest {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/workday/workday_1980_blank", "textures/workday/workday_1980_greyblack", "textures/workday/workday_1980_moss", "textures/workday/workday_1980_bida"};
+        return new String[]{"textures/workday/workday_1980_utility_blank_hirail_noshit"};
     }
 
     @Override
     public CarType type(){
-        return CarType.WORKDAY_1980;
+        return CarType.WORKDAY_1980_Utility_Hirail;
     }
 
 }

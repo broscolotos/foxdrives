@@ -38,6 +38,8 @@ public class CarType {
 	public static CarType TOYOTA_PICKUP_1992;
 	public static CarType REDMUND_1972;
 	public static CarType WORKDAY_1980;
+	public static CarType WORKDAY_1980_Utility;
+	public static CarType WORKDAY_1980_Utility_Hirail;
 	public static CarType GILLIG_PHANTOM;
 	public static CarType HYSTER_H80FT;
 	public static CarType MKDS_Standard;
