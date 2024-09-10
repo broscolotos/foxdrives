@@ -15,7 +15,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,9 +24,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import org.lwjgl.Sys;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -193,10 +190,6 @@ public abstract class EntityCar extends EntityAnimal {
         return dataWatcher.getWatchableObjectFloat(DW_VEL);
     }
 
-    /**
-     *
-     * @param isHeadlightsOn set 0 if loco lights is false, 1 if true
-     */
     public void setPacketLights(boolean isHeadlightsOn)
     {
         isHeadlightsEnabled = isHeadlightsOn;
@@ -207,13 +200,9 @@ public abstract class EntityCar extends EntityAnimal {
         turnSignal = turnIndicator;
     }
 
-    /**
-     *
-     * @param isLocoBeaconEnabled set 0 if loco beacon is false, 1 if true
-     */
-    public void setPacketBeacon(boolean isLocoBeaconEnabled)
+    public void setPacketBeacon(boolean isVehicleBeaconEnabled)
     {
-        isBeaconEnabled = isLocoBeaconEnabled;
+        isBeaconEnabled = isVehicleBeaconEnabled;
     }
 
     /**Sets the Ditch light mode
