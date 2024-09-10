@@ -40,6 +40,7 @@ public class ModelBase extends ArrayList<ModelRendererTurbo> {
 	public List<ModelRendererTurbo> frontWheels = new ArrayList<>();
 	public List<ModelRendererTurbo> frontWheels2 = new ArrayList<>();
 	public List<ModelRendererTurbo> backWheels = new ArrayList<>();
+	public List<ModelRendererTurbo> ignoreLightObjects = new ArrayList<>();
 
 	public List<Integer> displayList=new ArrayList<>();
 
@@ -154,6 +155,7 @@ public class ModelBase extends ArrayList<ModelRendererTurbo> {
 		translate(bodyModel,x,y,z);
 		translate(boxList,x,y,z);
 		translate(animatedList,x,y,z);
+		translate(ignoreLightObjects, x, y, z);
 	}
 
 
@@ -175,6 +177,7 @@ public class ModelBase extends ArrayList<ModelRendererTurbo> {
 		rotate(bodyModel,x,y,z);
 		rotate(boxList,x,y,z);
 		rotate(animatedList,x,y,z);
+		rotate(ignoreLightObjects, x, y, z);
 	}
     public void flipAll(){
         flip(base);
@@ -194,6 +197,7 @@ public class ModelBase extends ArrayList<ModelRendererTurbo> {
 		flip(bodyModel);
 		flip(boxList);
 		flip(animatedList);
+		flip(ignoreLightObjects);
     }
 
 

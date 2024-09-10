@@ -10,6 +10,7 @@
 package bidahochi.foxdrives.models; //Path where the model is located
 
 
+import bidahochi.foxdrives.util.BoxName;
 import fexcraft.tmt_slim.ModelConverter;
 import fexcraft.tmt_slim.ModelRendererTurbo;
 
@@ -67,10 +68,10 @@ public class ModelRedmund1972 extends ModelConverter //Same as Filename
 		bodyModel[32] = new ModelRendererTurbo(this, 153, 1, textureX, textureY); // Box 32
 		bodyModel[33] = new ModelRendererTurbo(this, 161, 9, textureX, textureY); // Box 33
 		bodyModel[34] = new ModelRendererTurbo(this, 33, 49, textureX, textureY); // Box 34
-		bodyModel[35] = new ModelRendererTurbo(this, 25, 9, textureX, textureY, "glow"); // Box 188 headlight
-		bodyModel[36] = new ModelRendererTurbo(this, 97, 9, textureX, textureY, "glow"); // Box 36 headlight
-		bodyModel[37] = new ModelRendererTurbo(this, 121, 9, textureX, textureY, "glow"); // Box 188 turnlight L
-		bodyModel[38] = new ModelRendererTurbo(this, 145, 9, textureX, textureY, "glow"); // Box 188 turnlight R
+		bodyModel[35] = new ModelRendererTurbo(this, 25, 9, textureX, textureY, BoxName.headLight); // Box 188 headlight
+		bodyModel[36] = new ModelRendererTurbo(this, 97, 9, textureX, textureY, BoxName.headLight); // Box 36 headlight
+		bodyModel[37] = new ModelRendererTurbo(this, 121, 9, textureX, textureY, BoxName.leftTurnLight); // Box 188 turnlight L
+		bodyModel[38] = new ModelRendererTurbo(this, 145, 9, textureX, textureY, BoxName.rightTurnLight); // Box 188 turnlight R
 		bodyModel[39] = new ModelRendererTurbo(this, 33, 33, textureX, textureY); // Box 39
 		bodyModel[40] = new ModelRendererTurbo(this, 105, 33, textureX, textureY); // Box 40
 		bodyModel[41] = new ModelRendererTurbo(this, 113, 49, textureX, textureY); // Box 41
@@ -127,10 +128,10 @@ public class ModelRedmund1972 extends ModelConverter //Same as Filename
 		bodyModel[92] = new ModelRendererTurbo(this, 113, 81, textureX, textureY); // Box 93
 		bodyModel[93] = new ModelRendererTurbo(this, 65, 89, textureX, textureY); // Box 94
 		bodyModel[94] = new ModelRendererTurbo(this, 1, 89, textureX, textureY); // Box 95 tailgate swing -90 z
-		bodyModel[95] = new ModelRendererTurbo(this, 65, 17, textureX, textureY, "glow"); // Box 96 taillight
-		bodyModel[96] = new ModelRendererTurbo(this, 81, 25, textureX, textureY, "glow"); // Box 97 taillight
-		bodyModel[97] = new ModelRendererTurbo(this, 25, 9, textureX, textureY, "glow"); // Box 98 turnlight R
-		bodyModel[98] = new ModelRendererTurbo(this, 41, 9, textureX, textureY, "glow"); // Box 99 turnlight L
+		bodyModel[95] = new ModelRendererTurbo(this, 65, 17, textureX, textureY, BoxName.brakeLight); // Box 96 taillight
+		bodyModel[96] = new ModelRendererTurbo(this, 81, 25, textureX, textureY, BoxName.brakeLight); // Box 97 taillight
+		bodyModel[97] = new ModelRendererTurbo(this, 25, 9, textureX, textureY, BoxName.rightTurnLight); // Box 98 turnlight R
+		bodyModel[98] = new ModelRendererTurbo(this, 41, 9, textureX, textureY, BoxName.leftTurnLight); // Box 99 turnlight L
 		bodyModel[99] = new ModelRendererTurbo(this, 217, 9, textureX, textureY); // Box 100 hitch ball
 		bodyModel[100] = new ModelRendererTurbo(this, 209, 41, textureX, textureY); // Box 101 hitch
 		bodyModel[101] = new ModelRendererTurbo(this, 89, 33, textureX, textureY); // Box 102

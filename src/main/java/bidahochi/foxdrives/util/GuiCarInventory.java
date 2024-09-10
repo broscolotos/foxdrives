@@ -2,6 +2,7 @@ package bidahochi.foxdrives.util;
 
 import bidahochi.foxdrives.FoxDrives;
 import bidahochi.foxdrives.entities.EntityCarChest;
+import com.google.gson.JsonObject;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
@@ -56,23 +57,47 @@ public class GuiCarInventory extends GuiContainer {
 
     }
 
+    @Override
+    public void initGui()
+    {
+        super.initGui();
+        buttonList.clear();
+
+    }
+
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_) {
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
+    {
         super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
-
-        buttonList =new ArrayList();
+        buttonList.clear();
         buttonList.add(
                 new GuiButton( 1,percentLeft(20)-10,percentTop(75), 50,20,
-                        car.getDataWatcher().getWatchableObjectByte(17)==(byte)1?"Turn Off":"Turn On"));
+                        car.getDataWatcher().getWatchableObjectByte(17)==(byte) 1 ?"Turn Off":"Turn On"));
+        buttonList.add(
+                new GuiButton( 10,percentLeft(20) + 80,percentTop(75), 80,20,
+                        car.isLightsEnabled() ? "Headlights On" : "Headlights Off"));
+        buttonList.add(
+                new GuiButton( 11,percentLeft(20) + 80 * 2,percentTop(75), 80,20,
+                        car.isBeaconEnabled() ? "Beacons On" : "Beacons Off"));
+        buttonList.add(
+                new GuiButton( 12,percentLeft(20) + 80 * 3,percentTop(75), 80,20,
+                        car.isDitchLightsEnabled() ? "DitchLights On" : "DitchLights Off"));
 
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) {
-        if(button.id==1){
-            FoxDrives.interactChannel.sendToServer(new PacketInteract(1, Minecraft.getMinecraft().thePlayer.ridingEntity.getEntityId()));
+    protected void actionPerformed(GuiButton button)
+    {
+        switch (button.id)
+        {
+            case 1:
+            case 10:
+            case 11:
+            case 12:
+                FoxDrives.interactChannel.sendToServer(new PacketInteract(button.id, Minecraft.getMinecraft().thePlayer.ridingEntity.getEntityId()));
+            break;
         }
     }
 

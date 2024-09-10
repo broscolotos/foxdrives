@@ -10,6 +10,7 @@
 package bidahochi.foxdrives.models; //Path where the model is located
 
 
+import bidahochi.foxdrives.util.BoxName;
 import fexcraft.tmt_slim.ModelConverter;
 import fexcraft.tmt_slim.ModelRendererTurbo;
 
@@ -85,10 +86,10 @@ public class ModelWorkday_1980_Utility extends ModelConverter //Same as Filename
 		bodyModel[50] = new ModelRendererTurbo(this, 49, 9, textureX, textureY); // Box 85 boy this geometry sure is exhausting
 		bodyModel[51] = new ModelRendererTurbo(this, 209, 49, textureX, textureY); // Box 226 steeringwhool
 		bodyModel[52] = new ModelRendererTurbo(this, 81, 9, textureX, textureY); // Box 227
-		bodyModel[53] = new ModelRendererTurbo(this, 25, 17, textureX, textureY, "glow"); // Box 96 taillight
-		bodyModel[54] = new ModelRendererTurbo(this, 65, 17, textureX, textureY, "glow"); // Box 97 taillight
-		bodyModel[55] = new ModelRendererTurbo(this, 25, 9, textureX, textureY, "glow"); // Box 98 turnlight R
-		bodyModel[56] = new ModelRendererTurbo(this, 73, 9, textureX, textureY, "glow"); // Box 99 turnlight L
+		bodyModel[53] = new ModelRendererTurbo(this, 25, 17, textureX, textureY, BoxName.brakeLight); // Box 96 taillight
+		bodyModel[54] = new ModelRendererTurbo(this, 65, 17, textureX, textureY, BoxName.brakeLight); // Box 97 taillight
+		bodyModel[55] = new ModelRendererTurbo(this, 25, 9, textureX, textureY, BoxName.rightTurnLight); // Box 98 turnlight R
+		bodyModel[56] = new ModelRendererTurbo(this, 73, 9, textureX, textureY, BoxName.leftTurnLight); // Box 99 turnlight L
 		bodyModel[57] = new ModelRendererTurbo(this, 105, 9, textureX, textureY); // Box 100 hitch ball
 		bodyModel[58] = new ModelRendererTurbo(this, 105, 33, textureX, textureY); // Box 101 hitch
 		bodyModel[59] = new ModelRendererTurbo(this, 137, 25, textureX, textureY); // Box 102
@@ -96,14 +97,14 @@ public class ModelWorkday_1980_Utility extends ModelConverter //Same as Filename
 		bodyModel[61] = new ModelRendererTurbo(this, 137, 33, textureX, textureY); // Box 104
 		bodyModel[62] = new ModelRendererTurbo(this, 137, 65, textureX, textureY); // Box 183 plate
 		bodyModel[63] = new ModelRendererTurbo(this, 89, 73, textureX, textureY); // Box 106 plate
-		bodyModel[64] = new ModelRendererTurbo(this, 41, 65, textureX, textureY, "glow"); // Box 59 headlight
-		bodyModel[65] = new ModelRendererTurbo(this, 1, 33, textureX, textureY, "glow"); // Box 201 turnlight R
+		bodyModel[64] = new ModelRendererTurbo(this, 41, 65, textureX, textureY, BoxName.headLight); // Box 59 headlight
+		bodyModel[65] = new ModelRendererTurbo(this, 1, 33, textureX, textureY, BoxName.rightTurnLight); // Box 201 turnlight R
 		bodyModel[66] = new ModelRendererTurbo(this, 41, 81, textureX, textureY); // Box 114
 		bodyModel[67] = new ModelRendererTurbo(this, 137, 65, textureX, textureY); // Box 115
 		bodyModel[68] = new ModelRendererTurbo(this, 97, 73, textureX, textureY); // Box 116
-		bodyModel[69] = new ModelRendererTurbo(this, 153, 65, textureX, textureY, "glow"); // Box 59 headlight
+		bodyModel[69] = new ModelRendererTurbo(this, 153, 65, textureX, textureY, BoxName.headLight); // Box 59 headlight
 		bodyModel[70] = new ModelRendererTurbo(this, 169, 33, textureX, textureY); // Box 179
-		bodyModel[71] = new ModelRendererTurbo(this, 209, 33, textureX, textureY, "glow"); // Box 201 turnlight L
+		bodyModel[71] = new ModelRendererTurbo(this, 209, 33, textureX, textureY, BoxName.leftTurnLight); // Box 201 turnlight L
 		bodyModel[72] = new ModelRendererTurbo(this, 209, 65, textureX, textureY); // Box 121
 		bodyModel[73] = new ModelRendererTurbo(this, 225, 33, textureX, textureY); // Box 122
 		bodyModel[74] = new ModelRendererTurbo(this, 49, 81, textureX, textureY); // Box 123
@@ -122,8 +123,8 @@ public class ModelWorkday_1980_Utility extends ModelConverter //Same as Filename
 		bodyModel[87] = new ModelRendererTurbo(this, 105, 89, textureX, textureY); // Box 139
 		bodyModel[88] = new ModelRendererTurbo(this, 153, 89, textureX, textureY); // Box 140
 		bodyModel[89] = new ModelRendererTurbo(this, 129, 89, textureX, textureY); // Box 141
-		bodyModel[90] = new ModelRendererTurbo(this, 57, 81, textureX, textureY, "glow"); // Box 142 front orangelight
-		bodyModel[91] = new ModelRendererTurbo(this, 57, 89, textureX, textureY, "glow"); // Box 143 front orangelight
+		bodyModel[90] = new ModelRendererTurbo(this, 57, 81, textureX, textureY, BoxName.rightTurnLight); // Box 142 front orangelight
+		bodyModel[91] = new ModelRendererTurbo(this, 57, 89, textureX, textureY, BoxName.leftTurnLight); // Box 143 front orangelight
 		bodyModel[92] = new ModelRendererTurbo(this, 249, 65, textureX, textureY); // Box 144
 		bodyModel[93] = new ModelRendererTurbo(this, 129, 89, textureX, textureY); // Box 145
 		bodyModel[94] = new ModelRendererTurbo(this, 1, 49, textureX, textureY); // Box 146
@@ -172,10 +173,10 @@ public class ModelWorkday_1980_Utility extends ModelConverter //Same as Filename
 		bodyModel[137] = new ModelRendererTurbo(this, 73, 170, textureX, textureY); // Box 163
 		bodyModel[138] = new ModelRendererTurbo(this, 112, 129, textureX, textureY); // Box 95 tailgate swing -90 z
 		bodyModel[139] = new ModelRendererTurbo(this, 242, 125, textureX, textureY); // Box 364 prime base
-		bodyModel[140] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, "glow"); // Box 6 PRIME2-1
-		bodyModel[141] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, "glow"); // Box 7 PRIME2-3
-		bodyModel[142] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, "glow"); // Box 8 PRIME2-2
-		bodyModel[143] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, "glow"); // Box 9 PRIME2-4
+		bodyModel[140] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, BoxName.prime1); // Box 6 PRIME2-1
+		bodyModel[141] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, BoxName.prime3); // Box 7 PRIME2-3
+		bodyModel[142] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, BoxName.prime2); // Box 8 PRIME2-2
+		bodyModel[143] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, BoxName.prime4); // Box 9 PRIME2-4
 		bodyModel[144] = new ModelRendererTurbo(this, 245, 182, textureX, textureY); // Box 194 hamburger
 		bodyModel[145] = new ModelRendererTurbo(this, 8, 184, textureX, textureY); // Box 195 welder
 		bodyModel[146] = new ModelRendererTurbo(this, 31, 188, textureX, textureY); // Box 196 gas bottle
@@ -187,10 +188,10 @@ public class ModelWorkday_1980_Utility extends ModelConverter //Same as Filename
 		bodyModel[152] = new ModelRendererTurbo(this, 53, 212, textureX, textureY, "cull"); // Box 203 cull compressor feet
 		bodyModel[153] = new ModelRendererTurbo(this, 60, 189, textureX, textureY, "cull"); // Box 204 cull compressor cage
 		bodyModel[154] = new ModelRendererTurbo(this, 243, 175, textureX, textureY); // Box 177 wide prime base
-		bodyModel[155] = new ModelRendererTurbo(this, 245, 171, textureX, textureY, "glow"); // Box 178 PRIME4
-		bodyModel[156] = new ModelRendererTurbo(this, 245, 171, textureX, textureY, "glow"); // Box 179 PRIME2
-		bodyModel[157] = new ModelRendererTurbo(this, 243, 169, textureX, textureY, "glow"); // Box 180 PRIME1
-		bodyModel[158] = new ModelRendererTurbo(this, 243, 169, textureX, textureY, "glow"); // Box 181 PRIME3
+		bodyModel[155] = new ModelRendererTurbo(this, 245, 171, textureX, textureY, BoxName.prime4); // Box 178 PRIME4
+		bodyModel[156] = new ModelRendererTurbo(this, 245, 171, textureX, textureY, BoxName.prime2); // Box 179 PRIME2
+		bodyModel[157] = new ModelRendererTurbo(this, 243, 169, textureX, textureY, BoxName.prime1); // Box 180 PRIME1
+		bodyModel[158] = new ModelRendererTurbo(this, 243, 169, textureX, textureY, BoxName.prime3); // Box 181 PRIME3
 
 		bodyModel[0].addBox(-1F, -3F, -1F, 2, 6, 2, 0F); // Box 136 Wheel1
 		bodyModel[0].setRotationPoint(-13.5F, 7F, -8F);

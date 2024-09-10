@@ -10,6 +10,7 @@
 package bidahochi.foxdrives.models; //Path where the model is located
 
 
+import bidahochi.foxdrives.util.BoxName;
 import fexcraft.tmt_slim.ModelConverter;
 import fexcraft.tmt_slim.ModelRendererTurbo;
 
@@ -84,10 +85,10 @@ public class ModelWorkday_1980_Utility_Hirail extends ModelConverter//Same as Fi
 		bodyModel[49] = new ModelRendererTurbo(this, 49, 9, textureX, textureY); // Box 85 boy this geometry sure is exhausting
 		bodyModel[50] = new ModelRendererTurbo(this, 209, 49, textureX, textureY); // Box 226 steeringwhool
 		bodyModel[51] = new ModelRendererTurbo(this, 81, 9, textureX, textureY); // Box 227
-		bodyModel[52] = new ModelRendererTurbo(this, 25, 17, textureX, textureY, "glow"); // Box 96 taillight
-		bodyModel[53] = new ModelRendererTurbo(this, 65, 17, textureX, textureY, "glow"); // Box 97 taillight
-		bodyModel[54] = new ModelRendererTurbo(this, 25, 9, textureX, textureY, "glow"); // Box 98 turnlight R
-		bodyModel[55] = new ModelRendererTurbo(this, 73, 9, textureX, textureY, "glow"); // Box 99 turnlight L
+		bodyModel[52] = new ModelRendererTurbo(this, 25, 17, textureX, textureY, BoxName.brakeLight); // Box 96 taillight
+		bodyModel[53] = new ModelRendererTurbo(this, 65, 17, textureX, textureY, BoxName.brakeLight); // Box 97 taillight
+		bodyModel[54] = new ModelRendererTurbo(this, 25, 9, textureX, textureY, BoxName.rightTurnLight); // Box 98 turnlight R
+		bodyModel[55] = new ModelRendererTurbo(this, 73, 9, textureX, textureY, BoxName.leftTurnLight); // Box 99 turnlight L
 		bodyModel[56] = new ModelRendererTurbo(this, 105, 9, textureX, textureY); // Box 100 hitch ball
 		bodyModel[57] = new ModelRendererTurbo(this, 105, 33, textureX, textureY); // Box 101 hitch
 		bodyModel[58] = new ModelRendererTurbo(this, 137, 25, textureX, textureY); // Box 102
@@ -95,14 +96,14 @@ public class ModelWorkday_1980_Utility_Hirail extends ModelConverter//Same as Fi
 		bodyModel[60] = new ModelRendererTurbo(this, 137, 33, textureX, textureY); // Box 104
 		bodyModel[61] = new ModelRendererTurbo(this, 137, 65, textureX, textureY); // Box 183 plate
 		bodyModel[62] = new ModelRendererTurbo(this, 89, 73, textureX, textureY); // Box 106 plate
-		bodyModel[63] = new ModelRendererTurbo(this, 41, 65, textureX, textureY, "glow"); // Box 59 headlight
-		bodyModel[64] = new ModelRendererTurbo(this, 1, 33, textureX, textureY, "glow"); // Box 201 turnlight R
+		bodyModel[63] = new ModelRendererTurbo(this, 41, 65, textureX, textureY, BoxName.headLight); // Box 59 headlight
+		bodyModel[64] = new ModelRendererTurbo(this, 1, 33, textureX, textureY, BoxName.rightTurnLight); // Box 201 turnlight R
 		bodyModel[65] = new ModelRendererTurbo(this, 41, 81, textureX, textureY); // Box 114
 		bodyModel[66] = new ModelRendererTurbo(this, 137, 65, textureX, textureY); // Box 115
 		bodyModel[67] = new ModelRendererTurbo(this, 97, 73, textureX, textureY); // Box 116
-		bodyModel[68] = new ModelRendererTurbo(this, 153, 65, textureX, textureY, "glow"); // Box 59 headlight
+		bodyModel[68] = new ModelRendererTurbo(this, 153, 65, textureX, textureY, BoxName.headLight); // Box 59 headlight
 		bodyModel[69] = new ModelRendererTurbo(this, 169, 33, textureX, textureY); // Box 179
-		bodyModel[70] = new ModelRendererTurbo(this, 209, 33, textureX, textureY, "glow"); // Box 201 turnlight L
+		bodyModel[70] = new ModelRendererTurbo(this, 209, 33, textureX, textureY, BoxName.leftTurnLight); // Box 201 turnlight L
 		bodyModel[71] = new ModelRendererTurbo(this, 209, 65, textureX, textureY); // Box 121
 		bodyModel[72] = new ModelRendererTurbo(this, 225, 33, textureX, textureY); // Box 122
 		bodyModel[73] = new ModelRendererTurbo(this, 185, 81, textureX, textureY); // Box 124
@@ -120,8 +121,8 @@ public class ModelWorkday_1980_Utility_Hirail extends ModelConverter//Same as Fi
 		bodyModel[85] = new ModelRendererTurbo(this, 105, 89, textureX, textureY); // Box 139
 		bodyModel[86] = new ModelRendererTurbo(this, 153, 89, textureX, textureY); // Box 140
 		bodyModel[87] = new ModelRendererTurbo(this, 129, 89, textureX, textureY); // Box 141
-		bodyModel[88] = new ModelRendererTurbo(this, 57, 81, textureX, textureY, "glow"); // Box 142 front orangelight
-		bodyModel[89] = new ModelRendererTurbo(this, 57, 89, textureX, textureY, "glow"); // Box 143 front orangelight
+		bodyModel[88] = new ModelRendererTurbo(this, 57, 81, textureX, textureY, BoxName.rightTurnLight); // Box 142 front orangelight
+		bodyModel[89] = new ModelRendererTurbo(this, 57, 89, textureX, textureY, BoxName.leftTurnLight); // Box 143 front orangelight
 		bodyModel[90] = new ModelRendererTurbo(this, 249, 65, textureX, textureY); // Box 144
 		bodyModel[91] = new ModelRendererTurbo(this, 129, 89, textureX, textureY); // Box 145
 		bodyModel[92] = new ModelRendererTurbo(this, 1, 49, textureX, textureY); // Box 146
@@ -170,10 +171,10 @@ public class ModelWorkday_1980_Utility_Hirail extends ModelConverter//Same as Fi
 		bodyModel[135] = new ModelRendererTurbo(this, 73, 170, textureX, textureY); // Box 163
 		bodyModel[136] = new ModelRendererTurbo(this, 112, 129, textureX, textureY); // Box 95 tailgate swing -90 z
 		bodyModel[137] = new ModelRendererTurbo(this, 242, 125, textureX, textureY); // Box 364 prime base
-		bodyModel[138] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, "glow"); // Box 6 PRIME2-1
-		bodyModel[139] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, "glow"); // Box 7 PRIME2-3
-		bodyModel[140] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, "glow"); // Box 8 PRIME2-2
-		bodyModel[141] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, "glow"); // Box 9 PRIME2-4
+		bodyModel[138] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, BoxName.prime1); // Box 6 PRIME2-1
+		bodyModel[139] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, BoxName.prime3); // Box 7 PRIME2-3
+		bodyModel[140] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, BoxName.prime2); // Box 8 PRIME2-2
+		bodyModel[141] = new ModelRendererTurbo(this, 242, 121, textureX, textureY, BoxName.prime4); // Box 9 PRIME2-4
 		bodyModel[142] = new ModelRendererTurbo(this, 253, 152, textureX, textureY); // Box 144
 		bodyModel[143] = new ModelRendererTurbo(this, 253, 152, textureX, textureY); // Box 145
 		bodyModel[144] = new ModelRendererTurbo(this, 240, 153, textureX, textureY); // Box 146
@@ -197,13 +198,13 @@ public class ModelWorkday_1980_Utility_Hirail extends ModelConverter//Same as Fi
 		bodyModel[162] = new ModelRendererTurbo(this, 228, 160, textureX, textureY, "glow"); // Box 172 foglight
 		bodyModel[163] = new ModelRendererTurbo(this, 249, 148, textureX, textureY, "cull"); // Box 339 cull beacon holdy
 		bodyModel[164] = new ModelRendererTurbo(this, 242, 148, textureX, textureY, "cull"); // Box 340 cull beacon holdy
-		bodyModel[165] = new ModelRendererTurbo(this, 243, 144, textureX, textureY, "glow"); // Box 410 commander beacon
-		bodyModel[166] = new ModelRendererTurbo(this, 250, 144, textureX, textureY, "glow"); // Box 342 commander beacon
+		bodyModel[165] = new ModelRendererTurbo(this, 243, 144, textureX, textureY, BoxName.commander); // Box 410 commander beacon
+		bodyModel[166] = new ModelRendererTurbo(this, 250, 144, textureX, textureY, BoxName.commander); // Box 342 commander beacon
 		bodyModel[167] = new ModelRendererTurbo(this, 243, 175, textureX, textureY); // Box 177 wide prime base
-		bodyModel[168] = new ModelRendererTurbo(this, 245, 171, textureX, textureY, "glow"); // Box 178 PRIME4
-		bodyModel[169] = new ModelRendererTurbo(this, 245, 171, textureX, textureY, "glow"); // Box 179 PRIME2
-		bodyModel[170] = new ModelRendererTurbo(this, 243, 169, textureX, textureY, "glow"); // Box 180 PRIME1
-		bodyModel[171] = new ModelRendererTurbo(this, 243, 169, textureX, textureY, "glow"); // Box 181 PRIME3
+		bodyModel[168] = new ModelRendererTurbo(this, 245, 171, textureX, textureY, BoxName.prime4); // Box 178 PRIME4
+		bodyModel[169] = new ModelRendererTurbo(this, 245, 171, textureX, textureY, BoxName.prime2); // Box 179 PRIME2
+		bodyModel[170] = new ModelRendererTurbo(this, 243, 169, textureX, textureY, BoxName.prime1); // Box 180 PRIME1
+		bodyModel[171] = new ModelRendererTurbo(this, 243, 169, textureX, textureY, BoxName.prime3); // Box 181 PRIME3
 		bodyModel[172] = new ModelRendererTurbo(this, 229, 176, textureX, textureY); // Box 308
 		bodyModel[173] = new ModelRendererTurbo(this, 236, 178, textureX, textureY); // Box 310
 		bodyModel[174] = new ModelRendererTurbo(this, 235, 185, textureX, textureY); // Box 311
@@ -213,9 +214,9 @@ public class ModelWorkday_1980_Utility_Hirail extends ModelConverter//Same as Fi
 		bodyModel[178] = new ModelRendererTurbo(this, 216, 185, textureX, textureY); // Box 306
 		bodyModel[179] = new ModelRendererTurbo(this, 216, 174, textureX, textureY); // Box 307
 		bodyModel[180] = new ModelRendererTurbo(this, 234, 169, textureX, textureY, "cull"); // Box 101  ditchlight holder cull
-		bodyModel[181] = new ModelRendererTurbo(this, 227, 169, textureX, textureY, "glow"); // Box 444 ditchlight glow
+		bodyModel[181] = new ModelRendererTurbo(this, 227, 169, textureX, textureY, BoxName.ditch); // Box 444 ditchlight glow
 		bodyModel[182] = new ModelRendererTurbo(this, 234, 169, textureX, textureY, "cull"); // Box 444 ditchlight holder cull
-		bodyModel[183] = new ModelRendererTurbo(this, 227, 169, textureX, textureY, "glow"); // Box 444 ditchlight glow
+		bodyModel[183] = new ModelRendererTurbo(this, 227, 169, textureX, textureY, BoxName.ditch); // Box 444 ditchlight glow
 		bodyModel[184] = new ModelRendererTurbo(this, 245, 182, textureX, textureY); // Box 194 hamburger
 		bodyModel[185] = new ModelRendererTurbo(this, 8, 184, textureX, textureY); // Box 195 welder
 		bodyModel[186] = new ModelRendererTurbo(this, 31, 188, textureX, textureY); // Box 196 gas bottle

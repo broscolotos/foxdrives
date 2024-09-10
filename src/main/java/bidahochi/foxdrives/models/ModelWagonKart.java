@@ -10,6 +10,7 @@
 package bidahochi.foxdrives.models; //Path where the model is located
 
 
+import bidahochi.foxdrives.util.BoxName;
 import fexcraft.tmt_slim.ModelConverter;
 import fexcraft.tmt_slim.ModelRendererTurbo;
 
@@ -105,10 +106,10 @@ public class ModelWagonKart extends ModelConverter //Same as Filename
 		bodyModel[70] = new ModelRendererTurbo(this, 89, 81, textureX, textureY); // Box 176
 		bodyModel[71] = new ModelRendererTurbo(this, 97, 81, textureX, textureY); // Box 177
 		bodyModel[72] = new ModelRendererTurbo(this, 113, 81, textureX, textureY); // Box 178
-		bodyModel[73] = new ModelRendererTurbo(this, 121, 81, textureX, textureY, "glow"); // Box 79 headlight
-		bodyModel[74] = new ModelRendererTurbo(this, 1, 89, textureX, textureY, "glow"); // Box 80 headlight
-		bodyModel[75] = new ModelRendererTurbo(this, 9, 89, textureX, textureY, "glow"); // Box 81 taillight
-		bodyModel[76] = new ModelRendererTurbo(this, 17, 89, textureX, textureY, "glow"); // Box 82 taillight
+		bodyModel[73] = new ModelRendererTurbo(this, 121, 81, textureX, textureY, BoxName.headLight); // Box 79 headlight
+		bodyModel[74] = new ModelRendererTurbo(this, 1, 89, textureX, textureY, BoxName.headLight); // Box 80 headlight
+		bodyModel[75] = new ModelRendererTurbo(this, 9, 89, textureX, textureY, BoxName.brakeLight); // Box 81 taillight
+		bodyModel[76] = new ModelRendererTurbo(this, 17, 89, textureX, textureY, BoxName.brakeLight); // Box 82 taillight
 		bodyModel[77] = new ModelRendererTurbo(this, 11, 87, textureX, textureY); // Box 83
 		bodyModel[78] = new ModelRendererTurbo(this, 11, 104, textureX, textureY); // Box 84
 		bodyModel[79] = new ModelRendererTurbo(this, 62, 82, textureX, textureY); // Box 85

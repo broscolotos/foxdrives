@@ -1,5 +1,6 @@
 package fexcraft.tmt_slim;
 
+import bidahochi.foxdrives.util.BoxName;
 import fexcraft.fvtm.FDTurboList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.MathHelper;
@@ -57,17 +58,17 @@ public class ModelRendererTurbo {
      * Creates a new ModelRenderTurbo object. It requires the coordinates of the
      * position of the texture, but also allows you to specify the width and height
      * of the texture.
-     * @param s
+     * @param boxName
      * @param textureX
      * @param textureY
      * @param textureU
      * @param textureV
      */
-    public ModelRendererTurbo(String s, int textureX, int textureY, float textureU, float textureV){
+    public ModelRendererTurbo(String boxName, int textureX, int textureY, float textureU, float textureV){
         mirror = false;
         showModel = true;
         faces = new ArrayList<>();
-        boxName = s;
+        this.boxName = boxName;
         textureOffsetX = textureX;
         textureOffsetY = textureY;
         textureWidth = textureU;
@@ -84,8 +85,14 @@ public class ModelRendererTurbo {
     public ModelRendererTurbo(FDTurboList modelbase, int textureX, int textureY, int textureU, int textureV){
         this("",textureX,textureY,textureU,textureV);
     }
-    public ModelRendererTurbo(ModelBase modelbase, int textureX, int textureY, int textureU, int textureV, String boxName) {
+    public ModelRendererTurbo(ModelBase modelbase, int textureX, int textureY, int textureU, int textureV, String boxName)
+    {
         this(boxName,textureX,textureY,textureU,textureV);
+    }
+
+    public ModelRendererTurbo(ModelBase modelbase, int textureX, int textureY, int textureU, int textureV, BoxName boxName)
+    {
+        this(boxName.AsString(),textureX,textureY,textureU,textureV);
     }
 
 

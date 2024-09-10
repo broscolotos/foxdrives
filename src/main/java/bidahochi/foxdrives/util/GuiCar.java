@@ -31,24 +31,52 @@ public class GuiCar extends GuiContainer {
 
     @Override
     public void initGui() {
-        buttonList = new ArrayList();
-        buttonList.add(button = new GuiButton(1, 0, 0, 20, 20, "loading..."));
+        buttonList.clear();
+        guiLeft = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight).getScaledWidth();
+        guiTop = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight).getScaledHeight();
+
+
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float t, int x, int y){
         guiLeft = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight).getScaledWidth();
         guiTop = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight).getScaledHeight();
-        button.xPosition = percentLeft(15) - 10;
-        button.yPosition = percentTop(56);
-        button.displayString = entity.getDataWatcher().getWatchableObjectByte(17) == (byte)1 ? "Turn Off" : "Turn On";
-        System.out.println(button.id + " " + button.displayString + " " + entity.getDataWatcher().getWatchableObjectByte(17));
+    }
+
+    /**
+     * Draws the screen and all the components in it.
+     */
+    public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
+    {
+        super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
+        buttonList.clear();
+        buttonList.add(
+                new GuiButton( 1,percentLeft(20)-10,percentTop(75), 50,20,
+                        entity.getDataWatcher().getWatchableObjectByte(17)==(byte) 1 ?"Turn Off":"Turn On"));
+        buttonList.add(
+                new GuiButton( 10,percentLeft(20) + 80,percentTop(75), 80,20,
+                        entity.isLightsEnabled() ? "Headlights On" : "Headlights Off"));
+        buttonList.add(
+                new GuiButton( 11,percentLeft(20) + 80 * 2,percentTop(75), 80,20,
+                        entity.isBeaconEnabled() ? "Beacons On" : "Beacons Off"));
+        buttonList.add(
+                new GuiButton( 12,percentLeft(20) + 80 * 3,percentTop(75), 80,20,
+                        entity.isDitchLightsEnabled() ? "DitchLights On" : "DitchLights Off"));
+
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) {
-        if(button.id==1){
-            FoxDrives.interactChannel.sendToServer(new PacketInteract(1,Minecraft.getMinecraft().thePlayer.ridingEntity.getEntityId()));
+    protected void actionPerformed(GuiButton button)
+    {
+        switch (button.id)
+        {
+            case 1:
+            case 10:
+            case 11:
+            case 12:
+                FoxDrives.interactChannel.sendToServer(new PacketInteract(button.id,Minecraft.getMinecraft().thePlayer.ridingEntity.getEntityId()));
+            break;
         }
     }
 

@@ -6,6 +6,7 @@ import bidahochi.foxdrives.entities.EntityCarChest;
 import bidahochi.foxdrives.entities.EntitySeat;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.InputEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,7 +24,8 @@ public class EventManager {
     //    which opens the GUI through the proxy.
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public void onClientKeyPress(TickEvent.ClientTickEvent event){
+    public void onClientKeyPress(TickEvent.ClientTickEvent event)
+    {
         if(event.phase == TickEvent.Phase.END) return;
         if(Minecraft.getMinecraft().currentScreen != null) return;
         if(!(Minecraft.getMinecraft().thePlayer.ridingEntity instanceof EntityCar)) return;
@@ -37,11 +39,30 @@ public class EventManager {
             }
         }
 
-        if(bidahochi.foxdrives.util.ClientProxy.KeyBrake.isPressed()){
+        if (bidahochi.foxdrives.util.ClientProxy.KeyLeftTurn.isPressed())
+        {
+            if(Minecraft.getMinecraft().thePlayer.ridingEntity instanceof EntityCar){
+                FoxDrives.interactChannel.sendToServer(new PacketInteract(4, Minecraft.getMinecraft().thePlayer.ridingEntity.getEntityId()));
+            }
+        }
+
+        if (bidahochi.foxdrives.util.ClientProxy.KeyRightTurn.isPressed())
+        {
+            if(Minecraft.getMinecraft().thePlayer.ridingEntity instanceof EntityCar){
+                FoxDrives.interactChannel.sendToServer(new PacketInteract(5, Minecraft.getMinecraft().thePlayer.ridingEntity.getEntityId()));
+            }
+        }
+
+        if(bidahochi.foxdrives.util.ClientProxy.KeyBrake.isPressed())
+        {
             if(Minecraft.getMinecraft().thePlayer.ridingEntity instanceof EntityCar){
                 FoxDrives.interactChannel.sendToServer(new PacketInteract(3, Minecraft.getMinecraft().thePlayer.ridingEntity.getEntityId()));
             }
         }
+    }
+
+    public void onKeyInput(InputEvent.KeyInputEvent event) {
+
     }
 
     @SideOnly(Side.CLIENT)
@@ -61,6 +82,7 @@ public class EventManager {
         if(car == null) return;
         Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Yaw: " + car.rotationYaw, 5, 5, 0xffff00);
         Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Vel: " + car.velocity, 5, 15, 0xffff00);
+        car.setRollingVel(car.velocity);
         if(!car.worldObj.isRemote) Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Local Server", 5, 25, 0xffff00);
     }
 

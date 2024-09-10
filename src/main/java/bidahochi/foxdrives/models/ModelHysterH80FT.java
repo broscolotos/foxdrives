@@ -9,6 +9,7 @@
 
 package bidahochi.foxdrives.models; //Path where the model is located
 
+import bidahochi.foxdrives.util.BoxName;
 import fexcraft.tmt_slim.ModelConverter;
 import fexcraft.tmt_slim.ModelRendererTurbo;
 
@@ -90,7 +91,7 @@ public class ModelHysterH80FT extends ModelConverter //Same as Filename
 		bodyModel[56] = new ModelRendererTurbo(this, 230, 17, textureX, textureY); // Box 68
 		bodyModel[57] = new ModelRendererTurbo(this, 135, 70, textureX, textureY, "cull"); // Box 512 cull
 		bodyModel[58] = new ModelRendererTurbo(this, 138, 67, textureX, textureY); // Box 409 commander base
-		bodyModel[59] = new ModelRendererTurbo(this, 138, 63, textureX, textureY, "glow"); // Box 410 commander beacon
+		bodyModel[59] = new ModelRendererTurbo(this, 138, 63, textureX, textureY, BoxName.commander); // Box 410 commander beacon
 		bodyModel[60] = new ModelRendererTurbo(this, 228, 111, textureX, textureY); // Box 72
 		bodyModel[61] = new ModelRendererTurbo(this, 239, 110, textureX, textureY); // Box 73
 		bodyModel[62] = new ModelRendererTurbo(this, 215, 110, textureX, textureY); // Box 74
@@ -105,14 +106,14 @@ public class ModelHysterH80FT extends ModelConverter //Same as Filename
 		bodyModel[71] = new ModelRendererTurbo(this, 127, 71, textureX, textureY); // Box 84 diesel exhaust
 		bodyModel[72] = new ModelRendererTurbo(this, 126, 70, textureX, textureY); // Box 85 diesel exhaust
 		bodyModel[73] = new ModelRendererTurbo(this, 126, 65, textureX, textureY); // Box 86 diesel exhaust
-		bodyModel[74] = new ModelRendererTurbo(this, 152, 74, textureX, textureY, "glow"); // Box 188 reverselight
-		bodyModel[75] = new ModelRendererTurbo(this, 145, 74, textureX, textureY, "glow"); // Box 188 reverselight
+		bodyModel[74] = new ModelRendererTurbo(this, 152, 74, textureX, textureY, BoxName.headLight); // Box 188 reverselight
+		bodyModel[75] = new ModelRendererTurbo(this, 145, 74, textureX, textureY, BoxName.headLight); // Box 188 reverselight
 		bodyModel[76] = new ModelRendererTurbo(this, 146, 70, textureX, textureY); // Box 89
 		bodyModel[77] = new ModelRendererTurbo(this, 153, 70, textureX, textureY); // Box 90
-		bodyModel[78] = new ModelRendererTurbo(this, 121, 72, textureX, textureY, "glow"); // Box 91 taillight
-		bodyModel[79] = new ModelRendererTurbo(this, 121, 72, textureX, textureY, "glow"); // Box 92 taillight
-		bodyModel[80] = new ModelRendererTurbo(this, 129, 47, textureX, textureY, "glow"); // Box 113 headlight
-		bodyModel[81] = new ModelRendererTurbo(this, 122, 47, textureX, textureY, "glow"); // Box 114 headlihhy
+		bodyModel[78] = new ModelRendererTurbo(this, 121, 72, textureX, textureY, BoxName.brakeLight); // Box 91 taillight
+		bodyModel[79] = new ModelRendererTurbo(this, 121, 72, textureX, textureY, BoxName.brakeLight); // Box 92 taillight
+		bodyModel[80] = new ModelRendererTurbo(this, 129, 47, textureX, textureY, BoxName.headLight); // Box 113 headlight
+		bodyModel[81] = new ModelRendererTurbo(this, 122, 47, textureX, textureY, BoxName.headLight); // Box 114 headlihhy
 		bodyModel[82] = new ModelRendererTurbo(this, 130, 44, textureX, textureY); // Box 115
 		bodyModel[83] = new ModelRendererTurbo(this, 123, 44, textureX, textureY); // Box 116
 		bodyModel[84] = new ModelRendererTurbo(this, 143, 44, textureX, textureY); // Box 226 steeringwhool
