@@ -2,6 +2,9 @@ package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.CarType;
 import bidahochi.foxdrives.FoxDrives;
+import bidahochi.foxdrives.util.DataMemberName;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fexcraft.tmt_slim.ModelBase;
@@ -12,7 +15,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,11 +35,13 @@ public abstract class EntityCar extends EntityAnimal {
     //@SideOnly(Side.CLIENT)
     public long lastFrame = System.currentTimeMillis();
 
+    public static int DW_LIGHTSJSON = 16;
     public static int DW_RUNNING = 17;
     public static int DW_ROLL = 18;
     public static int DW_HEALTH = 19;
     public static int DW_SKIN = 20;
     public static int DW_YAW = 21;
+    public static int DW_VEL = 22;
     //public static int DW_THROTTLE = 22;
     //public static int DW_BRAKING = 23;
 
@@ -93,6 +97,8 @@ public abstract class EntityCar extends EntityAnimal {
     @Override
     public void entityInit(){
         super.entityInit();
+        this.dataWatcher.addObject(DW_VEL, velocity);
+        this.dataWatcher.addObject(DW_LIGHTSJSON, lightingDetailsJSON());//tracks vehicle lighting
         this.dataWatcher.addObject(DW_RUNNING, running);//tracks if the entity is on or not
         this.dataWatcher.addObject(DW_ROLL, roll);//tracks the entity roll from being hit
         this.dataWatcher.addObject(DW_HEALTH, health);//tracks entity health
@@ -101,6 +107,113 @@ public abstract class EntityCar extends EntityAnimal {
         //this.dataWatcher.addObject(DW_THROTTLE, 0f);//throttle
         //this.dataWatcher.addObject(DW_BRAKING, 0);//throttle
     }
+
+    public JsonObject lightingDetailsAsJsonObjectDW()
+    {
+        try
+        {
+            return AsJsonObject(dataWatcher.getWatchableObjectString(DW_LIGHTSJSON));
+        }
+        catch (Exception e)
+        {
+            return lightingDetailsAsJSON();
+        }
+    }
+
+    private boolean isHeadlightsEnabled = false;
+    private boolean isBeaconEnabled = false;
+    private byte ditchLightMode = 0;
+    private byte beaconCycleIndex = 0;
+    private byte turnSignal = 0; // False for left, True for right
+    private byte turnSignalTick = 0;
+    private boolean areBrakeLightsOn = false;
+
+    public String lightingDetailsJSON()
+    {
+        JsonObject lightingDetailsJSON = new JsonObject();
+        lightingDetailsJSON.addProperty("isHeadlightsEnabled", isHeadlightsEnabled);
+        lightingDetailsJSON.addProperty("isBeaconEnabled", isBeaconEnabled);
+        lightingDetailsJSON.addProperty("beaconCycleIndex", beaconCycleIndex);
+        lightingDetailsJSON.addProperty("ditchLightMode", ditchLightMode);
+        lightingDetailsJSON.addProperty("turnSignal", turnSignal);
+        lightingDetailsJSON.addProperty("turnSignalTick", turnSignalTick);
+        lightingDetailsJSON.addProperty("areBrakeLightsOn", areBrakeLightsOn);
+
+        return lightingDetailsJSON.toString();
+    }
+
+    public JsonObject lightingDetailsAsJSON()
+    {
+        JsonObject lightingDetailsJSON = new JsonObject();
+        lightingDetailsJSON.addProperty("isHeadlightsEnabled", isHeadlightsEnabled);
+        lightingDetailsJSON.addProperty("isBeaconEnabled", isBeaconEnabled);
+        lightingDetailsJSON.addProperty("beaconCycleIndex", beaconCycleIndex);
+        lightingDetailsJSON.addProperty("ditchLightMode", ditchLightMode);
+        lightingDetailsJSON.addProperty("turnSignal", turnSignal);
+        lightingDetailsJSON.addProperty("turnSignalTick", turnSignalTick);
+        lightingDetailsJSON.addProperty("areBrakeLightsOn", areBrakeLightsOn);
+        return lightingDetailsJSON;
+    }
+
+    private JsonObject AsJsonObject(String string)
+    {
+        return new JsonParser().parse(string).getAsJsonObject();
+    }
+
+    public boolean isLightsEnabled()
+    {
+        return AsJsonObject(dataWatcher.getWatchableObjectString(DW_LIGHTSJSON)).get(DataMemberName.isHeadlightsEnabled.AsString()).getAsBoolean();
+    }
+
+    public boolean areBrakeLightsOn()
+    {
+        return AsJsonObject(dataWatcher.getWatchableObjectString(DW_LIGHTSJSON)).get(DataMemberName.areBrakeLightsOn.AsString()).getAsBoolean();
+    }
+
+    public boolean isBeaconEnabled()
+    {
+        return AsJsonObject(dataWatcher.getWatchableObjectString(DW_LIGHTSJSON)).get(DataMemberName.isBeaconEnabled.AsString()).getAsBoolean();
+    }
+
+    public byte getBeaconCycleIndex()
+    {
+        return AsJsonObject(dataWatcher.getWatchableObjectString(DW_LIGHTSJSON)).get(DataMemberName.beaconCycleIndex.AsString()).getAsByte();
+    }
+
+    public boolean isDitchLightsEnabled()
+    {
+        return AsJsonObject(dataWatcher.getWatchableObjectString(DW_LIGHTSJSON)).get(DataMemberName.ditchLightMode.AsString()).getAsByte() > 0;
+    }
+
+    public float getVelocity()
+    {
+        return dataWatcher.getWatchableObjectFloat(DW_VEL);
+    }
+
+    public void setPacketLights(boolean isHeadlightsOn)
+    {
+        isHeadlightsEnabled = isHeadlightsOn;
+    }
+
+    public void setPacketTurnIndicator(byte turnIndicator)
+    {
+        turnSignal = turnIndicator;
+    }
+
+    public void setPacketBeacon(boolean isVehicleBeaconEnabled)
+    {
+        isBeaconEnabled = isVehicleBeaconEnabled;
+    }
+
+    /**Sets the Ditch light mode
+     *
+     * @param ditchLightMode set 0 for off,
+     */
+    public void setPacketDitchLightsMode(byte ditchLightMode)
+    {
+        this.ditchLightMode = ditchLightMode;
+    }
+
 
     /**
      * Returns the model for the entity
@@ -252,10 +365,43 @@ public abstract class EntityCar extends EntityAnimal {
         this.dataWatcher.updateObject(DW_ROLL, r);
     }
 
+    public void setRollingVel(float vel)
+    {
+        this.velocity = vel;
+        dataWatcher.updateObject(DW_VEL, velocity);
+    }
+
+    private void cycleTurnSignalIndex()
+    {
+        if (turnSignal != 0 && ticksExisted % 7 == 0)
+        {
+            turnSignalTick++;
+            if (turnSignalTick == 2)
+            {
+                turnSignalTick = 0;
+            }
+        }
+    }
+
+    private void cycleBeaconIndex()
+    {
+        if (isBeaconEnabled && ticksExisted % 5 == 0)
+        {
+            beaconCycleIndex++;
+            if (beaconCycleIndex == 4)
+            {
+                beaconCycleIndex = 0;
+            }
+        }
+    }
+
     /** called every tick
      * replaces core entity update functionality, since EntityLiving does too much stuff we don't need.*/
     @Override
-    public void onUpdate() {
+    public void onUpdate()
+    {
+        cycleBeaconIndex();
+        cycleTurnSignalIndex();
 
         //handle the get punched animation
         if (this.getRollingDirection() > 0) {
@@ -272,6 +418,12 @@ public abstract class EntityCar extends EntityAnimal {
         this.onEntityUpdate();
         //handle movement
         this.moveEntityWithHeading();
+
+        if (!worldObj.isRemote)
+        {
+            dataWatcher.updateObject(DW_LIGHTSJSON ,lightingDetailsJSON());
+
+        }
     }
 
     /** save/load stuff */
@@ -283,6 +435,25 @@ public abstract class EntityCar extends EntityAnimal {
         dataWatcher.updateObject(DW_RUNNING, running);
         dataWatcher.updateObject(DW_YAW, rotationYaw);
         dataWatcher.updateObject(DW_SKIN, compound.getInteger("skin"));
+
+        JsonObject lightDetailsJson;
+        try
+        {
+            lightDetailsJson = AsJsonObject(compound.getString(DataMemberName.lightingDetailsJSON.AsString()));
+        }
+        catch (Exception e)
+        {
+            lightDetailsJson = lightingDetailsAsJSON();
+        }
+
+        isHeadlightsEnabled = lightDetailsJson.get(DataMemberName.isHeadlightsEnabled.AsString()).getAsBoolean();
+        isBeaconEnabled = lightDetailsJson.get(DataMemberName.isBeaconEnabled.AsString()).getAsBoolean();
+        beaconCycleIndex = lightDetailsJson.get(DataMemberName.beaconCycleIndex.AsString()).getAsByte();
+        ditchLightMode = lightDetailsJson.get(DataMemberName.ditchLightMode.AsString()).getAsByte();
+        turnSignal = lightDetailsJson.get(DataMemberName.turnSignal.AsString()).getAsByte();
+        turnSignalTick = lightDetailsJson.get(DataMemberName.turnSignalTick.AsString()).getAsByte();
+        areBrakeLightsOn = lightDetailsJson.get(DataMemberName.areBrakeLightsOn.AsString()).getAsBoolean();
+        dataWatcher.updateObject(DW_LIGHTSJSON, lightingDetailsJSON());
     }
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
@@ -290,19 +461,50 @@ public abstract class EntityCar extends EntityAnimal {
         compound.setFloat("vel", velocity);
         compound.setFloat("yaw", rotationYaw);
         compound.setInteger("skin", dataWatcher.getWatchableObjectInt(DW_SKIN));
+        compound.setString("lightingDetailsJSON", dataWatcher.getWatchableObjectString(DW_LIGHTSJSON));
     }
 
     /**
      * handles interaction from client over network.
      * @see bidahochi.foxdrives.util.PacketInteract  */
-    public void networkInteract(int player, int key) {
-        if (!worldObj.isRemote) {
-            if(key==1){
-                this.dataWatcher.updateObject(DW_RUNNING, running==(byte)1?(byte)0:(byte)1);
-            }
-            if(key == 3){
-                //dataWatcher.updateObject(DW_BRAKING, 1);
-                braking = true;
+    public void networkInteract(int player, int key)
+    {
+        if (!worldObj.isRemote)
+        {
+            System.out.println(key);
+
+            switch(key)
+            {
+                case 1:
+                    this.dataWatcher.updateObject(DW_RUNNING, running==(byte)1?(byte)0:(byte)1);
+                break;
+
+                case 3:
+                    //dataWatcher.updateObject(DW_BRAKING, 1);
+                    areBrakeLightsOn = !areBrakeLightsOn;
+                    braking = true;
+                    dataWatcher.updateObject(DW_LIGHTSJSON ,lightingDetailsJSON());
+                break;
+                case 4:
+                    setPacketTurnIndicator(turnSignal != -1 ? (byte)-1 : 0);
+                    dataWatcher.updateObject(DW_LIGHTSJSON ,lightingDetailsJSON());
+                    break;
+                case 5:
+                    setPacketTurnIndicator(turnSignal != 1 ? (byte)1 : 0);
+                    dataWatcher.updateObject(DW_LIGHTSJSON ,lightingDetailsJSON());
+                    break;
+                case 10:
+                    setPacketLights(isLightsEnabled() ? false : true);
+                    dataWatcher.updateObject(DW_LIGHTSJSON ,lightingDetailsJSON());
+                break;
+                case 11:
+                    setPacketBeacon(isBeaconEnabled() ? false : true);
+                    dataWatcher.updateObject(DW_LIGHTSJSON ,lightingDetailsJSON());
+                break;
+                case 12:
+                    setPacketDitchLightsMode(isDitchLightsEnabled() ? (byte) 0 : (byte) 1);
+                    dataWatcher.updateObject(DW_LIGHTSJSON ,lightingDetailsJSON());
+                break;
             }
             System.out.println(key + " " + player);
         }
@@ -315,7 +517,8 @@ public abstract class EntityCar extends EntityAnimal {
         if(running != dataWatcher.getWatchableObjectByte(DW_RUNNING)){
             running = dataWatcher.getWatchableObjectByte(DW_RUNNING);
         }
-        if(!worldObj.isRemote) {
+        if(!worldObj.isRemote)
+        {
             motionX *= 0.9;
             motionY = -0.4905;
             motionZ *= 0.9;
@@ -443,5 +646,4 @@ public abstract class EntityCar extends EntityAnimal {
 
     /** Gets this Entity's CarType */
     public abstract CarType type();
-
 }

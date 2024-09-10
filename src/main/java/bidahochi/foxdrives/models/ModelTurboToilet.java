@@ -10,6 +10,7 @@
 package bidahochi.foxdrives.models; //Path where the model is located
 
 
+import bidahochi.foxdrives.util.BoxName;
 import fexcraft.tmt_slim.ModelConverter;
 import fexcraft.tmt_slim.ModelRendererTurbo;
 
@@ -125,13 +126,13 @@ public class ModelTurboToilet extends ModelConverter //Same as Filename
 		bodyModel[90] = new ModelRendererTurbo(this, 72, 47, textureX, textureY); // Box 116
 		bodyModel[91] = new ModelRendererTurbo(this, 57, 50, textureX, textureY); // Box 117
 		bodyModel[92] = new ModelRendererTurbo(this, 103, 55, textureX, textureY); // Box 118
-		bodyModel[93] = new ModelRendererTurbo(this, 87, 47, textureX, textureY, "glow"); // Box 119 taillight
-		bodyModel[94] = new ModelRendererTurbo(this, 92, 50, textureX, textureY, "glow"); // Box 120 taillight
+		bodyModel[93] = new ModelRendererTurbo(this, 87, 47, textureX, textureY, BoxName.brakeLight); // Box 119 taillight
+		bodyModel[94] = new ModelRendererTurbo(this, 92, 50, textureX, textureY, BoxName.brakeLight); // Box 120 taillight
 		bodyModel[95] = new ModelRendererTurbo(this, 97, 17, textureX, textureY); // Box 121
-		bodyModel[96] = new ModelRendererTurbo(this, 87, 50, textureX, textureY, "glow"); // Box 122 taillight
-		bodyModel[97] = new ModelRendererTurbo(this, 92, 53, textureX, textureY, "glow"); // Box 123 taillight
-		bodyModel[98] = new ModelRendererTurbo(this, 87, 53, textureX, textureY, "glow"); // Box 125 headlight
-		bodyModel[99] = new ModelRendererTurbo(this, 80, 49, textureX, textureY, "glow"); // Box 126 headlight
+		bodyModel[96] = new ModelRendererTurbo(this, 87, 50, textureX, textureY, BoxName.brakeLight); // Box 122 taillight
+		bodyModel[97] = new ModelRendererTurbo(this, 92, 53, textureX, textureY, BoxName.brakeLight); // Box 123 taillight
+		bodyModel[98] = new ModelRendererTurbo(this, 87, 53, textureX, textureY, BoxName.headLight); // Box 125 headlight
+		bodyModel[99] = new ModelRendererTurbo(this, 80, 49, textureX, textureY, BoxName.headLight); // Box 126 headlight
 		bodyModel[100] = new ModelRendererTurbo(this, 80, 44, textureX, textureY); // Box 100
 		bodyModel[101] = new ModelRendererTurbo(this, 98, 60, textureX, textureY); // Box 101
 		bodyModel[102] = new ModelRendererTurbo(this, 98, 57, textureX, textureY); // Box 102

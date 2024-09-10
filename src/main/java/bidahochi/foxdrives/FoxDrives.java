@@ -6,6 +6,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -58,15 +59,22 @@ public class FoxDrives {
     private static int registryPosition=18;
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
-
+    public void preInit(FMLPreInitializationEvent event)
+    {
         //full length addresses for client only classes must be used to prevent
         // the import from being loaded on server and crashing.
-        if(event.getSide().isClient()){
+        if(event.getSide().isClient())
+        {
             cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(bidahochi.foxdrives.util.ClientProxy.KeyInventory);
             cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(bidahochi.foxdrives.util.ClientProxy.KeyBrake);
-
+            cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(bidahochi.foxdrives.util.ClientProxy.KeyLeftTurn);
+            cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(bidahochi.foxdrives.util.ClientProxy.KeyRightTurn);
         }
+    }
+
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event)
+    {
         //init networking stuff
         interactChannel = NetworkRegistry.INSTANCE.newSimpleChannel("FD.key");
         interactChannel.registerMessage(HANDLERS[0], PacketInteract.class, 1, Side.SERVER);
@@ -266,10 +274,11 @@ public class FoxDrives {
     }
 
     //each packet needs it's own entry in this, duplicates are not allowed, for whatever reason
-    private static final IMessageHandler[] HANDLERS = new IMessageHandler[]{
-            new IMessageHandler<IMessage, IMessage>() {
+    private static final IMessageHandler[] HANDLERS = new IMessageHandler[]
+    {
+            new IMessageHandler<IMessage, IMessage>()
+            {
                 @Override public IMessage onMessage(IMessage message, MessageContext ctx) {return null;}
             }
     };
-
 }

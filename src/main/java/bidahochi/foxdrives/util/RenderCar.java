@@ -2,11 +2,11 @@ package bidahochi.foxdrives.util;
 
 import bidahochi.foxdrives.FoxDrives;
 import bidahochi.foxdrives.entities.EntityCar;
+import com.google.gson.JsonObject;
 import fexcraft.tmt_slim.ModelRendererTurbo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
@@ -35,38 +35,109 @@ public class RenderCar extends Render {
 
     }
 
-
     public void doRender(EntityCar car, double x, double y, double z, float ticks){
         //init model if necessary
-        if(car.modelInstance==null){
+        if(car.modelInstance == null)
+        {
             car.modelInstance=car.getModel();
-            for (ModelRendererTurbo render : car.modelInstance.getParts()) {
-                if (render.boxName == null) {
+            for (ModelRendererTurbo render : car.modelInstance.getParts())
+            {
+                if (render.boxName == null || render.boxName.isEmpty())
+                {
                     continue;
                 }
+
                 //handle culling
-                /*if (render.boxName.toLowerCase().contains("cull")) {
-                    render.boxName=render.boxName.replace("cull","").replace("Cull", "");
-                    render.showModel = false;
-                } else*/ if (render.boxName.toLowerCase().contains("cull")) {
+                if (render.boxName.toLowerCase().contains("cull"))
+                {
                     //render.boxName=render.boxName.replace("nocull","").replace("Nocull", "").replace("NoCull", "").replace("cull", "");
                     render.noCull = true;
                 }
-                //handle glow
-                if(render.boxName.toLowerCase().contains("glow")){
-                    render.boxName=render.boxName.replace("glow","").replace("Glow", "");
-                    render.ignoresLighting=true;
+
+                //handle glow stuff
+                if(BoxName.isLightBox(render.boxName))
+                {
+                    car.modelInstance.ignoreLightObjects.add(render);
                 }
+
                 //handle wheels
-                if(render.boxName.toLowerCase().contains("wheel")){
-                    if(render.boxName.toLowerCase().contains("front")){
+                if(render.boxName.toLowerCase().contains("wheel"))
+                {
+                    if(render.boxName.toLowerCase().contains("front"))
+                    {
                         car.modelInstance.frontWheels.add(render);
-                    } else if (render.boxName.toLowerCase().contains("front2")){
+                    }
+                    else if (render.boxName.toLowerCase().contains("front2"))
+                    {
                         car.modelInstance.frontWheels2.add(render);
-                    } else {
+                    }
+                    else
+                    {
                         car.modelInstance.backWheels.add(render);
                     }
                 }
+            }
+        }
+
+        // render objects that change lighting:
+        JsonObject lightDetails = car.lightingDetailsAsJsonObjectDW();
+        for (ModelRendererTurbo lighting : car.modelInstance.ignoreLightObjects)
+        {
+            switch (lighting.boxName)
+            {
+                case "lamp":
+                    // BoxName.headLight
+                    lighting.ignoresLighting = lightDetails.get(DataMemberName.isHeadlightsEnabled.AsString()).getAsBoolean();
+                break;
+                case "brakeLight":
+                    // BoxName.areBrakeLightsOn
+                    lighting.ignoresLighting = lightDetails.get(DataMemberName.areBrakeLightsOn.AsString()).getAsBoolean();
+                break;
+                case "leftTurnLight":
+                    // BoxName.turnSignal
+                    lighting.ignoresLighting = lightDetails.get(DataMemberName.turnSignal.AsString()).getAsByte() == -1 && (lightDetails.get(DataMemberName.turnSignalTick.AsString()).getAsByte() == 1);
+                break;
+                case "rightTurnLight":
+                    // BoxName.turnSignal
+                    lighting.ignoresLighting = lightDetails.get(DataMemberName.turnSignal.AsString()).getAsByte() == 1 && (lightDetails.get(DataMemberName.turnSignalTick.AsString()).getAsByte() == 1);
+                break;
+                case "runningLights":
+                    // BoxName.runningLight
+                    lighting.ignoresLighting = car.running > 0;
+                break;
+                case "reverseLight":
+                    lighting.ignoresLighting = car.getVelocity() < 0f;
+                break;
+                case "commander":
+                    lighting.ignoresLighting = lightDetails.get(DataMemberName.isBeaconEnabled.AsString()).getAsBoolean() && car.ticksExisted % 30 == 0;
+                break;
+                case "ditch":
+                    lighting.ignoresLighting = lightDetails.get(DataMemberName.ditchLightMode.AsString()).getAsByte() > 0;
+                break;
+                default:
+                    if (lightDetails.get(DataMemberName.isBeaconEnabled.AsString()).getAsBoolean() && lighting.boxName.contains("prime"))
+                    {
+                        switch (lightDetails.get(DataMemberName.beaconCycleIndex.AsString()).getAsByte())
+                        {
+                            case 0:
+                                lighting.ignoresLighting = (lighting.boxName.equals("prime1"));
+                            break;
+                            case 1:
+                                lighting.ignoresLighting = (lighting.boxName.equals("prime2"));
+                            break;
+                            case 2:
+                                lighting.ignoresLighting = (lighting.boxName.equals("prime3"));
+                            break;
+                            case 3:
+                                lighting.ignoresLighting = (lighting.boxName.equals("prime4"));
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        lighting.ignoresLighting = false;
+                    }
+                break;
             }
         }
 
@@ -106,9 +177,9 @@ public class RenderCar extends Render {
                 wheel.rotateAngleZ -= rotation*car.wheelSpinMultiplier();
 
                 if (Minecraft.getMinecraft().thePlayer.moveStrafing < 0) {
-                    wheel.rotateAngleY = (car.turnRenderDegree(car.type().rear_steer ? false : true));
+                    wheel.rotateAngleY = (car.turnRenderDegree(!car.type().rear_steer));
                 } else if (Minecraft.getMinecraft().thePlayer.moveStrafing > 0) {
-                    wheel.rotateAngleY = (car.turnRenderDegree(car.type().rear_steer ? true : false));
+                    wheel.rotateAngleY = (car.turnRenderDegree(car.type().rear_steer));
                 } else {
                     wheel.rotateAngleY = 0;
                 }
@@ -136,7 +207,6 @@ public class RenderCar extends Render {
         GL11.glRotatef(car.getRollingDirection(),0,0,1);
         //render
         car.modelInstance.render(car, 0,0,0,0,0, 0.625f);
-
         GL11.glPopMatrix();
     }
 
