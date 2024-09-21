@@ -555,8 +555,8 @@ public abstract class EntityCar extends EntityAnimal {
 
             this.stepHeight = canClimbFullBlocks()?1.0f:canClimbSlabs()?0.5f:0.0f;
             moveEntityWithHeading(0, velocity);
-            //motionX -= Math.sin(Math.toRadians(rotationYaw)) * velocity * 0.05;
-            //motionZ += Math.cos(Math.toRadians(rotationYaw)) * velocity * 0.05;
+            motionX -= Math.sin(Math.toRadians(rotationYaw)) * velocity * 0.05;
+            motionZ += Math.cos(Math.toRadians(rotationYaw)) * velocity * 0.05;
             //moveEntity(motionX, motionY, motionZ);
 
             double d0 = 0.25D;
