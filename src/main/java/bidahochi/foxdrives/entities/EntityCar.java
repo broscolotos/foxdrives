@@ -513,11 +513,20 @@ public abstract class EntityCar extends EntityAnimal {
     /**
      * Moves the entity based on the rider heading and rider.moveForward
      */
-    public void moveEntityWithHeading() {
+    public void moveEntityWithHeading()
+    {
         if(running != dataWatcher.getWatchableObjectByte(DW_RUNNING)){
             running = dataWatcher.getWatchableObjectByte(DW_RUNNING);
         }
-        if(!worldObj.isRemote)
+
+        if (!worldObj.isRemote && running == 0)
+        {
+            velocity = 0;
+            motionX = 0;
+            motionY = 0;
+            motionZ = 0;
+        }
+        else if(!worldObj.isRemote)
         {
             motionX *= 0.9;
             motionY = -0.4905;
