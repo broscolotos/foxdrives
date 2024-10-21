@@ -32,7 +32,7 @@ public class EntityWorkday1980UtilityHirail extends EntityCarChest {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/workday/workday_1980_utility_blank_hirail_noshit"};
+        return new String[]{"textures/workday/workday_1980_utility_blank_hirail_noshit", "textures/workday/workday_1980_utility_hirail_CSX", "textures/workday/workday_1980_utility_hirail_fncc"};
     }
 
     @Override

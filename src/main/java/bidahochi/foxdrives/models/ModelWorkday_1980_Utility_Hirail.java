@@ -194,8 +194,8 @@ public class ModelWorkday_1980_Utility_Hirail extends ModelConverter//Same as Fi
 		bodyModel[158] = new ModelRendererTurbo(this, 223, 153, textureX, textureY); // Box 329 horn
 		bodyModel[159] = new ModelRendererTurbo(this, 223, 159, textureX, textureY); // Box 328 horn
 		bodyModel[160] = new ModelRendererTurbo(this, 221, 156, textureX, textureY); // Box 327 horn
-		bodyModel[161] = new ModelRendererTurbo(this, 228, 160, textureX, textureY, "glow"); // Box 171 foglight
-		bodyModel[162] = new ModelRendererTurbo(this, 228, 160, textureX, textureY, "glow"); // Box 172 foglight
+		bodyModel[161] = new ModelRendererTurbo(this, 228, 160, textureX, textureY, BoxName.ditch); // Box 171 foglight
+		bodyModel[162] = new ModelRendererTurbo(this, 228, 160, textureX, textureY, BoxName.ditch); // Box 172 foglight
 		bodyModel[163] = new ModelRendererTurbo(this, 249, 148, textureX, textureY, "cull"); // Box 339 cull beacon holdy
 		bodyModel[164] = new ModelRendererTurbo(this, 242, 148, textureX, textureY, "cull"); // Box 340 cull beacon holdy
 		bodyModel[165] = new ModelRendererTurbo(this, 243, 144, textureX, textureY, BoxName.commander); // Box 410 commander beacon
