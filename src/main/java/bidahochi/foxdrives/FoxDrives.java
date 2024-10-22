@@ -94,7 +94,7 @@ public class FoxDrives {
                 new float[]{ 0.3f, 0.25f, 0.25f },
                 new float[]{ -0.3f, 0.25f, 0.25f }
             )
-            .maxspeed(8, 7);;
+            .maxspeed(15, 11);;
 
         CarType.REDMUND_1972 = CarType.register("redmund_1972", EntityRedmund1972.class)
             .recipe(
@@ -107,7 +107,7 @@ public class FoxDrives {
                     new float[]{ -0.3f, 0.25f, 0.25f }
                     )
             .acceleration(0.75f)
-            .maxspeed(8, 6);
+            .maxspeed(13, 8);
 
         CarType.WORKDAY_1980 = CarType.register("workday_1980", EntityWorkday1980.class)
                 .recipe(
@@ -120,7 +120,7 @@ public class FoxDrives {
                         new float[]{ -0.3f, 0.25f, 0.25f }
                         )
                 .acceleration(0.75f)
-                .maxspeed(20, 10);
+                .maxspeed(15, 10);
 
         CarType.WORKDAY_1980_Utility = CarType.register("workday_1980_utility", EntityWorkday1980Utility.class)
                 .recipe(
@@ -133,7 +133,7 @@ public class FoxDrives {
                         new float[]{ -0.3f, 0.25f, 0.25f }
                 )
                 .acceleration(0.75f)
-                .maxspeed(20, 10);
+                .maxspeed(15, 10);
 
         CarType.WORKDAY_1980_Utility_Hirail = CarType.register("workday_1980_utility_hirail", EntityWorkday1980UtilityHirail.class)
                 .recipe(
@@ -146,7 +146,7 @@ public class FoxDrives {
                         new float[]{ -0.3f, 0.25f, 0.25f }
                 )
                 .acceleration(0.75f)
-                .maxspeed(20, 10);
+                .maxspeed(15, 10);
 
 
         CarType.GILLIG_PHANTOM = CarType.register("gillig_phantom", EntityGilligPhantom.class)
@@ -166,7 +166,7 @@ public class FoxDrives {
                 new float[]{ -.3f, 0.25f, -.5f },
                 new float[]{ 0.3f, 0.25f, -.5f }
             )
-            .maxspeed(6, 3);
+            .maxspeed(11, 7);
 
         CarType.HYSTER_H80FT = CarType.register("hyster_H80FT", EntityHysterH80FT.class)
             .recipe(
@@ -176,7 +176,7 @@ public class FoxDrives {
             )
             .passpos(new float[]{ 0.0f, 0.5f, 0.0f })
             .rearsteer(true)
-            .maxspeed(3, 3);
+            .maxspeed(4, 3);
 
         CarType.MKDS_Standard = CarType.register("mkds_standard", EntityMKDS_Standard.class)
                 .recipe(
