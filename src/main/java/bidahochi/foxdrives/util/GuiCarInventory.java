@@ -71,19 +71,33 @@ public class GuiCarInventory extends GuiContainer {
     public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
+        int rowX = (this.width - xSize) / 2;
+        int rowY = (this.height - ySize) / 2;
         buttonList.clear();
+        int buttonHeight = 14;
+
+        int topRowX = rowX + 108;
+        int topRowY = rowY + -13;
+
+
         buttonList.add(
-                new GuiButton( 1,percentLeft(20)-10,percentTop(75), 50,20,
-                        car.getDataWatcher().getWatchableObjectByte(17)==(byte) 1 ?"Turn Off":"Turn On"));
+                new GuiButton( 1,topRowX,topRowY, 60,buttonHeight,
+                        car.getDataWatcher().getWatchableObjectByte(17)==(byte) 1 ?"Turn Off" : "Turn On"));
+
+        int rowOneX = rowX;
+        int rowOneY = rowY + 166;
+        int rowTwoY = rowY + 166 + buttonHeight;
         buttonList.add(
-                new GuiButton( 10,percentLeft(20) + 80,percentTop(75), 80,20,
+                new GuiButton( 10,rowOneX,rowOneY, 80,buttonHeight,
                         car.isLightsEnabled() ? "Headlights On" : "Headlights Off"));
         buttonList.add(
-                new GuiButton( 11,percentLeft(20) + 80 * 2,percentTop(75), 80,20,
-                        car.isBeaconEnabled() ? "Beacons On" : "Beacons Off"));
-        buttonList.add(
-                new GuiButton( 12,percentLeft(20) + 80 * 3,percentTop(75), 80,20,
+                new GuiButton( 12,rowOneX += 80,rowTwoY, 80,buttonHeight,
                         car.isDitchLightsEnabled() ? "DitchLights On" : "DitchLights Off"));
+        buttonList.add(
+                new GuiButton( 11,rowOneX,rowOneY, 80,buttonHeight,
+                        car.isBeaconEnabled() ? "Beacons On" : "Beacons Off"));
+
+
 
     }
 
