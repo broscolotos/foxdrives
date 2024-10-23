@@ -1,6 +1,7 @@
 package bidahochi.foxdrives;
 
 import bidahochi.foxdrives.entities.EntityCar;
+import bidahochi.foxdrives.util.ConfigHandler;
 import bidahochi.foxdrives.util.ItemCar;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.item.Item;
@@ -91,8 +92,8 @@ public class CarType {
 	}
 
 	public CarType maxspeed(float front, float back){
-		max_forward_speed = front;
-		max_backward_speed = back;
+		max_forward_speed = front * ConfigHandler.SPEED_MULTIPLIER;
+		max_backward_speed = back * ConfigHandler.SPEED_MULTIPLIER;
 		return this;
 	}
 

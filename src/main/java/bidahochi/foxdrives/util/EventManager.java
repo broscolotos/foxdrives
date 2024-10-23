@@ -74,7 +74,11 @@ public class EventManager {
         if(player.ridingEntity instanceof EntityCar == false) return;
         EntityCar car = null;
         if(MinecraftServer.getServer() != null){
-            car = (EntityCar)MinecraftServer.getServer().getEntityWorld().getEntityByID(player.ridingEntity.getEntityId());
+            if (MinecraftServer.getServer().getEntityWorld() != null
+                    && MinecraftServer.getServer().worldServers.length > 0
+                    && MinecraftServer.getServer().getEntityWorld().getEntityByID(player.ridingEntity.getEntityId()) instanceof EntityCar) {
+                car = (EntityCar) MinecraftServer.getServer().getEntityWorld().getEntityByID(player.ridingEntity.getEntityId());
+            }
         }
         else{
             car =player.ridingEntity instanceof EntityCar ? (EntityCar)player.ridingEntity : player.ridingEntity instanceof EntitySeat ? ((EntitySeat)player.ridingEntity).car : null;
