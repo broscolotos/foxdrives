@@ -50,18 +50,23 @@ public class GuiCar extends GuiContainer {
     public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
+        int pos1 = (this.width - xSize) / 2;
+        int pos2 = (this.height - ySize) / 2;
         buttonList.clear();
+        int buttonHeight = 14;
+        int rowOnePos1 = pos1 - 40;
+        int rowOnePos2 = pos2 + 166;
         buttonList.add(
-                new GuiButton( 1,percentLeft(20)-10,percentTop(75), 50,20,
+                new GuiButton( 1,rowOnePos1,rowOnePos2, 50,buttonHeight,
                         entity.getDataWatcher().getWatchableObjectByte(17)==(byte) 1 ?"Turn Off":"Turn On"));
         buttonList.add(
-                new GuiButton( 10,percentLeft(20) + 80,percentTop(75), 80,20,
+                new GuiButton( 10,rowOnePos1 += 50,rowOnePos2, 80,buttonHeight,
                         entity.isLightsEnabled() ? "Headlights On" : "Headlights Off"));
         buttonList.add(
-                new GuiButton( 11,percentLeft(20) + 80 * 2,percentTop(75), 80,20,
+                new GuiButton( 11,rowOnePos1 += 80,rowOnePos2, 80,buttonHeight,
                         entity.isBeaconEnabled() ? "Beacons On" : "Beacons Off"));
         buttonList.add(
-                new GuiButton( 12,percentLeft(20) + 80 * 3,percentTop(75), 80,20,
+                new GuiButton( 12,rowOnePos1 += 80,rowOnePos2, 80,buttonHeight,
                         entity.isDitchLightsEnabled() ? "DitchLights On" : "DitchLights Off"));
 
     }
@@ -81,6 +86,12 @@ public class GuiCar extends GuiContainer {
     }
 
 
-    public static int percentTop(int value){return (int)(guiTop*(value*0.01f));}
-    public static int percentLeft(int value){return (int)(guiLeft*(value*0.01f));}
+    public static int percentTop(int value)
+    {
+        return (int)
+            (guiTop*(value*0.01f));
+    }
+    public static int percentLeft(int value)
+    {
+        return (int) (guiLeft*(value*0.01f));}
 }
