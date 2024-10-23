@@ -2,19 +2,31 @@
 <!-- ## Only replace the words on the right side of "=" ## -->
 
 item.foxdrives.wrap.name=Vehicle Wrap
+
 item.textures/creativetab.name=FoxDrives
+item.textures.creativetab.name=FoxDrives
+item.foxdrives.creativetab.name=FoxDrives
 
 item.foxdrives.toyota_pickup_1992.name=1992 Boiota Pickup
+entity.foxdrives.foxdrives.toyota_pickup_1992.entity.name=1992 Boiota Pickup
 item.foxdrives.redmund_1972.name=1972 Pine Redmund
+entity.foxdrives.foxdrives.redmund_1972.entity.name=1972 Pine Redmund
 item.foxdrives.workday_1980.name=1980 Pine Workday
+entity.foxdrives.foxdrives.workday_1980.entity.name=1980 Pine Workday
 item.foxdrives.workday_1980_utility.name=1980 Pine Workday (Utility Bed)
+entity.foxdrives.foxdrives.workday_1980_utility.entity.name=1980 Pine Workday (Utility Bed)
 item.foxdrives.workday_1980_utility_hirail.name=1980 Pine Workday (Utility Bed, Hi-Rail Gear)
+entity.foxdrives.foxdrives.workday_1980_utility_hirail.entity.name=1980 Pine Workday (Utility Bed, Hi-Rail Gear)
 
 item.foxdrives.gillig_phantom.name=Gillig Phantom (40ft)
+entity.foxdrives.foxdrives.gillig_phantom.entity.name=Gillig Phantom (40ft)
 item.foxdrives.hyster_H80FT.name=Hyster H80FT Forklift
+entity.foxdrives.foxdrives.hyster_H80FT.entity.name=Hyster H80FT Forklift
 
 item.foxdrives.mkds_standard.name=MKDS Standard Kart
+entity.foxdrives.foxdrives.mkds_standard.entity.name=MKDS Standard Kart
 item.foxdrives.wagonkart.name=Radio-Dominator Kart
+entity.foxdrives.foxdrives.wagonkart.entity.name=Radio-Dominator Kart
 item.foxdrives.turbotoilet.name=Turbo-Toilet Kart
+entity.foxdrives.foxdrives.turbotoilet.entity.name=Turbo-Toilet Kart
 
-item.foxdrives.creativetab.name=FoxDrives
