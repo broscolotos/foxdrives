@@ -7,6 +7,7 @@ import bidahochi.foxdrives.entities.EntitySeat;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -51,9 +52,14 @@ public class ClientProxy extends CommonProxy
 					GL11.glPushMatrix();
                     float scale = car.type().rider_scale;
 					scale = player.height * scale / player.height;
-					GL11.glTranslated(x, y, z);
-					GL11.glScalef(scale, scale, scale);
-					GL11.glTranslated(-x, -y, -z);
+                    GL11.glTranslated(x, (y + .35), z);
+                    GL11.glScalef(scale, scale, scale);
+                    GL11.glTranslated(-x, -(y + .35), -z);
+                    if (player != Minecraft.getMinecraft().thePlayer && car.type().rider_scale != 1) {
+                        GL11.glTranslated(0, 1 - (car.type().rider_scale + 0.2), 0); //rough approx. but gets the job done for everything in range 0.5-1
+                    } else {
+                        GL11.glTranslated(0, (0.6 - car.type().rider_scale) * -1, 0); //rough approx. but gets the job done for everything in range 0.5-1
+                    }
 					super.doRender(player, x, y, z, f0, f1);
 					GL11.glPopMatrix();
 					return;

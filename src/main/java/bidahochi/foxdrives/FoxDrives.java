@@ -20,10 +20,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nullable;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.logging.log4j.Logger;
 
 import static cpw.mods.fml.common.registry.EntityRegistry.registerModEntity;
 
@@ -58,6 +61,9 @@ public class FoxDrives {
     //the entityID for the first entity registered. must be 18 or higher because forge is dumb.
     private static int registryPosition=18;
 
+    public static Logger fdLog = LogManager.getLogger(MODID);
+    public static File configDirectory;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
@@ -70,6 +76,13 @@ public class FoxDrives {
             cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(bidahochi.foxdrives.util.ClientProxy.KeyLeftTurn);
             cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(bidahochi.foxdrives.util.ClientProxy.KeyRightTurn);
         }
+
+        /* Config handler */
+        configDirectory = event.getModConfigurationDirectory();
+        ConfigHandler.init(new File(event.getModConfigurationDirectory(), MODID + ".cfg"));
+
+        proxy.configDirectory = event.getModConfigurationDirectory().getAbsolutePath();
+
     }
 
     @Mod.EventHandler

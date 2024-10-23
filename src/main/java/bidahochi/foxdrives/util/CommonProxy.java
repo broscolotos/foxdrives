@@ -8,6 +8,9 @@ import net.minecraft.inventory.Container;
 import net.minecraft.world.World;
 
 public class CommonProxy implements IGuiHandler {
+
+    public static String configDirectory = "";
+
     /**
      * Returns a Server side Container to be displayed to the user.
      *

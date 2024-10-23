@@ -3,10 +3,6 @@
 
 item.foxdrives.wrap.name=Vehicle Wrap
 
-item.textures/creativetab.name=FoxDrives
-item.textures.creativetab.name=FoxDrives
-item.foxdrives.creativetab.name=FoxDrives
-
 item.foxdrives.toyota_pickup_1992.name=1992 Boiota Pickup
 entity.foxdrives.foxdrives.toyota_pickup_1992.entity.name=1992 Boiota Pickup
 item.foxdrives.redmund_1972.name=1972 Pine Redmund
@@ -30,3 +26,4 @@ entity.foxdrives.foxdrives.wagonkart.entity.name=Radio-Dominator Kart
 item.foxdrives.turbotoilet.name=Turbo-Toilet Kart
 entity.foxdrives.foxdrives.turbotoilet.entity.name=Turbo-Toilet Kart
 
+item.foxdrives.creativetab=FoxDrives
