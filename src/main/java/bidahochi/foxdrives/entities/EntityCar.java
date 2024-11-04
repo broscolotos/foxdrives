@@ -26,7 +26,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class EntityCar extends EntityAnimal {
 
@@ -53,8 +55,13 @@ public abstract class EntityCar extends EntityAnimal {
     public float velocity=0;
     //public float throttle;
     public boolean braking;
+    private float guiRenderScale = 25f;
 
     public ArrayList<EntitySeat> passengers = new ArrayList<>();
+    /**
+     * <p>Stores texture descriptions. Integer represents the number of the skin as registered in DataWatcher, and the String is the description itself.</p>
+     */
+    public final Map<Integer, String> textureDescriptionMap = new HashMap<>();
 
      /**
      * client side entity spawn
@@ -297,13 +304,16 @@ public abstract class EntityCar extends EntityAnimal {
         //if it's the skinning item, iterate to the next skin
         if(!this.worldObj.isRemote && player.getHeldItem()!=null &&
                 player.getHeldItem().getItem()== FoxDrives.wrap) {
-
-                //gets current skin value and loops around to 0 if it's past the entity's skin count.
-                int skin =dataWatcher.getWatchableObjectInt(DW_SKIN)+1;
-                if(skin>=getSkins().length){
-                    skin=0;
+                if (!player.isSneaking()) {
+                    //gets current skin value and loops around to 0 if it's past the entity's skin count.
+                    int skin = dataWatcher.getWatchableObjectInt(DW_SKIN) + 1;
+                    if (skin >= getSkins().length) {
+                        skin = 0;
+                    }
+                    dataWatcher.updateObject(DW_SKIN, skin);
+                } else if (getSkins().length > 1) {
+                    player.openGui(FoxDrives.instance, 101, player.getEntityWorld(), this.getEntityId(), -1, (int) this.posZ);
                 }
-                dataWatcher.updateObject(DW_SKIN,skin);
         //otherwise, try to mount the entity
         } else if (!this.worldObj.isRemote) {
             if(riddenByEntity == null){
@@ -655,4 +665,12 @@ public abstract class EntityCar extends EntityAnimal {
 
     /** Gets this Entity's CarType */
     public abstract CarType type();
+
+    public float getGuiRenderScale() {
+        return guiRenderScale;
+    }
+
+    public void setGuiRenderScale(float guiRenderScale) {
+        this.guiRenderScale = guiRenderScale;
+    }
 }
