@@ -5,14 +5,18 @@ import bidahochi.foxdrives.entities.EntityCar;
 import com.google.gson.JsonObject;
 import fexcraft.tmt_slim.ModelRendererTurbo;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class RenderCar extends Render {
+    private static boolean renderGUIFullBright = false;
+    private static boolean renderModeGUI = false;
 
     /**
      * Actually renders the given argument. This is a synthetic bridge method, always casting down its argument and then
@@ -30,12 +34,12 @@ public class RenderCar extends Render {
     @Override
     public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_) {
         if(p_76986_1_ instanceof EntityCar){
-            doRender((EntityCar) p_76986_1_, p_76986_2_,p_76986_4_,p_76986_6_, p_76986_9_);
+            doRender((EntityCar) p_76986_1_, p_76986_2_,p_76986_4_,p_76986_6_, p_76986_9_, renderModeGUI);
         }
 
     }
 
-    public void doRender(EntityCar car, double x, double y, double z, float ticks){
+    public void doRender(EntityCar car, double x, double y, double z, float ticks, boolean renderModeGUI){
         //init model if necessary
         if(car.modelInstance == null)
         {
@@ -205,8 +209,22 @@ public class RenderCar extends Render {
         GL11.glRotatef(-(car.rotationYaw + (car.rotationYaw - car.prevRotationYaw) * ticks) + 90, 0, 1, 0);
         GL11.glRotatef(180,1,0,0);
         GL11.glRotatef(car.getRollingDirection(),0,0,1);
+
+        int skyLight = car.worldObj.getLightBrightnessForSkyBlocks(MathHelper.floor_double(car.posX), MathHelper.floor_double(car.posY), MathHelper.floor_double(car.posZ), 0);
+        if (!renderModeGUI) {
+            GL11.glEnable(GL11.GL_LIGHTING);
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, skyLight % 65536,
+                    skyLight / 65536f);
+        } else {
+            if (renderGUIFullBright)
+                GL11.glDisable(GL11.GL_LIGHTING);
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f,
+                    240f);
+        }
+
         //render
         car.modelInstance.render(car, 0,0,0,0,0, 0.625f);
+        GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }
 
@@ -215,4 +233,23 @@ public class RenderCar extends Render {
      */
     @Override
     protected ResourceLocation getEntityTexture(Entity p_110775_1_) {return null;}
+
+
+    /**
+     * @author 02skaplan
+     * @param renderModeGUI GUI lighting flag
+     * 	<p>Flag of whether to allow in-game lighting conditions to effect light levels of rendered entity.
+     *  <b>Set to true if rendering in a GUI and set back to false when done.</b></p>
+     */
+    public static void setRenderModeGUI(boolean renderModeGUI) {
+        RenderCar.renderModeGUI = renderModeGUI;
+    }
+
+    /**
+     * @param renderGUIFullBright Flag of whether to allow any lighting on a rendered entity. This will cause the entity to render
+     * unnaturally bright, which may or may not be desired.
+     */
+    public static void setRenderGUIFullBright(boolean renderGUIFullBright) {
+        RenderCar.renderGUIFullBright = renderGUIFullBright;
+    }
 }

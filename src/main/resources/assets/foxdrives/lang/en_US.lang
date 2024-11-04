@@ -26,4 +26,14 @@ entity.foxdrives.foxdrives.wagonkart.entity.name=Radio-Dominator Kart
 item.foxdrives.turbotoilet.name=Turbo-Toilet Kart
 entity.foxdrives.foxdrives.turbotoilet.entity.name=Turbo-Toilet Kart
 
+wrapmenu.Close Menu.name=Close Menu
+wrapmenu.Previous Page.name=Previous Page
+wrapmenu.Next Page.name=Next Page
+wrapmenu.Pause.name=Pause Animation
+wrapmenu.Play.name=Play Animation
+wrapmenu.Lights On.name=Lights On
+wrapmenu.Lights Off.name=Lights Off
+wrapmenu.Hide Models.name=Hide Models
+wrapmenu.Show Models.name=Show Models
+
 item.foxdrives.creativetab=FoxDrives

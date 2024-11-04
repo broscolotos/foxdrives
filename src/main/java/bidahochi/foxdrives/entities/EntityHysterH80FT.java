@@ -16,6 +16,8 @@ public class EntityHysterH80FT extends EntityCar {
     }
     public EntityHysterH80FT(World p_i1685_1_) {
         super(p_i1685_1_);
+        textureDescriptionMap.put(0, "Yellow");
+        textureDescriptionMap.put(1, "Blue");
     }
 
 

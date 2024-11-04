@@ -4,11 +4,13 @@ package bidahochi.foxdrives.util;
 import bidahochi.foxdrives.entities.EntityCar;
 import bidahochi.foxdrives.entities.EntityCarChest;
 import bidahochi.foxdrives.entities.EntitySeat;
+import bidahochi.foxdrives.util.wrapgui.GuiWrap;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
@@ -34,7 +36,10 @@ public class ClientProxy extends CommonProxy
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         System.out.println("Open client");
-        if(player.worldObj.getEntityByID(ID) instanceof EntityCarChest){
+        Entity entity = world.getEntityByID(x);
+        if (ID == 101) {
+            return entity != null ? new GuiWrap(player, (EntityCar) entity) : null;
+        } else if (player.worldObj.getEntityByID(ID) instanceof EntityCarChest){
             System.out.println("Open client");
             return new GuiCarInventory(player.inventory, (EntityCarChest) player.worldObj.getEntityByID(ID));
         }

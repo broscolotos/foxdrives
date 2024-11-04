@@ -15,7 +15,6 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -58,6 +57,7 @@ public class FoxDrives {
     public static CreativeTabs tab;
     //the networking channel
     public static SimpleNetworkWrapper interactChannel;
+    public static SimpleNetworkWrapper wrapColorChannel;
     //the entityID for the first entity registered. must be 18 or higher because forge is dumb.
     private static int registryPosition=18;
 
@@ -90,7 +90,9 @@ public class FoxDrives {
     {
         //init networking stuff
         interactChannel = NetworkRegistry.INSTANCE.newSimpleChannel("FD.key");
+        wrapColorChannel = NetworkRegistry.INSTANCE.newSimpleChannel("wrapColor");
         interactChannel.registerMessage(HANDLERS[0], PacketInteract.class, 1, Side.SERVER);
+        wrapColorChannel.registerMessage(PacketWrapColor.Handler.class, PacketWrapColor.class, 2, Side.SERVER);
 
         //init item stuff
         tab= new FoxTab("FoxDrives", "creativetab");
