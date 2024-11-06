@@ -1,5 +1,4 @@
-<meta charset="UTF-8" />
+![FOXDRIVES Logo](https://images2.imgbox.com/9b/54/CJSZOcpC_o.png)
+# FOXDRIVES - FoxTC-scale ground transportation, at its finest!
 
-<h1 >Fox Drives</h1>
-<p><i>Fox Drives</i> is a Minecraft Mod built using Minecraft Forge.</p>
-<p>derpy cars go brrr.</p>
+FoxDrives is a Minecraft mod that adds driveable vehicles such as cars and trucks, that mimic the artstyle & scale of my other mod BAP/FoxTC.
