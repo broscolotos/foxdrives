@@ -14,6 +14,8 @@ public class EntityWorkday1980Utility extends EntityCarChest {
     }
     public EntityWorkday1980Utility(World p_i1685_1_) {
         super(p_i1685_1_);
+        textureDescriptionMap.put(0, "Factory Blank");
+        setGuiRenderScale(getGuiRenderScale() + 0f);
     }
 
 

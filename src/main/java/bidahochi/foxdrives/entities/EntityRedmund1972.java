@@ -16,6 +16,10 @@ public class EntityRedmund1972 extends EntityCarChest {
     }
     public EntityRedmund1972(World p_i1685_1_) {
         super(p_i1685_1_);
+        textureDescriptionMap.put(0, "Factory Blank");
+        textureDescriptionMap.put(1, "Factory Chocolate Brown");
+        textureDescriptionMap.put(2, "Factory Arbor Red");
+        setGuiRenderScale(getGuiRenderScale() + 0f);
     }
 
 

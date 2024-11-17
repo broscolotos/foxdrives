@@ -13,6 +13,11 @@ public class EntityWorkday1980 extends EntityCarChest {
     }
     public EntityWorkday1980(World p_i1685_1_) {
         super(p_i1685_1_);
+        textureDescriptionMap.put(0, "Factory Blank");
+        textureDescriptionMap.put(1, "Factory Silver W/ Black Stripe");
+        textureDescriptionMap.put(2, "Factory Moss Green");
+        textureDescriptionMap.put(3, "Bida's Truc");
+        setGuiRenderScale(getGuiRenderScale() + 0f);
     }
 
 

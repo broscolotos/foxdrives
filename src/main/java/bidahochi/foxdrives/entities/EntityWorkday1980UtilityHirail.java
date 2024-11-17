@@ -14,6 +14,11 @@ public class EntityWorkday1980UtilityHirail extends EntityCarChest {
     }
     public EntityWorkday1980UtilityHirail(World p_i1685_1_) {
         super(p_i1685_1_);
+        textureDescriptionMap.put(0, "Blandsville Track Department");
+        textureDescriptionMap.put(1, "CSXT");
+        textureDescriptionMap.put(2, "FNCC MW");
+        textureDescriptionMap.put(3, "NEP MW");
+        setGuiRenderScale(getGuiRenderScale() + 0f);
     }
 
 

@@ -17,7 +17,18 @@ public class EntityMKDS_Standard extends EntityCarChest {
         textureDescriptionMap.put(0, "Mario");
         textureDescriptionMap.put(1, "Luigi");
         textureDescriptionMap.put(2, "Peach");
+        textureDescriptionMap.put(3, "Yoshi");
+        textureDescriptionMap.put(4, "Toad");
+        textureDescriptionMap.put(5, "DK");
         textureDescriptionMap.put(6, "Wario");
+        textureDescriptionMap.put(7, "Bowser");
+        textureDescriptionMap.put(8, "Daisy");
+        textureDescriptionMap.put(9, "Dry Bones");
+        textureDescriptionMap.put(10, "Waluigi");
+        textureDescriptionMap.put(11, "R.O.B.");
+        textureDescriptionMap.put(12, "Shy Guy");
+        textureDescriptionMap.put(13, "Bida");
+        textureDescriptionMap.put(14, "Cubed64");
         setGuiRenderScale(getGuiRenderScale() + 5f);
     }
 
