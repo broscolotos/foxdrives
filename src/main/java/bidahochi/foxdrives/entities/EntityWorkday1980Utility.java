@@ -15,6 +15,7 @@ public class EntityWorkday1980Utility extends EntityCarChest {
     public EntityWorkday1980Utility(World p_i1685_1_) {
         super(p_i1685_1_);
         textureDescriptionMap.put(0, "Factory Blank");
+        textureDescriptionMap.put(1, "CSXT");
         setGuiRenderScale(getGuiRenderScale() + 0f);
     }
 
@@ -34,7 +35,7 @@ public class EntityWorkday1980Utility extends EntityCarChest {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/workday/workday_1980_utility_blank"};
+        return new String[]{"textures/workday/workday_1980_utility_blank", "textures/workday/workday_1980_utility_CSX"};
     }
 
     @Override
