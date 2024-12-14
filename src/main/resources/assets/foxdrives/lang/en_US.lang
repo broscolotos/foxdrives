@@ -13,6 +13,8 @@ item.foxdrives.workday_1980_utility.name=1980 Pine Workday (Utility Bed)
 entity.foxdrives.foxdrives.workday_1980_utility.entity.name=1980 Pine Workday (Utility Bed)
 item.foxdrives.workday_1980_utility_hirail.name=1980 Pine Workday (Utility Bed, Hi-Rail Gear)
 entity.foxdrives.foxdrives.workday_1980_utility_hirail.entity.name=1980 Pine Workday (Utility Bed, Hi-Rail Gear)
+item.foxdrives.cruisegoer.name=JMC Cruisegoer
+entity.foxdrives.foxdrives.cruisegoer.name=JMC Cruisegoer
 
 item.foxdrives.gillig_phantom.name=Gillig Phantom (40ft)
 entity.foxdrives.foxdrives.gillig_phantom.entity.name=Gillig Phantom (40ft)

@@ -32,7 +32,7 @@ import static cpw.mods.fml.common.registry.EntityRegistry.registerModEntity;
 @Mod(modid = FoxDrives.MODID, version = FoxDrives.MOD_VERSION, name = "FoxDrives")
 public class FoxDrives {
     public static final String MODID = "foxdrives";
-    public static final String MOD_VERSION = "0.3.1";
+    public static final String MOD_VERSION = "0.3.2";
 
     //used for TMT render caching. false improves performance dramatically, true can fix rare bugs.
     public static boolean disableCache=false;
@@ -162,6 +162,19 @@ public class FoxDrives {
                 )
                 .acceleration(0.75f)
                 .maxspeed(15, 10);
+        CarType.CRUISEGOER = CarType.register("cruisegoer", EntityCruisegoer.class)
+                .recipe(
+                        new ItemStack(Blocks.sponge), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                        new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+                )
+                .passpos(
+                        new float[]{ 0.3f, 0.25f, 0.25f },
+                        new float[]{ -0.3f, 0.25f, 0.25f }
+                )
+                .acceleration(0.75f)
+                .maxspeed(18, 8);
+
 
 
         CarType.GILLIG_PHANTOM = CarType.register("gillig_phantom", EntityGilligPhantom.class)

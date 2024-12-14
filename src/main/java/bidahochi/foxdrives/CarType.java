@@ -41,6 +41,7 @@ public class CarType {
 	public static CarType WORKDAY_1980;
 	public static CarType WORKDAY_1980_Utility;
 	public static CarType WORKDAY_1980_Utility_Hirail;
+	public static CarType CRUISEGOER;
 	public static CarType GILLIG_PHANTOM;
 	public static CarType HYSTER_H80FT;
 	public static CarType MKDS_Standard;
