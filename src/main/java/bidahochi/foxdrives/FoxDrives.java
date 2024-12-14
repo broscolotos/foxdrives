@@ -169,8 +169,8 @@ public class FoxDrives {
                         new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
                 )
                 .passpos(
-                        new float[]{ 0.3f, 0.25f, 0.25f },
-                        new float[]{ -0.3f, 0.25f, 0.25f }
+                        new float[]{ 0.27f, 0.05f, 0.05f },
+                        new float[]{ -0.27f, 0.05f, 0.05f }
                 )
                 .acceleration(0.75f)
                 .maxspeed(18, 8);
