@@ -1,7 +1,7 @@
-package fexcraft.tmt_slim;
+package fdfexcraft.tmt_slim;
 
 import bidahochi.foxdrives.util.BoxName;
-import fexcraft.fvtm.FDTurboList;
+import fdfexcraft.fvtm.FDTurboList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
@@ -22,7 +22,7 @@ import java.util.List;
  * This version of TMT was updated, maintened, as well as extended for 1.8 and newer Minecraft versions by FEX___96
  *
  * @author GaryCXJk, Ferdinand (FEX___96)
- * @license http://fexcraft.net/license?id=tmt
+ * @license http://fdfexcraft.net/license?id=tmt
  *
  */
 public class ModelRendererTurbo {

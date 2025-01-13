@@ -32,7 +32,7 @@ import static cpw.mods.fml.common.registry.EntityRegistry.registerModEntity;
 @Mod(modid = FoxDrives.MODID, version = FoxDrives.MOD_VERSION, name = "FoxDrives")
 public class FoxDrives {
     public static final String MODID = "foxdrives";
-    public static final String MOD_VERSION = "0.3.2";
+    public static final String MOD_VERSION = "0.4.0";
 
     //used for TMT render caching. false improves performance dramatically, true can fix rare bugs.
     public static boolean disableCache=false;
@@ -232,7 +232,7 @@ public class FoxDrives {
                         new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
                         new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
                 )
-                .passpos(new float[]{ 0.0f, 0.3f, 0.25f })//LR, UD, FB
+                .passpos(new float[]{ 0.0f, -0.275f, 0.25f })//LR, UD, FB, 0,0.3,0 default
                 .acceleration(0.9f)
                 .maxspeed(9, 4);
 

@@ -2,7 +2,7 @@ package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.CarType;
 import bidahochi.foxdrives.models.ModelTurboToilet;
-import fexcraft.tmt_slim.ModelBase;
+import fdfexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
 
@@ -31,7 +31,7 @@ public class EntityTurboToilet extends EntityCar {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/turboshitter"};
+        return new String[]{"textures/turboshitter", "textures/turboshitter2"};
     }
 
     @Override

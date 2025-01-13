@@ -1,11 +1,8 @@
-package fexcraft.tmt_slim;
-
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector3f;
+package fdfexcraft.tmt_slim;
 
 import java.util.ArrayList;
 
-import static fexcraft.tmt_slim.ModelRendererTurbo.*;
+import static fdfexcraft.tmt_slim.ModelRendererTurbo.*;
 
 public class CylinderBuilder {
 

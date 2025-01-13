@@ -1,4 +1,4 @@
-package fexcraft.tmt_slim;
+package fdfexcraft.tmt_slim;
 
 import net.minecraft.client.model.PositionTextureVertex;
 

@@ -10,8 +10,8 @@
 package bidahochi.foxdrives.models; //Path where the model is located
 
 import bidahochi.foxdrives.util.BoxName;
-import fexcraft.tmt_slim.ModelConverter;
-import fexcraft.tmt_slim.ModelRendererTurbo;
+import fdfexcraft.tmt_slim.ModelConverter;
+import fdfexcraft.tmt_slim.ModelRendererTurbo;
 
 public class ModelHysterH80FT extends ModelConverter //Same as Filename
 {

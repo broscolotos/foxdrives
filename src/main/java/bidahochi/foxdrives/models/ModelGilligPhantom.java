@@ -9,8 +9,8 @@
 
 package bidahochi.foxdrives.models; //Path where the model is located
 
-import fexcraft.tmt_slim.ModelConverter;
-import fexcraft.tmt_slim.ModelRendererTurbo;
+import fdfexcraft.tmt_slim.ModelConverter;
+import fdfexcraft.tmt_slim.ModelRendererTurbo;
 
 public class ModelGilligPhantom extends ModelConverter //Same as Filename
 {

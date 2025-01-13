@@ -1,4 +1,4 @@
-package fexcraft.tmt_slim;
+package fdfexcraft.tmt_slim;
 
 /**
  * This class represents a coordinate space and its UV coordinates. This allows for

@@ -1,4 +1,4 @@
-package fexcraft.fcl.common.lang;
+package fdfexcraft.fcl.common.lang;
 
 import javax.annotation.Nullable;
 import java.util.List;

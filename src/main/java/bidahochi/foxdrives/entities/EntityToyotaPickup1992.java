@@ -2,7 +2,7 @@ package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.CarType;
 import bidahochi.foxdrives.models.ModelToyotaPickup1992;
-import fexcraft.tmt_slim.ModelBase;
+import fdfexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
 public class EntityToyotaPickup1992 extends EntityCarChest {

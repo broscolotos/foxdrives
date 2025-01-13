@@ -6,7 +6,7 @@ Original branch version this was copied from: https://github.com/Fexcraft/FCL/tr
 This version of TMT was updated, maintened, as well as extended for 1.8 and newer Minecraft versions by FEX___96
 
  @author GaryCXJk, Ferdinand (FEX___96)
- @license http://fexcraft.net/license?id=tmt
+ @license http://fdfexcraft.net/license?id=tmt
 
 <hr/>
  <h3>Eternal's notes and license:</h3>

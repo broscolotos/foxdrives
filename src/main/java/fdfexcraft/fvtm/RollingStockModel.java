@@ -1,9 +1,9 @@
-package fexcraft.fvtm;
+package fdfexcraft.fvtm;
 
-import fexcraft.tmt_slim.ModelBase;
-import fexcraft.tmt_slim.ModelRendererTurbo;
-import fexcraft.tmt_slim.Tessellator;
-import fexcraft.tmt_slim.TexturedPolygon;
+import fdfexcraft.tmt_slim.ModelBase;
+import fdfexcraft.tmt_slim.ModelRendererTurbo;
+import fdfexcraft.tmt_slim.Tessellator;
+import fdfexcraft.tmt_slim.TexturedPolygon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.entity.Entity;

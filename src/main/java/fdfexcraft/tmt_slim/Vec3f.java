@@ -1,4 +1,4 @@
-package fexcraft.tmt_slim;
+package fdfexcraft.tmt_slim;
 
 import net.minecraft.util.Vec3;
 import org.lwjgl.util.vector.Matrix4f;

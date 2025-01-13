@@ -1,8 +1,7 @@
-package fexcraft.tmt_slim;
+package fdfexcraft.tmt_slim;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 

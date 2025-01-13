@@ -2,11 +2,8 @@ package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.CarType;
 import bidahochi.foxdrives.models.ModelRedmund1972;
-import fexcraft.tmt_slim.ModelBase;
+import fdfexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
-
-import java.util.Arrays;
-import java.util.List;
 
 
 public class EntityRedmund1972 extends EntityCarChest {

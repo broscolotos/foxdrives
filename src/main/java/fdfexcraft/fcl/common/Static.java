@@ -1,4 +1,4 @@
-package fexcraft.fcl.common;
+package fdfexcraft.fcl.common;
 
 import java.io.InputStream;
 import java.util.Random;

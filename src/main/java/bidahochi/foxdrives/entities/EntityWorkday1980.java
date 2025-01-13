@@ -2,7 +2,7 @@ package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.CarType;
 import bidahochi.foxdrives.models.ModelWorkday_1980;
-import fexcraft.tmt_slim.ModelBase;
+import fdfexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
 
