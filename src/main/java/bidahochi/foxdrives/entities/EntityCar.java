@@ -58,6 +58,9 @@ public abstract class EntityCar extends EntityAnimal {
     public boolean braking;
     private float guiRenderScale = 25f;
 
+    private Vec3f hitchPos = null;
+    public EntityCar trailer = null;
+
     public ArrayList<EntitySeat> passengers = new ArrayList<>();
     /**
      * <p>Stores texture descriptions. Integer represents the number of the skin as registered in DataWatcher, and the String is the description itself.</p>
@@ -76,9 +79,25 @@ public abstract class EntityCar extends EntityAnimal {
             this.yOffset = 0;
             ignoreFrustumCheck = true;
             this.isImmuneToFire = true;
+            this.setHitchPos(this.type().hitchPosition);
         }
     }
 
+    public void setHitchPos(Vec3f pos) {
+        this.hitchPos = pos;
+    }
+
+    public void setHitchPos(float x, float y, float z) {
+        this.hitchPos = new Vec3f(x, y, z);
+    }
+
+    public EntityCar getTrailer() {
+        return trailer;
+    }
+
+    public Vec3f getHitchPos() {
+        return this.hitchPos;
+    }
 
     /**
      * server side entity spawn
@@ -96,6 +115,7 @@ public abstract class EntityCar extends EntityAnimal {
         ignoreFrustumCheck = true;
         this.isImmuneToFire = true;
         this.preventEntitySpawning = true;
+        this.setHitchPos(this.type().hitchPosition);
     }
 
 
@@ -296,6 +316,7 @@ public abstract class EntityCar extends EntityAnimal {
 	public void applyEntityCollision(Entity entity){
 		if(entity instanceof EntitySeat) return;
         if(entity instanceof EntityPlayer && entity.ridingEntity instanceof EntitySeat) return;
+        if(entity instanceof EntityTrailer && ((EntityTrailer)entity).pullingEntity == this) return;
         super.applyEntityCollision(entity);
 	}
 
@@ -676,11 +697,11 @@ public abstract class EntityCar extends EntityAnimal {
     }
 
     public Vec3f getModelRotation() {
-        return new Vec3f(0,0,0);
+        return null;
     }
 
     public Vec3f getModelOffset() {
-        return new Vec3f(0,0,0);
+        return null;
     }
 
     public Vec3f getModelScale() {

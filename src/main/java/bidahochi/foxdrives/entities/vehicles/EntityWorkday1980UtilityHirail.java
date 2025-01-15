@@ -1,7 +1,7 @@
-package bidahochi.foxdrives.entities;
+package bidahochi.foxdrives.entities.vehicles;
 
 import bidahochi.foxdrives.CarType;
-import bidahochi.foxdrives.models.ModelWorkday_1980_Utility;
+import bidahochi.foxdrives.entities.EntityCarChest;
 import bidahochi.foxdrives.models.ModelWorkday_1980_Utility_Hirail;
 import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;

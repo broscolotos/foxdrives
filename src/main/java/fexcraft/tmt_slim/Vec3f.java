@@ -58,6 +58,12 @@ public class Vec3f implements Serializable {
                 this.xCoord * p_72431_1_.yCoord - this.yCoord * p_72431_1_.xCoord);
     }
 
+    public Vec3f crossProduct(Vec3d p_72431_1_) {
+        return new Vec3f(this.yCoord * p_72431_1_.zCoord - this.zCoord * p_72431_1_.yCoord,
+                this.zCoord * p_72431_1_.xCoord - this.xCoord * p_72431_1_.zCoord,
+                this.xCoord * p_72431_1_.yCoord - this.yCoord * p_72431_1_.xCoord);
+    }
+
     public Vec3f scale(float scale){
         return new Vec3f(this.xCoord * scale, this.yCoord * scale, this.zCoord * scale);
     }
@@ -84,6 +90,24 @@ public class Vec3f implements Serializable {
         zCoord-vec.zCoord);
     }
 
+    // Calculate magnitude of the vector
+    public double magnitude() {
+        return Math.sqrt(this.xCoord * this.xCoord + this.yCoord * this.yCoord + this.zCoord * this.zCoord);
+    }
+
+    // Angle between two vectors in radians
+    public double angle(Vec3f other) {
+        double dotProduct = this.dotProduct(other);
+        double magnitudes = this.magnitude() * other.magnitude();
+        return Math.acos(dotProduct / magnitudes);
+    }
+
+    // Angle between two vectors in radians
+    public double angle(Vec3d other) {
+        double dotProduct = this.dotProduct(other);
+        double magnitudes = this.magnitude() * other.magnitude();
+        return Math.acos(dotProduct / magnitudes);
+    }
 
     public Vec3f normalize(){
         double d0 = Math.sqrt(this.xCoord * this.xCoord + this.yCoord * this.yCoord + this.zCoord * this.zCoord);
@@ -92,6 +116,10 @@ public class Vec3f implements Serializable {
 
     public float dotProduct(Vec3f vec){
         return this.xCoord * vec.xCoord + this.yCoord * vec.yCoord + this.zCoord * vec.zCoord;
+    }
+
+    public float dotProduct(Vec3d vec){
+        return (float)(this.xCoord * vec.xCoord + this.yCoord * vec.yCoord + this.zCoord * vec.zCoord);
     }
 
 
@@ -230,5 +258,9 @@ public class Vec3f implements Serializable {
         Matrix4f.rotate(yCoord * 3.14159265F / 180, new Vector3f(0F, 0F, 1F), mat, mat);
         Matrix4f.rotate(xCoord * 3.14159265F / 180, new Vector3f(0F, 1F, 0F), mat, mat);
         return new Vec3f(mat.m00, mat.m10, mat.m20);
+    }
+
+    public Vec3d toVec3d() {
+        return new Vec3d(xCoord,yCoord,zCoord);
     }
 }

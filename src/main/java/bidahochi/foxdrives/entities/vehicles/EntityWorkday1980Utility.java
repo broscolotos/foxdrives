@@ -1,22 +1,22 @@
-package bidahochi.foxdrives.entities;
+package bidahochi.foxdrives.entities.vehicles;
 
 import bidahochi.foxdrives.CarType;
-import bidahochi.foxdrives.models.ModelWorkday_1980;
+import bidahochi.foxdrives.entities.EntityCarChest;
+import bidahochi.foxdrives.models.ModelWorkday_1980_Utility;
 import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
 
-public class EntityWorkday1980 extends EntityCarChest {
+public class EntityWorkday1980Utility extends EntityCarChest {
 
-    public EntityWorkday1980(World world, double xPos, double yPos, double zPos) {
+    public EntityWorkday1980Utility(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
     }
-    public EntityWorkday1980(World p_i1685_1_) {
+    public EntityWorkday1980Utility(World p_i1685_1_) {
         super(p_i1685_1_);
         textureDescriptionMap.put(0, "Factory Blank");
-        textureDescriptionMap.put(1, "Factory Silver W/ Black Stripe");
-        textureDescriptionMap.put(2, "Factory Moss Green");
-        textureDescriptionMap.put(3, "Bida's Truc");
+        textureDescriptionMap.put(1, "CSXT");
+        textureDescriptionMap.put(2, "GLC");
         setGuiRenderScale(getGuiRenderScale() + 0f);
     }
 
@@ -26,7 +26,7 @@ public class EntityWorkday1980 extends EntityCarChest {
      */
     @Override
     public ModelBase getModel() {
-        return new ModelWorkday_1980();
+        return new ModelWorkday_1980_Utility();
     }
 
     /**
@@ -36,12 +36,12 @@ public class EntityWorkday1980 extends EntityCarChest {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/workday/workday_1980_blank", "textures/workday/workday_1980_greyblack", "textures/workday/workday_1980_moss", "textures/workday/workday_1980_bida"};
+        return new String[]{"textures/workday/workday_1980_utility_blank", "textures/workday/workday_1980_utility_CSX", "textures/workday/workday_1980_Utility_GLC"};
     }
 
     @Override
     public CarType type(){
-        return CarType.WORKDAY_1980;
+        return CarType.WORKDAY_1980_Utility;
     }
 
 }

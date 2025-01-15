@@ -4,6 +4,7 @@ import bidahochi.foxdrives.entities.EntityCar;
 import bidahochi.foxdrives.util.ConfigHandler;
 import bidahochi.foxdrives.util.ItemCar;
 import cpw.mods.fml.common.FMLCommonHandler;
+import fexcraft.tmt_slim.Vec3f;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -35,6 +36,8 @@ public class CarType {
 	public float max_forward_speed = 10;
 	/** max backwards movement speed in meters per tick */
 	public float max_backward_speed = 5;
+
+	public Vec3f hitchPosition = null;
  	//
 	public static CarType TOYOTA_PICKUP_1992;
 	public static CarType REDMUND_1972;
@@ -47,6 +50,7 @@ public class CarType {
 	public static CarType MKDS_Standard;
 	public static CarType WagonKart;
 	public static CarType TurboToilet;
+	public static CarType TrailerTest;
 	public static CarType F1_CAR;
 
 	public CarType(String id, Class<? extends EntityCar> carclass){
@@ -85,6 +89,11 @@ public class CarType {
 		for(float[] pos : positions){
 			passenger_pos.add(pos);
 		}
+		return this;
+	}
+
+	public CarType setHitchPos(Vec3f vec) {
+		hitchPosition = vec;
 		return this;
 	}
 

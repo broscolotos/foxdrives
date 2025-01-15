@@ -1,6 +1,7 @@
 package bidahochi.foxdrives;
 
 import bidahochi.foxdrives.entities.*;
+import bidahochi.foxdrives.entities.vehicles.*;
 import bidahochi.foxdrives.util.*;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -14,6 +15,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
+import fexcraft.tmt_slim.Vec3f;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -122,8 +124,8 @@ public class FoxDrives {
                     new float[]{ -0.3f, 0.25f, 0.25f }
                     )
             .acceleration(0.75f)
-            .maxspeed(13, 8);
-
+            .maxspeed(13, 8)
+            .setHitchPos(new Vec3f(0.25f, 0, 0));
         CarType.WORKDAY_1980 = CarType.register("workday_1980", EntityWorkday1980.class)
                 .recipe(
                         new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
@@ -174,8 +176,6 @@ public class FoxDrives {
                 )
                 .acceleration(0.75f)
                 .maxspeed(18, 8);
-
-
 
         CarType.GILLIG_PHANTOM = CarType.register("gillig_phantom", EntityGilligPhantom.class)
             .recipe(
@@ -235,6 +235,14 @@ public class FoxDrives {
                 .passpos(new float[]{ 0.0f, 0.3f, 0.25f })//LR, UD, FB
                 .acceleration(0.9f)
                 .maxspeed(9, 4);
+
+        CarType.TrailerTest = CarType.register("trailertest", EntityTestTrailer.class);
+
+        CarType.F1_CAR = CarType.register("f1 car", EntityF1Car.class)
+                .passpos(new float[]{1.1f,0,0})
+                .acceleration(2.2f)
+                .riderScale(0.4f)
+                .maxspeed(20, 3);
 
         //CarType Registry Entry registration
         for(CarType type : CarType.REGISTRY.values()){

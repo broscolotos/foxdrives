@@ -1,28 +1,28 @@
-package bidahochi.foxdrives.entities;
+package bidahochi.foxdrives.entities.vehicles;
 
 import bidahochi.foxdrives.CarType;
-import bidahochi.foxdrives.models.ModelGilligPhantom;
+import bidahochi.foxdrives.entities.EntityCar;
+import bidahochi.foxdrives.models.ModelTurboToilet;
 import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
-import java.util.Arrays;
-import java.util.List;
 
-public class EntityGilligPhantom extends EntityCar {
+public class EntityTurboToilet extends EntityCar {
 
-    public EntityGilligPhantom(World world, double xPos, double yPos, double zPos) {
+    public EntityTurboToilet(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
     }
-    public EntityGilligPhantom(World p_i1685_1_) {
+    public EntityTurboToilet(World p_i1685_1_) {
         super(p_i1685_1_);
     }
+
 
     /**
      * Returns the model for the entity
      */
     @Override
     public ModelBase getModel() {
-        return new ModelGilligPhantom();
+        return new ModelTurboToilet();
     }
 
     /**
@@ -32,12 +32,13 @@ public class EntityGilligPhantom extends EntityCar {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/gillig/GILLIG_BUSSIN_generic"};
+        return new String[]{"textures/turboshitter"};
     }
 
     @Override
     public CarType type(){
-        return CarType.GILLIG_PHANTOM;
+        return CarType.TurboToilet;
     }
+
 
 }

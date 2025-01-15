@@ -1,23 +1,19 @@
-package bidahochi.foxdrives.entities;
+package bidahochi.foxdrives.entities.vehicles;
 
 import bidahochi.foxdrives.CarType;
-import bidahochi.foxdrives.models.ModelHysterH80FT;
+import bidahochi.foxdrives.entities.EntityCarChest;
+import bidahochi.foxdrives.models.ModelWagonKart;
 import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
-import java.util.Arrays;
-import java.util.List;
 
+public class EntityWagonKart extends EntityCarChest {
 
-public class EntityHysterH80FT extends EntityCar {
-
-    public EntityHysterH80FT(World world, double xPos, double yPos, double zPos) {
+    public EntityWagonKart(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
     }
-    public EntityHysterH80FT(World p_i1685_1_) {
+    public EntityWagonKart(World p_i1685_1_) {
         super(p_i1685_1_);
-        textureDescriptionMap.put(0, "Yellow");
-        textureDescriptionMap.put(1, "Blue");
     }
 
 
@@ -26,7 +22,7 @@ public class EntityHysterH80FT extends EntityCar {
      */
     @Override
     public ModelBase getModel() {
-        return new ModelHysterH80FT();
+        return new ModelWagonKart();
     }
 
     /**
@@ -36,12 +32,13 @@ public class EntityHysterH80FT extends EntityCar {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/hyster_h80ft", "textures/hyster_h80ft2"};
+        return new String[]{"textures/radio_flyer"};
     }
 
     @Override
     public CarType type(){
-        return CarType.HYSTER_H80FT;
+        return CarType.WagonKart;
     }
+
 
 }

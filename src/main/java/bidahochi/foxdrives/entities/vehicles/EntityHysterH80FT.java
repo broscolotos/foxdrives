@@ -1,17 +1,21 @@
-package bidahochi.foxdrives.entities;
+package bidahochi.foxdrives.entities.vehicles;
 
 import bidahochi.foxdrives.CarType;
-import bidahochi.foxdrives.models.ModelToyotaPickup1992;
+import bidahochi.foxdrives.entities.EntityCar;
+import bidahochi.foxdrives.models.ModelHysterH80FT;
 import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
-public class EntityToyotaPickup1992 extends EntityCarChest {
 
-    public EntityToyotaPickup1992(World world, double xPos, double yPos, double zPos) {
+public class EntityHysterH80FT extends EntityCar {
+
+    public EntityHysterH80FT(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
     }
-    public EntityToyotaPickup1992(World p_i1685_1_) {
+    public EntityHysterH80FT(World p_i1685_1_) {
         super(p_i1685_1_);
+        textureDescriptionMap.put(0, "Yellow");
+        textureDescriptionMap.put(1, "Blue");
     }
 
 
@@ -20,7 +24,7 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
      */
     @Override
     public ModelBase getModel() {
-        return new ModelToyotaPickup1992();
+        return new ModelHysterH80FT();
     }
 
     /**
@@ -30,12 +34,12 @@ public class EntityToyotaPickup1992 extends EntityCarChest {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/toyota/JC1992BoiodaPickup"};
+        return new String[]{"textures/hyster_h80ft", "textures/hyster_h80ft2"};
     }
 
     @Override
     public CarType type(){
-        return CarType.TOYOTA_PICKUP_1992;
+        return CarType.HYSTER_H80FT;
     }
 
 }

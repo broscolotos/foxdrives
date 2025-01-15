@@ -1,7 +1,7 @@
-package bidahochi.foxdrives.entities;
+package bidahochi.foxdrives.entities.vehicles;
 
 import bidahochi.foxdrives.CarType;
-import bidahochi.foxdrives.models.ModelRedmund1972;
+import bidahochi.foxdrives.entities.EntityCarChest;
 import bidahochi.foxdrives.models.Modelmkds_standard;
 import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;

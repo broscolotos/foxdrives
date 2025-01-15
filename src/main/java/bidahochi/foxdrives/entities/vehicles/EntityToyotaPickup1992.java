@@ -1,18 +1,17 @@
-package bidahochi.foxdrives.entities;
+package bidahochi.foxdrives.entities.vehicles;
 
 import bidahochi.foxdrives.CarType;
-import bidahochi.foxdrives.models.ModelWagonKart;
-import bidahochi.foxdrives.models.Modelmkds_standard;
+import bidahochi.foxdrives.entities.EntityCarChest;
+import bidahochi.foxdrives.models.ModelToyotaPickup1992;
 import fexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
+public class EntityToyotaPickup1992 extends EntityCarChest {
 
-public class EntityWagonKart extends EntityCarChest {
-
-    public EntityWagonKart(World world, double xPos, double yPos, double zPos) {
+    public EntityToyotaPickup1992(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
     }
-    public EntityWagonKart(World p_i1685_1_) {
+    public EntityToyotaPickup1992(World p_i1685_1_) {
         super(p_i1685_1_);
     }
 
@@ -22,7 +21,7 @@ public class EntityWagonKart extends EntityCarChest {
      */
     @Override
     public ModelBase getModel() {
-        return new ModelWagonKart();
+        return new ModelToyotaPickup1992();
     }
 
     /**
@@ -32,13 +31,12 @@ public class EntityWagonKart extends EntityCarChest {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/radio_flyer"};
+        return new String[]{"textures/toyota/JC1992BoiodaPickup"};
     }
 
     @Override
     public CarType type(){
-        return CarType.WagonKart;
+        return CarType.TOYOTA_PICKUP_1992;
     }
-
 
 }

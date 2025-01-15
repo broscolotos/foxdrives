@@ -1,0 +1,48 @@
+package bidahochi.foxdrives.entities.vehicles;
+
+import bidahochi.foxdrives.CarType;
+import bidahochi.foxdrives.entities.EntityTrailer;
+import bidahochi.foxdrives.models.ModelRedmund1972;
+import fexcraft.tmt_slim.ModelBase;
+import fexcraft.tmt_slim.Vec3f;
+import net.minecraft.world.World;
+
+public class EntityTestTrailer extends EntityTrailer {
+
+
+    public EntityTestTrailer(World world, double xPos, double yPos, double zPos) {
+        super(world, xPos, yPos, zPos);
+    }
+
+    public EntityTestTrailer(World p_i1681_1_) {
+        super(p_i1681_1_);
+    }
+    /**
+     * Returns the model for the entity
+     */
+    @Override
+    public ModelBase getModel() {
+        return new ModelRedmund1972();
+    }
+
+    /**
+     * returns a list of skin texture addresses for the entity, the MODID is presumed to be the one defined in FoxDrives.java
+     * example:
+     * String[] getSkins(){return new String[]{"textures/skin1", "textures/skin2"};}
+     */
+    @Override
+    public String[] getSkins() {
+        return new String[]{"textures/redmund/redmund_1972_red"};
+    }
+
+    @Override
+    public Vec3f getHitchPos() {
+        return new Vec3f(-2.6875f, 0f, 0f);
+    }
+
+    @Override
+    public CarType type(){
+        return CarType.TrailerTest;
+    }
+
+}
