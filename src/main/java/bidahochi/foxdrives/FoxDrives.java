@@ -236,6 +236,51 @@ public class FoxDrives {
                 .acceleration(0.9f)
                 .maxspeed(9, 4);
 
+        CarType.BYRNE60S_SEDAN = CarType.register("byrne60s_sedan", Entitybyrne60s_sedan.class)
+                .recipe(
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                        new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+                )
+                .passpos(
+                        new float[]{ 0.3f, 0.0625f, 0.25f },
+                        new float[]{ -0.3f, 0.0625f, 0.25f },
+                        new float[]{ 0.3f, 0.0625f, -0.25f },
+                        new float[]{ -0.3f, 0.0625f, -0.25f }
+                )
+                .acceleration(0.75f)
+                .maxspeed(17, 10);
+
+        CarType.BYRNE60S_SEDAN_V8 = CarType.register("byrne60s_sedan_v8", Entitybyrne60s_sedan_v8.class)
+                .recipe(
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                        new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+                )
+                .passpos(
+                        new float[]{ 0.3f, 0.0625f, 0.25f },
+                        new float[]{ -0.3f, 0.0625f, 0.25f },
+                        new float[]{ 0.3f, 0.0625f, -0.25f },
+                        new float[]{ -0.3f, 0.0625f, -0.25f }
+                )
+                .acceleration(0.75f)
+                .maxspeed(19, 10);
+
+        CarType.BYRNE60S_ESTATE = CarType.register("byrne60s_estate", Entitybyrne60s_estate.class)
+                .recipe(
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                        new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+                )
+                .passpos(
+                        new float[]{ 0.3f, 0.0625f, 0.25f },
+                        new float[]{ -0.3f, 0.0625f, 0.25f },
+                        new float[]{ 0.3f, 0.0625f, -0.25f },
+                        new float[]{ -0.3f, 0.0625f, -0.25f }
+                )
+                .acceleration(0.75f)
+                .maxspeed(17, 10);
+
         //CarType Registry Entry registration
         for(CarType type : CarType.REGISTRY.values()){
             registerModEntity(type.clazz, MODID + "." + type.regname + ".entity", registryPosition, FoxDrives.instance, 1600, 3, true);

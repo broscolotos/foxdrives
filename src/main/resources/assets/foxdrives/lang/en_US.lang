@@ -15,6 +15,12 @@ item.foxdrives.workday_1980_utility_hirail.name=1980 Pine Workday (Utility Bed, 
 entity.foxdrives.foxdrives.workday_1980_utility_hirail.entity.name=1980 Pine Workday (Utility Bed, Hi-Rail Gear)
 item.foxdrives.cruisegoer.name=JMC Cruisegoer
 entity.foxdrives.foxdrives.cruisegoer.entity.name=JMC Cruisegoer
+item.foxdrives.byrne60s_sedan.name=Byrne 1963-1969 Sedan (I6 Engine)
+entity.foxdrives.foxdrives.byrne60s_sedan.entity.name=1960s Byrne Sedan
+item.foxdrives.byrne60s_sedan_v8.name=Byrne 1963-1969 Sedan (V8 Engine)
+entity.foxdrives.foxdrives.byrne60s_sedan_v8.entity.name=1960s Byrne Sedan
+item.foxdrives.byrne60s_estate.name=Byrne 1963-1970 Estate (I6 Engine)
+entity.foxdrives.foxdrives.byrne60s_estate.entity.name=1960s Byrne Estate
 
 item.foxdrives.gillig_phantom.name=Gillig Phantom (40ft)
 entity.foxdrives.foxdrives.gillig_phantom.entity.name=Gillig Phantom (40ft)
