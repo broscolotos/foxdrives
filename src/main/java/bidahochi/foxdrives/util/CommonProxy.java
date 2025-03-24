@@ -3,9 +3,11 @@ package bidahochi.foxdrives.util;
 import bidahochi.foxdrives.entities.EntityCar;
 import bidahochi.foxdrives.entities.EntityCarChest;
 import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
 public class CommonProxy implements IGuiHandler {
 
@@ -23,18 +25,31 @@ public class CommonProxy implements IGuiHandler {
      * @return A GuiScreen/Container to be displayed to the user, null if none.
      */
     @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    {
         //System.out.println("Open client");
-        if(player.worldObj.getEntityByID(ID) instanceof EntityCarChest){
-            System.out.println("OpenServer");
-            return new ContainerCarInventory(player.inventory, (EntityCarChest) player.worldObj.getEntityByID(ID));
+        EntityPlayer riddenByEntity = null;
+        Entity entity = player.ridingEntity;
+
+        if (player.ridingEntity != null) {
+            riddenByEntity = (EntityPlayer) entity.riddenByEntity;
         }
-        else return new Container(){
-            @Override
-            public boolean canInteractWith(EntityPlayer player){
-                return !player.isDead;
-            }
-        };
+
+        if(player.worldObj.getEntityByID(ID) instanceof EntityCarChest)
+        {
+            System.out.println("OpenServer");
+            return riddenByEntity != null ? new ContainerCarInventory(riddenByEntity.inventory, (EntityCarChest) player.worldObj.getEntityByID(ID)) : null;
+        }
+        else
+        {
+            return new Container()
+            {
+                @Override
+                public boolean canInteractWith(EntityPlayer player){
+                    return !player.isDead;
+                }
+            };
+        }
         //return null;
     }
 
