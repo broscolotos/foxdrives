@@ -307,6 +307,36 @@ public class FoxDrives {
                 .acceleration(0.75f)
                 .maxspeed(17, 10);
 
+        CarType.BYRNE40S_SEDAN = CarType.register("byrne40s_sedan", Entitybyrne40s_sedan.class)
+                .recipe(
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                        new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+                )
+                .passpos(
+                        new float[]{ 0.3f, 0.0f, 0.15f },
+                        new float[]{ -0.3f, 0.0f, 0.15f },
+                        new float[]{ 0.3f, 0.0f, -0.4f },
+                        new float[]{ -0.3f, 0.0f, -0.4f }
+                )
+                .acceleration(0.75f)
+                .maxspeed(16, 10);
+
+        CarType.BYRNE40S_SEDAN_V8 = CarType.register("byrne40s_sedan_v8", Entitybyrne40s_sedan_v8.class)
+                .recipe(
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                        new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+                )
+                .passpos(
+                        new float[]{ 0.3f, 0.0f, 0.15f },
+                        new float[]{ -0.3f, 0.0f, 0.15f },
+                        new float[]{ 0.3f, 0.0f, -0.4f },
+                        new float[]{ -0.3f, 0.0f, -0.4f }
+                )
+                .acceleration(0.75f)
+                .maxspeed(18, 10);
+
         //CarType Registry Entry registration
         for(CarType type : CarType.REGISTRY.values()){
             registerModEntity(type.clazz, MODID + "." + type.regname + ".entity", registryPosition, FoxDrives.instance, 1600, 3, true);

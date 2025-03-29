@@ -27,6 +27,10 @@ item.foxdrives.byrne60s_sedan_v8.name=Byrne 1963-1969 Sedan (V8 Engine)
 entity.foxdrives.foxdrives.byrne60s_sedan_v8.entity.name=1960s Byrne Sedan
 item.foxdrives.byrne60s_estate.name=Byrne 1963-1970 Estate (I6 Engine)
 entity.foxdrives.foxdrives.byrne60s_estate.entity.name=1960s Byrne Estate
+item.foxdrives.byrne40s_sedan.name=Byrne 1948-1952 Sedan (I6 Engine)
+entity.foxdrives.foxdrives.byrne40s_sedan.entity.name=1940s Byrne Sedan
+item.foxdrives.byrne40s_sedan_v8.name=Byrne 1948-1952 Sedan (V8 Engine)
+entity.foxdrives.foxdrives.byrne40s_sedan_v8.entity.name=1940s Byrne Sedan
 
 item.foxdrives.gillig_phantom.name=Gillig Phantom (40ft)
 entity.foxdrives.foxdrives.gillig_phantom.entity.name=Gillig Phantom (40ft)
