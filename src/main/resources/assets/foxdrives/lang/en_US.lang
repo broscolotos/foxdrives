@@ -5,6 +5,7 @@ item.foxdrives.wrap.name=Vehicle Wrap
 
 item.foxdrives.toyota_pickup_1992.name=1992 Boiota Pickup
 entity.foxdrives.foxdrives.toyota_pickup_1992.entity.name=1992 Boiota Pickup
+
 item.foxdrives.redmund_1972.name=1972 Pine Redmund
 entity.foxdrives.foxdrives.redmund_1972.entity.name=1972 Pine Redmund
 item.foxdrives.workday_1980.name=1980 Pine Workday
@@ -13,6 +14,11 @@ item.foxdrives.workday_1980_utility.name=1980 Pine Workday (Utility Bed)
 entity.foxdrives.foxdrives.workday_1980_utility.entity.name=1980 Pine Workday (Utility Bed)
 item.foxdrives.workday_1980_utility_hirail.name=1980 Pine Workday (Utility Bed, Hi-Rail Gear)
 entity.foxdrives.foxdrives.workday_1980_utility_hirail.entity.name=1980 Pine Workday (Utility Bed, Hi-Rail Gear)
+item.foxdrives.campwagon_1981.name=1981 Pine Campwagon (V6)
+entity.foxdrives.foxdrives.campwagon_1981.entity.name=1981 Pine Campwagon (V6)
+item.foxdrives.campwagon_1981_v8.name=1981 Pine Campwagon (V8)
+entity.foxdrives.foxdrives.campwagon_1981_v8.entity.name=1981 Pine Campwagon (V8)
+
 item.foxdrives.cruisegoer.name=JMC Cruisegoer
 entity.foxdrives.foxdrives.cruisegoer.entity.name=JMC Cruisegoer
 item.foxdrives.byrne60s_sedan.name=Byrne 1963-1969 Sedan (I6 Engine)

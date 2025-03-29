@@ -162,6 +162,7 @@ public class FoxDrives {
                 )
                 .acceleration(0.75f)
                 .maxspeed(15, 10);
+
         CarType.CRUISEGOER = CarType.register("cruisegoer", EntityCruisegoer.class)
                 .recipe(
                         new ItemStack(Blocks.sponge), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
@@ -175,6 +176,31 @@ public class FoxDrives {
                 .acceleration(0.75f)
                 .maxspeed(18, 8);
 
+
+        CarType.CAMPWAGON_1981 = CarType.register("campwagon_1981", EntityCampwagon1981.class)
+                .recipe(
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                        new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+                )
+                .passpos(
+                        new float[]{ 0.3f, 0.25f, 0.0f },
+                        new float[]{ -0.3f, 0.25f, 1.0f }
+                )
+                .acceleration(0.70f)
+                .maxspeed(16, 10);
+        CarType.CAMPWAGON_1981_V8 = CarType.register("campwagon_1981_v8", EntityCampwagon1981_v8.class)
+                .recipe(
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                        new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+                )
+                .passpos(
+                        new float[]{ 0.3f, 0.25f, 0.0f },
+                        new float[]{ -0.3f, 0.25f, 1.0f }
+                )
+                .acceleration(0.77f)
+                .maxspeed(19, 10);
 
 
         CarType.GILLIG_PHANTOM = CarType.register("gillig_phantom", EntityGilligPhantom.class)
