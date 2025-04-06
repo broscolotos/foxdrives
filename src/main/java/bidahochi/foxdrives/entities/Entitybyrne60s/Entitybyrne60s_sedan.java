@@ -1,21 +1,24 @@
-package bidahochi.foxdrives.entities;
+package bidahochi.foxdrives.entities.Entitybyrne60s;
 
 import bidahochi.foxdrives.CarType;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCarChest;
 import bidahochi.foxdrives.models.Modelbyrne60s_sedan;
 import fdfexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
 
-public class Entitybyrne60s_sedan_v8 extends EntityCarChest {
+public class Entitybyrne60s_sedan extends EntityCarChest
+{
 
-    public Entitybyrne60s_sedan_v8(World world, double xPos, double yPos, double zPos) {
+    public Entitybyrne60s_sedan(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);
     }
-    public Entitybyrne60s_sedan_v8(World p_i1685_1_) {
+    public Entitybyrne60s_sedan(World p_i1685_1_) {
         super(p_i1685_1_);
-        textureDescriptionMap.put(0, "Roadsport Green Top");
-        textureDescriptionMap.put(1, "Cubed's Car");
-        textureDescriptionMap.put(2, "Police Trim");
+        textureDescriptionMap.put(0, "Blue Top");
+        textureDescriptionMap.put(1, "Marian Blue");
+        textureDescriptionMap.put(2, "Turqoise");
+        textureDescriptionMap.put(3, "Fleetpower Trim");
         setGuiRenderScale(getGuiRenderScale() + 0f);
     }
 
@@ -35,12 +38,12 @@ public class Entitybyrne60s_sedan_v8 extends EntityCarChest {
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/byrne/byrne_sedan_roadsport_blank", "textures/byrne/byrne_sedan_roadsport_cubedcar", "textures/byrne/byrne_sedan_detectivespecial_blank"};
+        return new String[]{"textures/byrne/byrne_sedan_base_blank", "textures/byrne/byrne_sedan_base_marian", "textures/byrne/byrne_sedan_base_turqoise", "textures/byrne/byrne_sedan_fleetpower_blank"};
     }
 
     @Override
     public CarType type(){
-        return CarType.BYRNE60S_SEDAN_V8;
+        return CarType.BYRNE60S_SEDAN;
     }
 
 }

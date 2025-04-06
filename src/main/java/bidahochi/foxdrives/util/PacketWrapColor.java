@@ -1,13 +1,13 @@
 package bidahochi.foxdrives.util;
 
-import bidahochi.foxdrives.entities.EntityCar;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 
-import static bidahochi.foxdrives.entities.EntityCar.DW_SKIN;
+import static bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar.DW_SKIN;
 
 /**
  * @author 02skaplan

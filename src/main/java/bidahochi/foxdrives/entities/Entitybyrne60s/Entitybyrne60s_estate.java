@@ -1,12 +1,14 @@
-package bidahochi.foxdrives.entities;
+package bidahochi.foxdrives.entities.Entitybyrne60s;
 
 import bidahochi.foxdrives.CarType;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCarChest;
 import bidahochi.foxdrives.models.Modelbyrne60s_estate;
 import fdfexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
 
-public class Entitybyrne60s_estate extends EntityCarChest {
+public class Entitybyrne60s_estate extends EntityCarChest
+{
 
     public Entitybyrne60s_estate(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);

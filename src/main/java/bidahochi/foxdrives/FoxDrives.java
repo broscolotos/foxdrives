@@ -1,6 +1,16 @@
 package bidahochi.foxdrives;
 
 import bidahochi.foxdrives.entities.*;
+import bidahochi.foxdrives.entities.EntityCampwagon1981.EntityCampwagon1981;
+import bidahochi.foxdrives.entities.EntityCampwagon1981.EntityCampwagon1981_v8;
+import bidahochi.foxdrives.entities.EntityWorkday1980.EntityWorkday1980;
+import bidahochi.foxdrives.entities.EntityWorkday1980.EntityWorkday1980Utility;
+import bidahochi.foxdrives.entities.EntityWorkday1980.EntityWorkday1980UtilityHirail;
+import bidahochi.foxdrives.entities.Entitybyrne40s.Entitybyrne40s_sedan;
+import bidahochi.foxdrives.entities.Entitybyrne40s.Entitybyrne40s_sedan_v8;
+import bidahochi.foxdrives.entities.Entitybyrne60s.Entitybyrne60s_estate;
+import bidahochi.foxdrives.entities.Entitybyrne60s.Entitybyrne60s_sedan;
+import bidahochi.foxdrives.entities.Entitybyrne60s.Entitybyrne60s_sedan_v8;
 import bidahochi.foxdrives.util.*;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;

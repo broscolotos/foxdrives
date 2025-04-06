@@ -1,6 +1,6 @@
 package bidahochi.foxdrives.util;
 
-import bidahochi.foxdrives.entities.EntityCar;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;

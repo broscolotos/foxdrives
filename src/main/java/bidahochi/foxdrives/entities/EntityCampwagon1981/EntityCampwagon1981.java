@@ -1,11 +1,13 @@
-package bidahochi.foxdrives.entities;
+package bidahochi.foxdrives.entities.EntityCampwagon1981;
 
 import bidahochi.foxdrives.CarType;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCarChest;
 import bidahochi.foxdrives.models.ModelCampwagon_1981;
 import fdfexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
-public class EntityCampwagon1981 extends EntityCarChest {
+public class EntityCampwagon1981 extends EntityCarChest
+{
 
     public EntityCampwagon1981(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);

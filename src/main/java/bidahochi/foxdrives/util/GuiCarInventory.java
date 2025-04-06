@@ -1,8 +1,7 @@
 package bidahochi.foxdrives.util;
 
 import bidahochi.foxdrives.FoxDrives;
-import bidahochi.foxdrives.entities.EntityCarChest;
-import com.google.gson.JsonObject;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCarChest;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
@@ -12,8 +11,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-
-import java.util.ArrayList;
 
 public class GuiCarInventory extends GuiContainer {
     private static final ResourceLocation horseGuiTextures = new ResourceLocation("textures/gui/container/horse.png");

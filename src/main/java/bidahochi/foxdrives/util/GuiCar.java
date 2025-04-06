@@ -1,16 +1,13 @@
 package bidahochi.foxdrives.util;
 
 import bidahochi.foxdrives.FoxDrives;
-import bidahochi.foxdrives.entities.EntityCar;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-
-import java.util.ArrayList;
 
 public class GuiCar extends GuiContainer {
 

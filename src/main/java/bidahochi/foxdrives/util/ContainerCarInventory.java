@@ -1,8 +1,7 @@
 package bidahochi.foxdrives.util;
 
-import bidahochi.foxdrives.entities.EntityCarChest;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCarChest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

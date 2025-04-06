@@ -1,12 +1,14 @@
-package bidahochi.foxdrives.entities;
+package bidahochi.foxdrives.entities.EntityWorkday1980;
 
 import bidahochi.foxdrives.CarType;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCarChest;
 import bidahochi.foxdrives.models.ModelWorkday_1980;
 import fdfexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
 
-public class EntityWorkday1980 extends EntityCarChest {
+public class EntityWorkday1980 extends EntityCarChest
+{
 
     public EntityWorkday1980(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);

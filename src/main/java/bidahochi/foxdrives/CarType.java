@@ -1,6 +1,6 @@
 package bidahochi.foxdrives;
 
-import bidahochi.foxdrives.entities.EntityCar;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
 import bidahochi.foxdrives.util.ConfigHandler;
 import bidahochi.foxdrives.util.ItemCar;
 import cpw.mods.fml.common.FMLCommonHandler;

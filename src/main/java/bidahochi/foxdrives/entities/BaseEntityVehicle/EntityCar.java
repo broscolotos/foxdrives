@@ -1,7 +1,8 @@
-package bidahochi.foxdrives.entities;
+package bidahochi.foxdrives.entities.BaseEntityVehicle;
 
 import bidahochi.foxdrives.CarType;
 import bidahochi.foxdrives.FoxDrives;
+import bidahochi.foxdrives.entities.EntitySeat;
 import bidahochi.foxdrives.util.DataMemberName;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

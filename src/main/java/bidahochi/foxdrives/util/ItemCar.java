@@ -1,7 +1,7 @@
 package bidahochi.foxdrives.util;
 
 import bidahochi.foxdrives.CarType;
-import bidahochi.foxdrives.entities.EntityCar;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

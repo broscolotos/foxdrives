@@ -1,12 +1,14 @@
 package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.CarType;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCarChest;
 import bidahochi.foxdrives.models.Modelmkds_standard;
 import fdfexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
 
-public class EntityMKDS_Standard extends EntityCarChest {
+public class EntityMKDS_Standard extends EntityCarChest
+{
 
     public EntityMKDS_Standard(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);

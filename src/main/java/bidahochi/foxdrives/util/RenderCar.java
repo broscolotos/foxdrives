@@ -1,7 +1,7 @@
 package bidahochi.foxdrives.util;
 
 import bidahochi.foxdrives.FoxDrives;
-import bidahochi.foxdrives.entities.EntityCar;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
 import com.google.gson.JsonObject;
 import fdfexcraft.tmt_slim.ModelRendererTurbo;
 import fdfexcraft.tmt_slim.Tessellator;
@@ -255,6 +255,14 @@ public class RenderCar extends Render {
     @Override
     protected ResourceLocation getEntityTexture(Entity p_110775_1_) {return null;}
 
+    /**Overriding this to make it stop throwing irrelevant errors in the logs
+     *
+     * @param p_bindEntityTexture_1_
+     */
+    @Override
+    protected void bindEntityTexture(Entity p_bindEntityTexture_1_)
+    {
+    }
 
     /**
      * @author 02skaplan

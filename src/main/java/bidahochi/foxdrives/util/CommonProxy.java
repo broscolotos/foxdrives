@@ -1,13 +1,12 @@
 package bidahochi.foxdrives.util;
 
-import bidahochi.foxdrives.entities.EntityCar;
-import bidahochi.foxdrives.entities.EntityCarChest;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCarChest;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 
 public class CommonProxy implements IGuiHandler {
 

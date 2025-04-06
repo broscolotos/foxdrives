@@ -1,7 +1,7 @@
 package bidahochi.foxdrives.util.wrapgui;
 
 import bidahochi.foxdrives.FoxDrives;
-import bidahochi.foxdrives.entities.EntityCar;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
 import bidahochi.foxdrives.util.ConfigHandler;
 import bidahochi.foxdrives.util.PacketWrapColor;
 import bidahochi.foxdrives.util.RenderCar;
@@ -22,7 +22,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 
-import static bidahochi.foxdrives.entities.EntityCar.DW_SKIN;
+import static bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar.DW_SKIN;
 
 /**
  * @author 02skaplan

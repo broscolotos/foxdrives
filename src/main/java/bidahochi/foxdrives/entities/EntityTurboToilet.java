@@ -1,12 +1,14 @@
 package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.CarType;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
 import bidahochi.foxdrives.models.ModelTurboToilet;
 import fdfexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
 
-public class EntityTurboToilet extends EntityCar {
+public class EntityTurboToilet extends EntityCar
+{
 
     public EntityTurboToilet(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);

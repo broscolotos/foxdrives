@@ -1,11 +1,13 @@
 package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.CarType;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
 import bidahochi.foxdrives.models.ModelGilligPhantom;
 import fdfexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
-public class EntityGilligPhantom extends EntityCar {
+public class EntityGilligPhantom extends EntityCar
+{
 
     public EntityGilligPhantom(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);

@@ -1,12 +1,14 @@
 package bidahochi.foxdrives.entities;
 
 import bidahochi.foxdrives.CarType;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
 import bidahochi.foxdrives.models.ModelHysterH80FT;
 import fdfexcraft.tmt_slim.ModelBase;
 import net.minecraft.world.World;
 
 
-public class EntityHysterH80FT extends EntityCar {
+public class EntityHysterH80FT extends EntityCar
+{
 
     public EntityHysterH80FT(World world, double xPos, double yPos, double zPos) {
         super(world, xPos, yPos, zPos);

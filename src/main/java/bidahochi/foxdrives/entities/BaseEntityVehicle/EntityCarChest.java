@@ -1,4 +1,4 @@
-package bidahochi.foxdrives.entities;
+package bidahochi.foxdrives.entities.BaseEntityVehicle;
 
 import bidahochi.foxdrives.FoxDrives;
 import cpw.mods.fml.common.gameevent.InputEvent;

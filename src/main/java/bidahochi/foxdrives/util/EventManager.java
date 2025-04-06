@@ -1,8 +1,8 @@
 package bidahochi.foxdrives.util;
 
 import bidahochi.foxdrives.FoxDrives;
-import bidahochi.foxdrives.entities.EntityCar;
-import bidahochi.foxdrives.entities.EntityCarChest;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
+import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCarChest;
 import bidahochi.foxdrives.entities.EntitySeat;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
