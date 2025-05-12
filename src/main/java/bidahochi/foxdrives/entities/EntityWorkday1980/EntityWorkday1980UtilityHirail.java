@@ -20,6 +20,8 @@ public class EntityWorkday1980UtilityHirail extends EntityCarChest
         textureDescriptionMap.put(2, "FNCC MW");
         textureDescriptionMap.put(3, "NEP MW");
         textureDescriptionMap.put(4, "GLC");
+        textureDescriptionMap.put(5, "CRIP");
+        textureDescriptionMap.put(6, "GCM");
         setGuiRenderScale(getGuiRenderScale() + 0f);
     }
 
@@ -39,7 +41,10 @@ public class EntityWorkday1980UtilityHirail extends EntityCarChest
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/workday/workday_1980_utility_blank_hirail_noshit", "textures/workday/workday_1980_utility_hirail_CSX", "textures/workday/workday_1980_utility_hirail_fncc", "textures/workday/workday_1980_utility_hyrail_wpnep_mw", "textures/workday/workday_1980_Utility_hyrail_GLC"};
+        return new String[]{"textures/workday/workday_1980_utility_blank_hirail_noshit", "textures/workday/workday_1980_utility_hirail_CSX",
+                "textures/workday/workday_1980_utility_hirail_fncc", "textures/workday/workday_1980_utility_hyrail_wpnep_mw",
+                "textures/workday/workday_1980_Utility_hyrail_GLC", "textures/workday/workday_1980_utility_hyrail_CRIP",
+                "textures/workday/workday_1980_utility_hyrail_GCM"};
     }
 
     @Override

@@ -21,6 +21,7 @@ public class Entitybyrne60s_estate extends EntityCarChest
         textureDescriptionMap.put(3, "Fleetpower Trim (HiRail Equipped)");
         textureDescriptionMap.put(4, "Woody Special Red");
         textureDescriptionMap.put(5, "Woody Special Blue");
+        textureDescriptionMap.put(6, "FNCC Crewvan");
         setGuiRenderScale(getGuiRenderScale() + 0f);
     }
 
@@ -40,7 +41,9 @@ public class Entitybyrne60s_estate extends EntityCarChest
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/byrne/byrne_estate_base_blank", "textures/byrne/byrne_estate_base_greene", "textures/byrne/byrne_estate_fleetpower_blank", "textures/byrne/byrne_estate_fleetpower_hirail", "textures/byrne/byrne_estate_woodyspecial1", "textures/byrne/byrne_estate_woodyspecial2"};
+        return new String[]{"textures/byrne/byrne_estate_base_blank", "textures/byrne/byrne_estate_base_greene",
+                "textures/byrne/byrne_estate_fleetpower_blank", "textures/byrne/byrne_estate_fleetpower_hirail",
+                "textures/byrne/byrne_estate_woodyspecial1", "textures/byrne/byrne_estate_woodyspecial2", "textures/byrne/byrne_estate_fncc_crewmow"};
     }
 
     @Override
