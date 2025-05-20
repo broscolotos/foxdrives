@@ -20,9 +20,9 @@ public class EntityCampwagon1981_v8 extends EntityCarChest
         textureDescriptionMap.put(3, "Fleet Trim (Generic Police Service)");
         textureDescriptionMap.put(4, "Exploration Trim (Factory Stock Paint)");
         textureDescriptionMap.put(5, "Tennessee Highway Patrol");
-        textureDescriptionMap.put(6, "stupid asshole railroad MTO");
-        textureDescriptionMap.put(7, "stupid asshole railroad MOW");
-        textureDescriptionMap.put(8, "stupid asshole railroad Police");
+        textureDescriptionMap.put(6, "crash smash xplode MTO");
+        textureDescriptionMap.put(7, "CSXT MOW");
+        textureDescriptionMap.put(8, "CSXT Fun Police");
         setGuiRenderScale(getGuiRenderScale() + 0f);
     }
 
