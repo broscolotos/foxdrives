@@ -1,9 +1,13 @@
-package bidahochi.foxdrives.util;
+package bidahochi.foxdrives.client;
 
 
 import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
 import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCarChest;
 import bidahochi.foxdrives.entities.EntitySeat;
+import bidahochi.foxdrives.client.gui.GuiCarInventory;
+import bidahochi.foxdrives.util.CommonProxy;
+import bidahochi.foxdrives.util.RenderCar;
+import bidahochi.foxdrives.util.RenderSeat;
 import bidahochi.foxdrives.util.wrapgui.GuiWrap;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;

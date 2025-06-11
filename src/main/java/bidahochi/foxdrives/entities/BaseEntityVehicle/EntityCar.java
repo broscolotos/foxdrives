@@ -12,11 +12,9 @@ import fdfexcraft.tmt_slim.ModelBase;
 import fdfexcraft.tmt_slim.Vec3f;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -32,22 +30,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class EntityCar extends EntityAnimal {
+import static bidahochi.foxdrives.util.FoxDrivesConstants.*;
+
+public abstract class EntityCar extends Entity {
 
     @SideOnly(Side.CLIENT)
     public ModelBase modelInstance;
     //@SideOnly(Side.CLIENT)
     public long lastFrame = System.currentTimeMillis();
-
-    public static int DW_LIGHTSJSON = 16;
-    public static int DW_RUNNING = 17;
-    public static int DW_ROLL = 18;
-    public static int DW_HEALTH = 19;
-    public static int DW_SKIN = 20;
-    public static int DW_YAW = 21;
-    public static int DW_VEL = 22;
-    //public static int DW_THROTTLE = 22;
-    //public static int DW_BRAKING = 23;
 
     public float health =20, roll=0;
     public double transportX=0,transportY=0,transportZ=0;
@@ -104,8 +94,7 @@ public abstract class EntityCar extends EntityAnimal {
      * Literally just exists to properly init the datawatcher stuff.
      */
     @Override
-    public void entityInit(){
-        super.entityInit();
+    protected void entityInit(){
         this.dataWatcher.addObject(DW_VEL, velocity);
         this.dataWatcher.addObject(DW_LIGHTSJSON, lightingDetailsJSON());//tracks vehicle lighting
         this.dataWatcher.addObject(DW_RUNNING, running);//tracks if the entity is on or not
@@ -268,14 +257,6 @@ public abstract class EntityCar extends EntityAnimal {
      */
     public float getHitboxSize(){return 1.4f;}
 
-
-    /************
-     * overrides from host class to disable/modify features
-     ***********/
-
-    @Override
-    public EntityAgeable createChild(EntityAgeable p_90011_1_) {return null;}
-
     /**
      * Returns a boundingBox used to collide the entity with other entities and blocks. This enables the entity to be
      * pushable on contact, like boats or minecarts.
@@ -284,10 +265,12 @@ public abstract class EntityCar extends EntityAnimal {
     public AxisAlignedBB getCollisionBox(Entity p_70114_1_) {
         return p_70114_1_.boundingBox;
     }
+
     @Override
     public AxisAlignedBB getBoundingBox() {
         return boundingBox;
     }
+
     @Override
     public boolean canBeCollidedWith() {
         return true;
@@ -302,7 +285,7 @@ public abstract class EntityCar extends EntityAnimal {
 
     /**add entity mount functionality, and remove item interactions*/
     @Override
-    public boolean interact(EntityPlayer player){
+    public boolean interactFirst(EntityPlayer player){
         //if it's the skinning item, iterate to the next skin
         if(!this.worldObj.isRemote && player.getHeldItem()!=null &&
                 player.getHeldItem().getItem()== FoxDrives.wrap) {
@@ -686,5 +669,109 @@ public abstract class EntityCar extends EntityAnimal {
 
     public Vec3f getModelScale() {
         return new Vec3f(1,1,1);
+    }
+
+    /**
+     * Moves the entity based on the specified heading.  Args: strafe, forward
+     */
+    public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_)
+    {
+        double d0;
+
+        if (this.isInWater())
+        {
+            d0 = this.posY;
+            this.moveFlying(p_70612_1_, p_70612_2_, !false ? 0.04F : 0.02F);
+            this.moveEntity(this.motionX, this.motionY, this.motionZ);
+            this.motionX *= 0.800000011920929D;
+            this.motionY *= 0.800000011920929D;
+            this.motionZ *= 0.800000011920929D;
+            this.motionY -= 0.02D;
+
+            if (this.isCollidedHorizontally && this.isOffsetPositionInLiquid(this.motionX, this.motionY + 0.6000000238418579D - this.posY + d0, this.motionZ))
+            {
+                this.motionY = 0.30000001192092896D;
+            }
+        }
+        else if (this.handleLavaMovement())
+        {
+            d0 = this.posY;
+            this.moveFlying(p_70612_1_, p_70612_2_, 0.02F);
+            this.moveEntity(this.motionX, this.motionY, this.motionZ);
+            this.motionX *= 0.5D;
+            this.motionY *= 0.5D;
+            this.motionZ *= 0.5D;
+            this.motionY -= 0.02D;
+
+            if (this.isCollidedHorizontally && this.isOffsetPositionInLiquid(this.motionX, this.motionY + 0.6000000238418579D - this.posY + d0, this.motionZ))
+            {
+                this.motionY = 0.30000001192092896D;
+            }
+        }
+        else
+        {
+            float f2 = 0.91F;
+
+            if (this.onGround)
+            {
+                f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
+            }
+
+            float f3 = 0.16277136F / (f2 * f2 * f2);
+            float f4;
+
+            if (this.onGround)
+            {
+                f4 = 0.1F * f3;
+            }
+            else
+            {
+                f4 = 0.02F;
+            }
+
+            this.moveFlying(p_70612_1_, p_70612_2_, f4);
+            f2 = 0.91F;
+
+            if (this.onGround)
+            {
+                f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
+            }
+
+
+            this.moveEntity(this.motionX, this.motionY, this.motionZ);
+
+            if (this.worldObj.isRemote && (!this.worldObj.blockExists((int)this.posX, 0, (int)this.posZ) || !this.worldObj.getChunkFromBlockCoords((int)this.posX, (int)this.posZ).isChunkLoaded))
+            {
+                if (this.posY > 0.0D)
+                {
+                    this.motionY = -0.1D;
+                }
+                else
+                {
+                    this.motionY = 0.0D;
+                }
+            }
+            else
+            {
+                this.motionY -= 0.08D;
+            }
+
+            this.motionY *= 0.9800000190734863D;
+            this.motionX *= (double)f2;
+            this.motionZ *= (double)f2;
+        }
+
+        //this.prevLimbSwingAmount = this.limbSwingAmount;
+        d0 = this.posX - this.prevPosX;
+        double d1 = this.posZ - this.prevPosZ;
+        float f6 = MathHelper.sqrt_double(d0 * d0 + d1 * d1) * 4.0F;
+
+        if (f6 > 1.0F)
+        {
+            f6 = 1.0F;
+        }
+
+        //this.limbSwingAmount += (f6 - this.limbSwingAmount) * 0.4F;
+        //this.limbSwing += this.limbSwingAmount;
     }
 }

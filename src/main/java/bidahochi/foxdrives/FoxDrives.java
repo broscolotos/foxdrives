@@ -1,5 +1,6 @@
 package bidahochi.foxdrives;
 
+import bidahochi.foxdrives.client.ClientProxy;
 import bidahochi.foxdrives.entities.*;
 import bidahochi.foxdrives.entities.EntityCampwagon1981.EntityCampwagon1981;
 import bidahochi.foxdrives.entities.EntityCampwagon1981.EntityCampwagon1981_v8;
@@ -57,7 +58,7 @@ public class FoxDrives {
      *@see CommonProxy
      *@see ClientProxy
      */
-    @SidedProxy(clientSide = "bidahochi.foxdrives.util.ClientProxy", serverSide = "bidahochi.foxdrives.util.CommonProxy")
+    @SidedProxy(clientSide = "bidahochi.foxdrives.client.ClientProxy", serverSide = "bidahochi.foxdrives.util.CommonProxy")
     public static CommonProxy proxy;
 
 
@@ -81,10 +82,10 @@ public class FoxDrives {
         // the import from being loaded on server and crashing.
         if(event.getSide().isClient())
         {
-            cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(bidahochi.foxdrives.util.ClientProxy.KeyInventory);
-            cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(bidahochi.foxdrives.util.ClientProxy.KeyBrake);
-            cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(bidahochi.foxdrives.util.ClientProxy.KeyLeftTurn);
-            cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(bidahochi.foxdrives.util.ClientProxy.KeyRightTurn);
+            cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(ClientProxy.KeyInventory);
+            cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(ClientProxy.KeyBrake);
+            cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(ClientProxy.KeyLeftTurn);
+            cpw.mods.fml.client.registry.ClientRegistry.registerKeyBinding(ClientProxy.KeyRightTurn);
         }
 
         /* Config handler */

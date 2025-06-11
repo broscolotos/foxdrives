@@ -1,7 +1,8 @@
-package bidahochi.foxdrives.util;
+package bidahochi.foxdrives.client.gui;
 
 import bidahochi.foxdrives.FoxDrives;
 import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
+import bidahochi.foxdrives.util.PacketInteract;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
@@ -10,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 
 public class GuiCar extends GuiContainer {
-
     public static int guiTop;
     public static int guiLeft;
     public EntityCar entity;

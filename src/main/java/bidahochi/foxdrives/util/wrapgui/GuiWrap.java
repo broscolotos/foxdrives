@@ -22,7 +22,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 
-import static bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar.DW_SKIN;
+import static bidahochi.foxdrives.util.FoxDrivesConstants.DW_SKIN;
 
 /**
  * @author 02skaplan
@@ -187,7 +187,7 @@ public class GuiWrap extends GuiScreen {
                 GL11.glScalef(-renderScale, renderScale, renderScale);
                 GL11.glRotatef(180, 0, 0, 1);
                 GL11.glRotatef(yaw, 0, 1, 0);
-                RenderManager.instance.renderEntityWithPosYaw(renderEntity, car.renderYawOffset, 0, 0, 0, 0);
+                RenderManager.instance.renderEntityWithPosYaw(renderEntity, car.yOffset, 0, 0, 0, 0);
                 GL11.glPopMatrix();
 
                 offsetX += 95;

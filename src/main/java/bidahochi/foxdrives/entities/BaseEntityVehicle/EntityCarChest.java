@@ -2,6 +2,7 @@ package bidahochi.foxdrives.entities.BaseEntityVehicle;
 
 import bidahochi.foxdrives.FoxDrives;
 import cpw.mods.fml.common.gameevent.InputEvent;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.AnimalChest;
 import net.minecraft.inventory.IInvBasic;
@@ -65,10 +66,13 @@ public abstract class EntityCarChest extends EntityCar implements IInventory, II
      */
     public void onInventoryChanged(InventoryBasic p_76316_1_) {}
 
+    /**
+     * Called when the entity is attacked.
+     */
     @Override
-    public void onDeath(DamageSource p_70645_1_) {
-        super.onDeath(p_70645_1_);
-
+    public boolean attackEntityFrom(DamageSource damageSource, float p_70097_2_)
+    {
+        super.attackEntityFrom(damageSource, p_70097_2_);
         if (!this.worldObj.isRemote) {
             if (inv != null) {
                 for (int i = 0; i < inv.getSizeInventory(); ++i) {
@@ -80,6 +84,8 @@ public abstract class EntityCarChest extends EntityCar implements IInventory, II
                 }
             }
         }
+
+        return true;
     }
 
 

@@ -1,9 +1,11 @@
 package bidahochi.foxdrives.util;
 
 import bidahochi.foxdrives.FoxDrives;
+import bidahochi.foxdrives.client.ClientProxy;
 import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCar;
 import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCarChest;
 import bidahochi.foxdrives.entities.EntitySeat;
+import bidahochi.foxdrives.client.gui.GuiCar;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
@@ -30,7 +32,7 @@ public class EventManager {
         if(Minecraft.getMinecraft().currentScreen != null) return;
         if(!(Minecraft.getMinecraft().thePlayer.ridingEntity instanceof EntityCar)) return;
 
-        if(bidahochi.foxdrives.util.ClientProxy.KeyInventory.isPressed()){
+        if(ClientProxy.KeyInventory.isPressed()){
             if(Minecraft.getMinecraft().thePlayer.ridingEntity instanceof EntityCarChest){
                 FoxDrives.interactChannel.sendToServer(new PacketInteract(
                         2,Minecraft.getMinecraft().thePlayer.ridingEntity.getEntityId()));
@@ -39,21 +41,21 @@ public class EventManager {
             }
         }
 
-        if (bidahochi.foxdrives.util.ClientProxy.KeyLeftTurn.isPressed())
+        if (ClientProxy.KeyLeftTurn.isPressed())
         {
             if(Minecraft.getMinecraft().thePlayer.ridingEntity instanceof EntityCar){
                 FoxDrives.interactChannel.sendToServer(new PacketInteract(4, Minecraft.getMinecraft().thePlayer.ridingEntity.getEntityId()));
             }
         }
 
-        if (bidahochi.foxdrives.util.ClientProxy.KeyRightTurn.isPressed())
+        if (ClientProxy.KeyRightTurn.isPressed())
         {
             if(Minecraft.getMinecraft().thePlayer.ridingEntity instanceof EntityCar){
                 FoxDrives.interactChannel.sendToServer(new PacketInteract(5, Minecraft.getMinecraft().thePlayer.ridingEntity.getEntityId()));
             }
         }
 
-        if(bidahochi.foxdrives.util.ClientProxy.KeyBrake.isPressed())
+        if(ClientProxy.KeyBrake.isPressed())
         {
             if(Minecraft.getMinecraft().thePlayer.ridingEntity instanceof EntityCar){
                 FoxDrives.interactChannel.sendToServer(new PacketInteract(3, Minecraft.getMinecraft().thePlayer.ridingEntity.getEntityId()));

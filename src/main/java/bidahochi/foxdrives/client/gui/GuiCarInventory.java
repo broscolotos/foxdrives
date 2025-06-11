@@ -1,7 +1,9 @@
-package bidahochi.foxdrives.util;
+package bidahochi.foxdrives.client.gui;
 
 import bidahochi.foxdrives.FoxDrives;
 import bidahochi.foxdrives.entities.BaseEntityVehicle.EntityCarChest;
+import bidahochi.foxdrives.util.ContainerCarInventory;
+import bidahochi.foxdrives.util.PacketInteract;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
@@ -45,8 +47,8 @@ public class GuiCarInventory extends GuiContainer {
 
         this.drawTexturedModalRect(guiLeft + 7, guiTop + 35, 0, this.ySize + 54, 18, 18);
 
-        GuiInventory.func_147046_a(guiLeft + 51, guiTop + 60, 17, (float)(guiLeft + 51) -
-                screenWidth, (float)(guiTop + 75 - 50) - screenHeight, this.car);
+        //GuiInventory.func_147046_a(guiLeft + 51, guiTop + 60, 17, (float)(guiLeft + 51) -
+          //      screenWidth, (float)(guiTop + 75 - 50) - screenHeight, this.car);
 
         //these fix positions for the scaled position
         guiLeft = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight).getScaledWidth();
