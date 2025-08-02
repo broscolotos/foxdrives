@@ -19,6 +19,7 @@ public class EntityWorkday1980 extends EntityCarChest
         textureDescriptionMap.put(1, "Factory Silver W/ Black Stripe");
         textureDescriptionMap.put(2, "Factory Moss Green");
         textureDescriptionMap.put(3, "Bida's Truc");
+        textureDescriptionMap.put(4, "Factory Mustard Yellow");
         setGuiRenderScale(getGuiRenderScale() + 0f);
     }
 
@@ -38,7 +39,8 @@ public class EntityWorkday1980 extends EntityCarChest
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/workday/workday_1980_blank", "textures/workday/workday_1980_greyblack", "textures/workday/workday_1980_moss", "textures/workday/workday_1980_bida"};
+        return new String[]{"textures/workday/workday_1980_blank", "textures/workday/workday_1980_greyblack", "textures/workday/workday_1980_moss",
+                "textures/workday/workday_1980_bida", "textures/workday/workday_1980_mustard"};
     }
 
     @Override

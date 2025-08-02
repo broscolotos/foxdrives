@@ -17,7 +17,7 @@ public class EntityCruisegoer extends EntityCarChest
         super(p_i1685_1_);
         textureDescriptionMap.put(0, "Factory White");
         textureDescriptionMap.put(1, "Ordinary Life");
-        textureDescriptionMap.put(2, "");
+        textureDescriptionMap.put(2, "Factory Verdigris");
         setGuiRenderScale(getGuiRenderScale() + 0f);
     }
 
@@ -37,7 +37,7 @@ public class EntityCruisegoer extends EntityCarChest
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/cruisegoer/jmc_cruisegoer_white", "textures/cruisegoer/jmc_cruisegoer_cyan"};
+        return new String[]{"textures/cruisegoer/jmc_cruisegoer_white", "textures/cruisegoer/jmc_cruisegoer_cyan", "textures/cruisegoer/jmc_cruisegoer_lime"};
     }
 
     @Override

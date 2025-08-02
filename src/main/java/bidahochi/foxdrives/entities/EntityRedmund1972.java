@@ -18,6 +18,8 @@ public class EntityRedmund1972 extends EntityCarChest
         textureDescriptionMap.put(0, "Factory Blank");
         textureDescriptionMap.put(1, "Factory Chocolate Brown");
         textureDescriptionMap.put(2, "Factory Arbor Red");
+        textureDescriptionMap.put(3, "Factory Yellow-White");
+        textureDescriptionMap.put(4, "Factory Blue-White");
         setGuiRenderScale(getGuiRenderScale() + 0f);
     }
 
@@ -37,7 +39,8 @@ public class EntityRedmund1972 extends EntityCarChest
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/redmund/redmund_1972_blank", "textures/redmund/redmund_1972_brown","textures/redmund/redmund_1972_red"};
+        return new String[]{"textures/redmund/redmund_1972_blank", "textures/redmund/redmund_1972_brown", "textures/redmund/redmund_1972_red",
+                "textures/redmund/redmund_1972_yellow_white", "textures/redmund/redmund_1972_blue_white"};
     }
 
     @Override

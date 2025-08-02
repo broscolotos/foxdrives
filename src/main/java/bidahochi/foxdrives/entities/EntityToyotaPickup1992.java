@@ -14,6 +14,11 @@ public class EntityToyotaPickup1992 extends EntityCarChest
     }
     public EntityToyotaPickup1992(World p_i1685_1_) {
         super(p_i1685_1_);
+        textureDescriptionMap.put(0, "JC's Truck");
+        textureDescriptionMap.put(1, "Factory White");
+        textureDescriptionMap.put(2, "Factory Toned Grey");
+        textureDescriptionMap.put(3, "Factory Burgundy");
+        textureDescriptionMap.put(4, "Pinstripes");
     }
 
 
@@ -32,7 +37,8 @@ public class EntityToyotaPickup1992 extends EntityCarChest
      */
     @Override
     public String[] getSkins() {
-        return new String[]{"textures/toyota/JC1992BoiodaPickup"};
+        return new String[]{"textures/toyota/JC1992BoiodaPickup", "textures/toyota/toyota_pickup_1992_blank", "textures/toyota/toyota_pickup_1992_grey"
+                , "textures/toyota/toyota_pickup_1992_red", "textures/toyota/toyota_pickup_1992_white2"};
     }
 
     @Override
