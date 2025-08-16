@@ -55,6 +55,7 @@ public class CarType {
 	public static CarType BYRNE60S_ESTATE;
 	public static CarType BYRNE40S_SEDAN;
 	public static CarType BYRNE40S_SEDAN_V8;
+	public static CarType AWOOGA;
 
 	public CarType(String id, Class<? extends EntityCar> carclass){
 		regname = id;

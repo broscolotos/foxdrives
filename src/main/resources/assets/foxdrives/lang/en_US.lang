@@ -37,6 +37,9 @@ entity.foxdrives.foxdrives.gillig_phantom.entity.name=Gillig Phantom (40ft)
 item.foxdrives.hyster_H80FT.name=Hyster H80FT Forklift
 entity.foxdrives.foxdrives.hyster_H80FT.entity.name=Hyster H80FT Forklift
 
+item.foxdrives.awooga.name=Awooga Car
+entity.foxdrives.foxdrives.awooga.entity.name=Awooga Car
+
 item.foxdrives.mkds_standard.name=MKDS Standard Kart
 entity.foxdrives.foxdrives.mkds_standard.entity.name=MKDS Standard Kart
 item.foxdrives.wagonkart.name=Radio-Dominator Kart

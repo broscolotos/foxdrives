@@ -241,7 +241,7 @@ public class FoxDrives {
             )
             .passpos(new float[]{ 0.0f, 0.5f, 0.0f })
             .rearsteer(true)
-            .maxspeed(4, 3);
+            .maxspeed(3, 3);
 
         CarType.MKDS_Standard = CarType.register("mkds_standard", EntityMKDS_Standard.class)
                 .recipe(
@@ -347,6 +347,16 @@ public class FoxDrives {
                 )
                 .acceleration(0.75f)
                 .maxspeed(18, 10);
+
+        CarType.AWOOGA = CarType.register("awooga", EntityAwooga.class)
+                .recipe(
+                        new ItemStack(Blocks.wooden_button), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone),
+                        new ItemStack(Blocks.iron_door), new ItemStack(Blocks.oak_stairs),new ItemStack(Blocks.iron_door),
+                        new ItemStack(Blocks.stone), new ItemStack(Blocks.glass_pane),new ItemStack(Blocks.stone)
+                )
+                .passpos(new float[]{ 0.0f, 0.1f, 0.0f })//LR, UD, FB
+                .acceleration(0.6f)
+                .maxspeed(4, 2);
 
         //CarType Registry Entry registration
         for(CarType type : CarType.REGISTRY.values()){
